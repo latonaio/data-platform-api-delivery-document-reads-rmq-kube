@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: data-platform-api-delivery-document-reads-rmq-kube
+  name: data-platform-api-delivery-document-reads-rmq-kube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: data-platform-api-delivery-document-reads-rmq-kube
+      app: DELIVERY_DOCUMENT
+  template:
+    metadata:
+      labels:
+        run: data-platform-api-delivery-document-reads-rmq-kube
+        app: DELIVERY_DOCUMENT
+    spec:
+      hostname: data-platform-api-delivery-document-reads-rmq-kube
+      containers:
+        - name: data-platform-api-delivery-document-reads-rmq-kube
+          image: latonaio/data-platform-api-delivery-document-reads-rmq-kube
+          imagePullPolicy: Always
+          env:
+            - name: "RMQ_QUEUE_FROM"
+              value: "data-platform-api-delivery-document-reads-queue"
+            - name: "RMQ_QUEUE_TO_SQL"
+              value: ""
+            - name: "RMQ_QUEUE_TO_EX_CONF"
+              value: ""
+            - name: "RMQ_QUEUE_TO_HEADERS_SUB_FUNC"
+              value: ""
+            - name: "RMQ_QUEUE_TO_ITEMS_SUB_FUNC"
+              value: ""
+            - name: "RMQ_SESSION_CONTROL_QUEUE"
+              value: "data-platform-api-delivery-document-reads-session-control-queue"
+            - name: "DB_NAME"
+              value: "DataPlatformMastersAndTransactionsMysqlKube"
+          envFrom:
+            - configMapRef:
+                name: env-config
+            - secretRef:
+                name: env-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: data-platform-api-delivery-document-reads-rmq-kube
+  name: data-platform-api-delivery-document-reads-rmq-kube
+spec:
+  selector:
+    run: data-platform-api-delivery-document-reads-rmq-kube
+  type: NodePort
+  ports:
+    - name: api
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30737
