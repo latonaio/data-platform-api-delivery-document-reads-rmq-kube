@@ -167,6 +167,135 @@ func ConvertToHeaderPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*HeaderP
 	return headerPartner, nil
 }
 
+func ConvertToHeaderPartnerContact(sdc *api_input_reader.SDC, rows *sql.Rows) (*HeaderPartnerContact, error) {
+	pm := &requests.HeaderPartnerContact{}
+
+	for i := 0; true; i++ {
+		if !rows.Next() {
+			if i == 0 {
+				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+			} else {
+				break
+			}
+		}
+		err := rows.Scan(
+			&pm.DeliveryDocument,
+			&pm.PartnerFunction,
+			&pm.ContactID,
+			&pm.ContactPersonName,
+			&pm.EmailAddress,
+			&pm.PhoneNumber,
+			&pm.MobilePhoneNumber,
+			&pm.FaxNumber,
+			&pm.ContactTag1,
+			&pm.ContactTag2,
+			&pm.ContactTag3,
+			&pm.ContactTag4,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return nil, err
+		}
+	}
+	data := pm
+
+	headerPartnerContact := &HeaderPartnerContact{
+		DeliveryDocument:  data.DeliveryDocument,
+		PartnerFunction:   data.PartnerFunction,
+		ContactID:         data.ContactID,
+		ContactPersonName: data.ContactPersonName,
+		EmailAddress:      data.EmailAddress,
+		PhoneNumber:       data.PhoneNumber,
+		MobilePhoneNumber: data.MobilePhoneNumber,
+		FaxNumber:         data.FaxNumber,
+		ContactTag1:       data.ContactTag1,
+		ContactTag2:       data.ContactTag2,
+		ContactTag3:       data.ContactTag3,
+		ContactTag4:       data.ContactTag4,
+	}
+	return headerPartnerContact, nil
+}
+
+func ConvertToHeaderPartnerPlant(sdc *api_input_reader.SDC, rows *sql.Rows) (*HeaderPartnerPlant, error) {
+	pm := &requests.HeaderPartnerPlant{}
+
+	for i := 0; true; i++ {
+		if !rows.Next() {
+			if i == 0 {
+				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+			} else {
+				break
+			}
+		}
+		err := rows.Scan(
+			&pm.DeliveryDocument,
+			&pm.PartnerFunction,
+			&pm.BusinessPartner,
+			&pm.Plant,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return nil, err
+		}
+	}
+	data := pm
+
+	headerPartnerPlant := &HeaderPartnerPlant{
+		DeliveryDocument: data.DeliveryDocument,
+		PartnerFunction:  data.PartnerFunction,
+		BusinessPartner:  data.BusinessPartner,
+		Plant:            data.Plant,
+	}
+	return headerPartnerPlant, nil
+}
+
+func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*Address, error) {
+	pm := &requests.Address{}
+
+	for i := 0; true; i++ {
+		if !rows.Next() {
+			if i == 0 {
+				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+			} else {
+				break
+			}
+		}
+		err := rows.Scan(
+			&pm.DeliveryDocument,
+			&pm.AddressID,
+			&pm.PostalCode,
+			&pm.LocalRegion,
+			&pm.Country,
+			&pm.District,
+			&pm.StreetName,
+			&pm.CityName,
+			&pm.Building,
+			&pm.Floor,
+			&pm.Room,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return nil, err
+		}
+	}
+	data := pm
+
+	address := &Address{
+		DeliveryDocument: data.DeliveryDocument,
+		AddressID:        data.AddressID,
+		PostalCode:       data.PostalCode,
+		LocalRegion:      data.LocalRegion,
+		Country:          data.Country,
+		District:         data.District,
+		StreetName:       data.StreetName,
+		CityName:         data.CityName,
+		Building:         data.Building,
+		Floor:            data.Floor,
+		Room:             data.Room,
+	}
+	return address, nil
+}
+
 func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*Item, error) {
 	pm := &requests.Item{}
 
@@ -374,66 +503,70 @@ func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*Item, error) {
 	return item, nil
 }
 
-// func (sdc *SDC) ConvertToBusinessPartner() *requests.BusinessPartner {
-// 	dataGeneral := sdc.General
-// 	data := sdc.BusinessPartner
-// 	return &requests.BusinessPartner{
-// 		Product:                dataGeneral.Product,
-// 		BusinessPartner:        data.BusinessPartner,
-// 		ValidityEndDate:        data.ValidityEndDate,
-// 		ValidityStartDate:      data.ValidityStartDate,
-// 		BusinessPartnerProduct: data.BusinessPartnerProduct,
-// 		IsMarkedForDeletion:    data.IsMarkedForDeletion,
-// 	}
-// }
+func ConvertToItemPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*ItemPartner, error) {
+	pm := &requests.ItemPartner{}
 
-// func (sdc *SDC) ConvertToProcurement() *requests.Procurement {
-// 	dataGeneral := sdc.General
-// 	dataBusinessPartner := sdc.BusinessPartner
-// 	data := sdc.Procurement
-// 	return &requests.Procurement{
-// 		Product:                     dataGeneral.Product,
-// 		BusinessPartner:             dataBusinessPartner.BusinessPartner,
-// 		Plant:                       data.Plant,
-// 		Buyable:                     data.Buyable,
-// 		IsAutoPurOrdCreationAllowed: data.IsAutoPurOrdCreationAllowed,
-// 		IsSourceListRequired:        data.IsSourceListRequired,
-// 		IsMarkedForDeletion:         data.IsMarkedForDeletion,
-// 	}
-// }
+	for i := 0; true; i++ {
+		if !rows.Next() {
+			if i == 0 {
+				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+			} else {
+				break
+			}
+		}
+		err := rows.Scan(
+			&pm.DeliveryDocument,
+			&pm.DeliveryDocumentItem,
+			&pm.PartnerFunction,
+			&pm.BusinessPartner,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return nil, err
+		}
+	}
+	data := pm
 
-// func (sdc *SDC) ConvertToBPPlant(num int) *requests.BPPlant {
-// 	dataGeneral := sdc.General
-// 	dataBusinessPartner := sdc.BusinessPartner
-// 	data := sdc.BusinessPartner.BPPlant[num]
-// 	return &requests.BPPlant{
-// 		Product:                   dataGeneral.Product,
-// 		BusinessPartner:           dataBusinessPartner.BusinessPartner,
-// 		Plant:                     data.Plant,
-// 		Issuable:                  data.Issuable,
-// 		Receivable:                data.Receivable,
-// 		IssuingStorageLocation:    data.IssuingStorageLocation,
-// 		ReceivingStorageLocation:  data.ReceivingStorageLocation,
-// 		AvailabilityCheckType:     data.AvailabilityCheckType,
-// 		ProfitCenter:              data.ProfitCenter,
-// 		MRPType:                   data.MRPType,
-// 		MRPResponsible:            data.MRPResponsible,
-// 		MinimumLotSizeQuantity:    data.MinimumLotSizeQuantity,
-// 		MaximumLotSizeQuantity:    data.MaximumLotSizeQuantity,
-// 		FixedLotSizeQuantity:      data.FixedLotSizeQuantity,
-// 		IsBatchManagementRequired: data.IsBatchManagementRequired,
-// 		ProcurementType:           data.ProcurementType,
-// 		InventoryUnit:             data.InventoryUnit,
-// 		IsMarkedForDeletion:       data.IsMarkedForDeletion,
-// 	}
-// }
+	itemPartner := &ItemPartner{
+		DeliveryDocument:     data.DeliveryDocument,
+		DeliveryDocumentItem: data.DeliveryDocumentItem,
+		PartnerFunction:      data.PartnerFunction,
+		BusinessPartner:      data.BusinessPartner,
+	}
+	return itemPartner, nil
+}
 
-// func (sdc *SDC) ConvertToProductDescription() *requests.ProductDescription {
-// 	dataGeneral := sdc.General
-// 	data := sdc.ProductDescription
-// 	return &requests.ProductDescription{
-// 		Product:            dataGeneral.Product,
-// 		Language:           data.Language,
-// 		ProductDescription: data.ProductDescription,
-// 	}
-// }
+func ConvertToItemPartnerPlant(sdc *api_input_reader.SDC, rows *sql.Rows) (*ItemPartnerPlant, error) {
+	pm := &requests.ItemPartnerPlant{}
+
+	for i := 0; true; i++ {
+		if !rows.Next() {
+			if i == 0 {
+				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+			} else {
+				break
+			}
+		}
+		err := rows.Scan(
+			&pm.DeliveryDocument,
+			&pm.DeliveryDocumentItem,
+			&pm.PartnerFunction,
+			&pm.BusinessPartner,
+			&pm.Plant,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return nil, err
+		}
+	}
+	data := pm
+
+	itemPartnerPlant := &ItemPartnerPlant{
+		DeliveryDocument:     data.DeliveryDocument,
+		DeliveryDocumentItem: data.DeliveryDocumentItem,
+		PartnerFunction:      data.PartnerFunction,
+		BusinessPartner:      data.BusinessPartner,
+		Plant:                data.Plant,
+	}
+	return itemPartnerPlant, nil
+}

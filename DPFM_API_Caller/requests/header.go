@@ -1,7 +1,7 @@
 package requests
 
 type Header struct {
-	DeliveryDocument              *int     `json:"DeliveryDocument"`
+	DeliveryDocument              int      `json:"DeliveryDocument"`
 	Buyer                         *int     `json:"Buyer"`
 	Seller                        *int     `json:"Seller"`
 	ReferenceDocument             *int     `json:"ReferenceDocument"`
