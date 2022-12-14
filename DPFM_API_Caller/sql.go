@@ -90,13 +90,13 @@ func (c *DPFMAPICaller) Header(
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocument, Buyer, Seller, ReferenceDocument, ReferenceDocumentItem, OrderID, 
 		OrderItem, ContractType, OrderValidityStartDate, OrderValidityEndDate, IssuingPlantTimeZone, 
-		ReceivingPlantTimeZone, DocumentDate, PlannedGoodsIssueDate, PlannedGoodsIssueTime, PlannedGoodsReceiptDate, 
-		PlannedGoodsReceiptTime, BillingDocumentDate, CompleteDeliveryIsDefined, OverallDeliveryStatus, 
-		CreationDate, CreationTime, IssuingBlockReason, ReceivingBlockReason, GoodsIssueOrReceiptSlipNumber, 
-		HeaderBillingStatus, HeaderBillingConfStatus, HeaderBillingBlockReason, HeaderGrossWeight, 
-		HeaderNetWeight, HeaderVolume, HeaderVolumeUnit, HeaderWeightUnit, Incoterms, IsExportImportDelivery, 
-		LastChangeDate, IssuingPlantBusinessPartner, IssuingPlant, ReceivingPlant, ReceivingPlantBusinessPartner, 
-		DeliverToParty, DeliverFromParty, TransactionCurrency, OverallDelivReltdBillgStatus
+		ReceivingLocationTimeZone, DocumentDate, PlannedGoodsIssueDate, PlannedGoodsIssueTime, PlannedGoodsReceiptDate, 
+		PlannedGoodsReceiptTime, InvoiceDocumentDate, HeaderCompleteDeliveryIsDefined, HeaderDeliveryStatus, 
+		CreationDate, CreationTime, HeaderDeliveryBlockStatus, HeaderIssuingBlockStatus, HeaderReceivingBlockStatus, GoodsIssueOrReceiptSlipNumber, 
+		HeaderBillingStatus, HeaderBillingConfStatus, HeaderBillingBlockStatus, HeaderGrossWeight, 
+		HeaderNetWeight, HeaderWeightUnit, Incoterms, BillFromParty, BillToParty, BillFromCountry, BillToCountry, 
+		IsExportImportDelivery, Payer, Payee, IsExportImportDelivery, LastChangeDate, IssuingPlantBusinessPartner, IssuingPlant, ReceivingPlantBusinessPartner, 
+		ReceivingPlant, DeliverFromParty, DeliverToParty, TransactionCurrency, StockIsFullyConfirmed
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
 		WHERE DeliveryDocument = ?;`, deliveryDocument,
 	)
@@ -157,7 +157,7 @@ func (c *DPFMAPICaller) HeaderPartnerContact(
 	contactID := input.Header.HeaderPartner.HeaderPartnerContact.ContactID
 
 	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, PartnerFunction, ContactID, ContactPersonName, EmailAddress, 
+		`SELECT DeliveryDocument, PartnerFunction, ContactID, BusinessPartner, ContactPersonName, EmailAddress, 
 		PhoneNumber, MobilePhoneNumber, FaxNumber, ContactTag1, ContactTag2, ContactTag3, ContactTag4
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_partner_contact_data
 		WHERE (DeliveryDocument, PartnerFunction, ContactID) = (?, ?, ?);`, deliveryDocument, partnerFunction, contactID,
@@ -186,12 +186,11 @@ func (c *DPFMAPICaller) HeaderPartnerPlant(
 	deliveryDocument := input.Header.DeliveryDocument
 	partnerFunction := input.Header.HeaderPartner.PartnerFunction
 	businessPartner := input.Header.HeaderPartner.BusinessPartner
-	plant := input.Header.HeaderPartner.HeaderPartnerPlant.Plant
 
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocument, PartnerFunction, BusinessPartner, Plant
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_partner_plant_data
-		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner, Plant) = (?, ?, ?, ?);`, deliveryDocument, partnerFunction, businessPartner, plant,
+		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) = (?, ?, ?);`, deliveryDocument, partnerFunction, businessPartner,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -249,24 +248,25 @@ func (c *DPFMAPICaller) Item(
 
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocument, DeliveryDocumentItem, DeliveryDocumentItemCategory, DeliveryDocumentItemText, 
-		Product, ProductStandardID, ProductGroup, BaseUnit, OriginalDeliveryQuantity, DeliveryQuantityUnit, 
-		ActualGoodsIssueDate, ActualGoodsIssueTime, ActualGoodsReceiptDate, ActualGoodsReceiptTime, 
-		ActualGoodsIssueQtyInBaseUnit, ActualGoodsIssueQuantity, ActualGoodsReceiptQtyInBaseUnit, ActualGoodsReceiptQuantity, 
-		CompleteItemDeliveryIsDefined, StockConfirmationPartnerFunction, StockConfirmationBusinessPartner, StockConfirmationPlant, 
-		StockConfirmationPolicy, StockConfirmationStatus, ProductionPlantPartnerFunction, ProductionPlantBusinessPartner, 
-		ProductionPlant, ProductionPlantStorageLocation, IssuingPlantPartnerFunction, IssuingPlantBusinessPartner, IssuingPlant, 
-		IssuingPlantStorageLocation, ReceivingPlantPartnerFunction, ReceivingPlantBusinessPartner, ReceivingPlant, 
+		DeliveryDocumentItemTextByBuyer, DeliveryDocumentItemTextBySeller, Product, ProductStandardID, ProductGroup, 
+		BaseUnit, OriginalQuantityInBaseUnit, IssuingUnit, ReceivingUnit,ActualGoodsIssueDate, ActualGoodsIssueTime, 
+		ActualGoodsReceiptDate, ActualGoodsReceiptTime, ActualGoodsIssueQtyInBaseUnit, ActualGoodsIssueQuantity, 
+		ActualGoodsReceiptQtyInBaseUnit, ActualGoodsReceiptQuantity, CompleteItemDeliveryIsDefined, StockConfirmationPartnerFunction, 
+		StockConfirmationBusinessPartner, StockConfirmationPlant, StockConfirmationPlantBatch, StockConfirmationPlantBatchValidityStartDate, 
+		StockConfirmationPlantBatchValidityEndDate, StockConfirmationPolicy, StockConfirmationStatus, ProductionPlantPartnerFunction, 
+		ProductionPlantBusinessPartner, ProductionPlant, ProductionPlantStorageLocation, IssuingPlantPartnerFunction, IssuingPlantBusinessPartner, 
+		IssuingPlant, IssuingPlantStorageLocation, ReceivingPlantPartnerFunction, ReceivingPlantBusinessPartner, ReceivingPlant, 
 		ReceivingPlantStorageLocation, ProductIsBatchManagedInProductionPlant, ProductIsBatchManagedInIssuingPlant, 
 		ProductIsBatchManagedInReceivingPlant, BatchMgmtPolicyInProductionPlant, BatchMgmtPolicyInIssuingPlant, 
 		BatchMgmtPolicyInReceivingPlant, ProductionPlantBatch, IssuingPlantBatch, ReceivingPlantBatch, ProductionPlantBatchValidityStartDate, 
-		ProductionPlantBatchValidityEndDate, IssuingPlantBatchValidityStartDate, IssuingPlantBatchValidityEndDate, ReceivingPlantBatchValidityStartDate, 
-		ReceivingPlantBatchValidityEndDate, CreationDate, CreationTime, ItemBillingStatus, ItemBillingConfStatus, SalesCostGLAccount, 
-		ReceivingGLAccount, IssuingGoodsMovementType, ReceivingGoodsMovementType, ItemBillingBlockReason, ItemCompleteDeliveryIsDefined, 
-		ItemDeliveryIncompletionStatus, ItemGrossWeight, ItemNetWeight, ItemWeightUnit, ItemIsBillingRelevant, LastChangeDate, 
-		OrderID, OrderItem, OrderType, ContractType, OrderValidityStartDate, OrderValidityEndDate, PaymentTerms, 
-		DueCalculationBaseDate, PaymentDueDate, NetPaymentDays, PaymentMethod, InvoicePeriodStartDate, InvoicePeriodEndDate, 
-		ProductAvailabilityDate, Project, ReferenceDocument, ReferenceDocumentItem, BPTaxClassification, ProductTaxClassification, 
-		BPAccountAssignmentGroup, ProductAccountAssignmentGroup, TaxCode, TaxRate, CountryOfOrigin
+		IssuingPlantBatchValidityStartDate, ProductionPlantBatchValidityEndDate, IssuingPlantBatchValidityEndDate, IssuingPlantBatchValidityStartDate, 
+		ReceivingPlantBatchValidityStartDate, ReceivingPlantBatchValidityEndDate, CreationDate, CreationTime, ItemBillingStatus, ItemBillingConfStatus, 
+		SalesCostGLAccount, ReceivingGLAccount, IssuingGoodsMovementType, ReceivingGoodsMovementType, ItemDeliveryBlockStatus, ItemReceivingBlockStatus, 
+		ItemBillingBlockStatus, ItemCompleteDeliveryIsDefined, ItemDeliveryIncompletionStatus, ItemGrossWeight, ItemNetWeight, ItemWeightUnit, 
+		ItemIsBillingRelevant, LastChangeDate, OrderID, OrderItem, OrderType, ContractType, OrderValidityStartDate, OrderValidityEndDate, PaymentTerms, 
+		DueCalculationBaseDate, PaymentDueDate, NetPaymentDays, PaymentMethod, InvoicePeriodStartDate, InvoicePeriodEndDate, ConfirmedDeliveryDate, 
+		Project, ReferenceDocument, ReferenceDocumentItem, BPTaxClassification, ProductTaxClassification, 
+		BPAccountAssignmentGroup, ProductAccountAssignmentGroup, TaxCode, TaxRate, CountryOfOrigin, StockIsFullyConfirmed
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
 		WHERE (DeliveryDocument, DeliveryDocumentItem) = (?, ?, ?);`, deliveryDocument, deliveryDocumentItem,
 	)
@@ -294,12 +294,11 @@ func (c *DPFMAPICaller) ItemPartner(
 	deliveryDocument := input.Header.DeliveryDocument
 	deliveryDocumentItem := input.Header.Item.DeliveryDocumentItem
 	partnerFunction := input.Header.Item.ItemPartner.PartnerFunction
-	businessPartner := input.Header.Item.ItemPartner.BusinessPartner
 
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_partner_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner) = (?, ?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction, businessPartner,
+		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction) = (?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -326,12 +325,11 @@ func (c *DPFMAPICaller) ItemPartnerPlant(
 	deliveryDocumentItem := input.Header.Item.DeliveryDocumentItem
 	partnerFunction := input.Header.Item.ItemPartner.PartnerFunction
 	businessPartner := input.Header.Item.ItemPartner.BusinessPartner
-	plant := input.Header.Item.ItemPartner.ItemPartnerPlant.Plant
 
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner, Plant
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_partner_plant_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner, Plant) = (?, ?, ?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction, businessPartner, plant,
+		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner) = (?, ?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction, businessPartner,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
