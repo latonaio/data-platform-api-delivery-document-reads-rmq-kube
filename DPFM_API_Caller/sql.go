@@ -4,6 +4,7 @@ import (
 	"context"
 	dpfm_api_input_reader "data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Input_Reader"
 	dpfm_api_output_formatter "data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Output_Formatter"
+	"strings"
 	"sync"
 
 	"github.com/latonaio/golang-logging-library-for-data-platform/logger"
@@ -19,60 +20,48 @@ func (c *DPFMAPICaller) readSqlProcess(
 	log *logger.Logger,
 ) interface{} {
 	var header *dpfm_api_output_formatter.Header
-	var headerPartner *dpfm_api_output_formatter.HeaderPartner
-	var headerPartnerContact *dpfm_api_output_formatter.HeaderPartnerContact
-	var headerPartnerPlant *dpfm_api_output_formatter.HeaderPartnerPlant
-	var address *dpfm_api_output_formatter.Address
-	var item *dpfm_api_output_formatter.Item
-	var itemPartner *dpfm_api_output_formatter.ItemPartner
-	var itemPartnerPlant *dpfm_api_output_formatter.ItemPartnerPlant
+	var item *[]dpfm_api_output_formatter.Item
+	var partner *[]dpfm_api_output_formatter.Partner
+	var address *[]dpfm_api_output_formatter.Address
+	var deliverFromItems *[]dpfm_api_output_formatter.DeliverFromItems
+	var deliverToItems *[]dpfm_api_output_formatter.DeliverToItems
 	for _, fn := range accepter {
 		switch fn {
 		case "Header":
 			func() {
 				header = c.Header(mtx, input, output, errs, log)
 			}()
-		case "HeaderPartner":
+		case "Item":
 			func() {
-				headerPartner = c.HeaderPartner(mtx, input, output, errs, log)
+				item = c.Item(mtx, input, output, errs, log)
 			}()
-		case "HeaderPartnerContact":
+		case "Partner":
 			func() {
-				headerPartnerContact = c.HeaderPartnerContact(mtx, input, output, errs, log)
-			}()
-		case "HeaderPartnerPlant":
-			func() {
-				headerPartnerPlant = c.HeaderPartnerPlant(mtx, input, output, errs, log)
+				partner = c.Partner(mtx, input, output, errs, log)
 			}()
 		case "Address":
 			func() {
 				address = c.Address(mtx, input, output, errs, log)
 			}()
-		case "Item":
+		case "DeliverFromItems":
 			func() {
-				item = c.Item(mtx, input, output, errs, log)
+				deliverFromItems = c.DeliverFromItems(mtx, input, output, errs, log)
 			}()
-		case "ItemPartner":
+		case "DeliverToItems":
 			func() {
-				itemPartner = c.ItemPartner(mtx, input, output, errs, log)
-			}()
-		case "ItemPartnerPlant":
-			func() {
-				itemPartnerPlant = c.ItemPartnerPlant(mtx, input, output, errs, log)
+				deliverToItems = c.DeliverToItems(mtx, input, output, errs, log)
 			}()
 		default:
 		}
 	}
 
 	data := &dpfm_api_output_formatter.Message{
-		Header:               header,
-		HeaderPartner:        headerPartner,
-		HeaderPartnerContact: headerPartnerContact,
-		HeaderPartnerPlant:   headerPartnerPlant,
-		Address:              address,
-		Item:                 item,
-		ItemPartner:          itemPartner,
-		ItemPartnerPlant:     itemPartnerPlant,
+		Header:           header,
+		Item:             item,
+		Partner:          partner,
+		Address:          address,
+		DeliverFromItems: deliverFromItems,
+		DeliverToItems:   deliverToItems,
 	}
 
 	return data
@@ -88,15 +77,7 @@ func (c *DPFMAPICaller) Header(
 	deliveryDocument := input.Header.DeliveryDocument
 
 	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, Buyer, Seller, ReferenceDocument, ReferenceDocumentItem, OrderID, 
-		OrderItem, ContractType, OrderValidityStartDate, OrderValidityEndDate, IssuingPlantTimeZone, 
-		ReceivingLocationTimeZone, DocumentDate, PlannedGoodsIssueDate, PlannedGoodsIssueTime, PlannedGoodsReceiptDate, 
-		PlannedGoodsReceiptTime, InvoiceDocumentDate, HeaderCompleteDeliveryIsDefined, HeaderDeliveryStatus, 
-		CreationDate, CreationTime, HeaderDeliveryBlockStatus, HeaderIssuingBlockStatus, HeaderReceivingBlockStatus, GoodsIssueOrReceiptSlipNumber, 
-		HeaderBillingStatus, HeaderBillingConfStatus, HeaderBillingBlockStatus, HeaderGrossWeight, 
-		HeaderNetWeight, HeaderWeightUnit, Incoterms, BillFromParty, BillToParty, BillFromCountry, BillToCountry, 
-		IsExportImportDelivery, Payer, Payee, IsExportImportDelivery, LastChangeDate, IssuingPlantBusinessPartner, IssuingPlant, ReceivingPlantBusinessPartner, 
-		ReceivingPlant, DeliverFromParty, DeliverToParty, TransactionCurrency, StockIsFullyConfirmed
+		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
 		WHERE DeliveryDocument = ?;`, deliveryDocument,
 	)
@@ -114,161 +95,27 @@ func (c *DPFMAPICaller) Header(
 	return data
 }
 
-func (c *DPFMAPICaller) HeaderPartner(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *dpfm_api_output_formatter.HeaderPartner {
-	deliveryDocument := input.Header.DeliveryDocument
-	partnerFunction := input.Header.HeaderPartner.PartnerFunction
-	businessPartner := input.Header.HeaderPartner.BusinessPartner
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, PartnerFunction, BusinessPartner, BusinessPartnerFullName, BusinessPartnerName, 
-		Organization, Country, Language, Currency, ExternalDocumentID, AddressID
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_partner_data
-		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) = (?, ?, ?);`, deliveryDocument, partnerFunction, businessPartner,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToHeaderPartner(input, rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
-func (c *DPFMAPICaller) HeaderPartnerContact(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *dpfm_api_output_formatter.HeaderPartnerContact {
-	deliveryDocument := input.Header.DeliveryDocument
-	partnerFunction := input.Header.HeaderPartner.PartnerFunction
-	contactID := input.Header.HeaderPartner.HeaderPartnerContact.ContactID
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, PartnerFunction, ContactID, BusinessPartner, ContactPersonName, EmailAddress, 
-		PhoneNumber, MobilePhoneNumber, FaxNumber, ContactTag1, ContactTag2, ContactTag3, ContactTag4
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_partner_contact_data
-		WHERE (DeliveryDocument, PartnerFunction, ContactID) = (?, ?, ?);`, deliveryDocument, partnerFunction, contactID,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToHeaderPartnerContact(input, rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
-func (c *DPFMAPICaller) HeaderPartnerPlant(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *dpfm_api_output_formatter.HeaderPartnerPlant {
-	deliveryDocument := input.Header.DeliveryDocument
-	partnerFunction := input.Header.HeaderPartner.PartnerFunction
-	businessPartner := input.Header.HeaderPartner.BusinessPartner
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, PartnerFunction, BusinessPartner, Plant
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_partner_plant_data
-		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) = (?, ?, ?);`, deliveryDocument, partnerFunction, businessPartner,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToHeaderPartnerPlant(input, rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
-func (c *DPFMAPICaller) Address(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *dpfm_api_output_formatter.Address {
-	deliveryDocument := input.Header.DeliveryDocument
-	addressID := input.Header.Address.AddressID
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, AddressID, PostalCode, LocalRegion, Country, District, StreetName, 
-		CityName, Building, Floor, Room
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_address_data
-		WHERE (DeliveryDocument, AddressID) = (?, ?);`, deliveryDocument, addressID,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToAddress(input, rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
 func (c *DPFMAPICaller) Item(
 	mtx *sync.Mutex,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) *dpfm_api_output_formatter.Item {
+) *[]dpfm_api_output_formatter.Item {
+	var args []interface{}
 	deliveryDocument := input.Header.DeliveryDocument
-	deliveryDocumentItem := input.Header.Item.DeliveryDocumentItem
+	item := input.Header.Item
 
+	cnt := 0
+	for _, v := range item {
+		args = append(args, deliveryDocument, v.DeliveryDocumentItem)
+		cnt++
+	}
+	repeat := strings.Repeat("(?,?),", cnt-1) + "(?,?)"
 	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, DeliveryDocumentItem, DeliveryDocumentItemCategory, DeliveryDocumentItemText, 
-		DeliveryDocumentItemTextByBuyer, DeliveryDocumentItemTextBySeller, Product, ProductStandardID, ProductGroup, 
-		BaseUnit, OriginalQuantityInBaseUnit, IssuingUnit, ReceivingUnit,ActualGoodsIssueDate, ActualGoodsIssueTime, 
-		ActualGoodsReceiptDate, ActualGoodsReceiptTime, ActualGoodsIssueQtyInBaseUnit, ActualGoodsIssueQuantity, 
-		ActualGoodsReceiptQtyInBaseUnit, ActualGoodsReceiptQuantity, CompleteItemDeliveryIsDefined, StockConfirmationPartnerFunction, 
-		StockConfirmationBusinessPartner, StockConfirmationPlant, StockConfirmationPlantBatch, StockConfirmationPlantBatchValidityStartDate, 
-		StockConfirmationPlantBatchValidityEndDate, StockConfirmationPolicy, StockConfirmationStatus, ProductionPlantPartnerFunction, 
-		ProductionPlantBusinessPartner, ProductionPlant, ProductionPlantStorageLocation, IssuingPlantPartnerFunction, IssuingPlantBusinessPartner, 
-		IssuingPlant, IssuingPlantStorageLocation, ReceivingPlantPartnerFunction, ReceivingPlantBusinessPartner, ReceivingPlant, 
-		ReceivingPlantStorageLocation, ProductIsBatchManagedInProductionPlant, ProductIsBatchManagedInIssuingPlant, 
-		ProductIsBatchManagedInReceivingPlant, BatchMgmtPolicyInProductionPlant, BatchMgmtPolicyInIssuingPlant, 
-		BatchMgmtPolicyInReceivingPlant, ProductionPlantBatch, IssuingPlantBatch, ReceivingPlantBatch, ProductionPlantBatchValidityStartDate, 
-		IssuingPlantBatchValidityStartDate, ProductionPlantBatchValidityEndDate, IssuingPlantBatchValidityEndDate, IssuingPlantBatchValidityStartDate, 
-		ReceivingPlantBatchValidityStartDate, ReceivingPlantBatchValidityEndDate, CreationDate, CreationTime, ItemBillingStatus, ItemBillingConfStatus, 
-		SalesCostGLAccount, ReceivingGLAccount, IssuingGoodsMovementType, ReceivingGoodsMovementType, ItemDeliveryBlockStatus, ItemReceivingBlockStatus, 
-		ItemBillingBlockStatus, ItemCompleteDeliveryIsDefined, ItemDeliveryIncompletionStatus, ItemGrossWeight, ItemNetWeight, ItemWeightUnit, 
-		ItemIsBillingRelevant, LastChangeDate, OrderID, OrderItem, OrderType, ContractType, OrderValidityStartDate, OrderValidityEndDate, PaymentTerms, 
-		DueCalculationBaseDate, PaymentDueDate, NetPaymentDays, PaymentMethod, InvoicePeriodStartDate, InvoicePeriodEndDate, ConfirmedDeliveryDate, 
-		Project, ReferenceDocument, ReferenceDocumentItem, BPTaxClassification, ProductTaxClassification, 
-		BPAccountAssignmentGroup, ProductAccountAssignmentGroup, TaxCode, TaxRate, CountryOfOrigin, StockIsFullyConfirmed
+		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem) = (?, ?, ?);`, deliveryDocument, deliveryDocumentItem,
+		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` );`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -284,28 +131,35 @@ func (c *DPFMAPICaller) Item(
 	return data
 }
 
-func (c *DPFMAPICaller) ItemPartner(
+func (c *DPFMAPICaller) Partner(
 	mtx *sync.Mutex,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) *dpfm_api_output_formatter.ItemPartner {
+) *[]dpfm_api_output_formatter.Partner {
+	var args []interface{}
 	deliveryDocument := input.Header.DeliveryDocument
-	deliveryDocumentItem := input.Header.Item.DeliveryDocumentItem
-	partnerFunction := input.Header.Item.ItemPartner.PartnerFunction
+	partner := input.Header.Partner
+
+	cnt := 0
+	for _, v := range partner {
+		args = append(args, deliveryDocument, v.PartnerFunction, v.BusinessPartner)
+		cnt++
+	}
+	repeat := strings.Repeat("(?,?,?),", cnt-1) + "(?,?,?)"
 
 	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_partner_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction) = (?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction,
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_partner_data
+		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` );`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToItemPartner(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToPartner(input, rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -314,29 +168,117 @@ func (c *DPFMAPICaller) ItemPartner(
 	return data
 }
 
-func (c *DPFMAPICaller) ItemPartnerPlant(
+func (c *DPFMAPICaller) Address(
 	mtx *sync.Mutex,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) *dpfm_api_output_formatter.ItemPartnerPlant {
+) *[]dpfm_api_output_formatter.Address {
+	var args []interface{}
 	deliveryDocument := input.Header.DeliveryDocument
-	deliveryDocumentItem := input.Header.Item.DeliveryDocumentItem
-	partnerFunction := input.Header.Item.ItemPartner.PartnerFunction
-	businessPartner := input.Header.Item.ItemPartner.BusinessPartner
+	address := input.Header.Address
+
+	cnt := 0
+	for _, v := range address {
+		args = append(args, deliveryDocument, v.AddressID)
+		cnt++
+	}
+	repeat := strings.Repeat("(?,?),", cnt-1) + "(?,?)"
 
 	rows, err := c.db.Query(
-		`SELECT DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner, Plant
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_partner_plant_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem, PartnerFunction, BusinessPartner) = (?, ?, ?, ?);`, deliveryDocument, deliveryDocumentItem, partnerFunction, businessPartner,
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_address_data
+		WHERE (DeliveryDocument, AddressID) IN ( `+repeat+` );`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToItemPartnerPlant(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToAddress(input, rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) DeliverFromItems(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.DeliverFromItems {
+	deliverFromParty := input.Header.DeliverFromParty
+
+	rows, err := c.db.Query(
+		`SELECT DeliveryDocumentHeader.DeliveryDocument,
+			DeliveryDocumentHeader.HeaderDeliveryStatus,
+			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName, 
+			BusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
+			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName,
+			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
+			DeliveryDocumentItem.ItemBillingStatus,
+			DeliveryDocumentItem.ConfirmedDeliveryDate
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data as DeliveryDocumentHeader
+		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as BusinessPartnerGeneral
+		ON DeliveryDocumentHeader.DeliverFromParty = BusinessPartnerGeneral.BusinessPartner
+		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data as DeliveryDocumentItem
+		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
+		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
+		ON DeliveryDocumentHeader.DeliverToParty = DeliverToBusinessPartnerGeneral.BusinessPartner
+		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?);`, deliverFromParty,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToDeliverFromItems(input, rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) DeliverToItems(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.DeliverToItems {
+	deliverToParty := input.Header.DeliverToParty
+
+	rows, err := c.db.Query(
+		`SELECT DeliveryDocumentHeader.DeliveryDocument,
+			DeliveryDocumentHeader.HeaderDeliveryStatus,
+			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName, 
+			BusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
+			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName,
+			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
+			DeliveryDocumentItem.ItemBillingStatus,
+			DeliveryDocumentItem.ConfirmedDeliveryDate
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data as DeliveryDocumentHeader
+		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as BusinessPartnerGeneral
+		ON DeliveryDocumentHeader.DeliverToParty = BusinessPartnerGeneral.BusinessPartner
+		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data as DeliveryDocumentItem
+		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
+		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
+		ON DeliveryDocumentHeader.DeliverFromParty = DeliverToBusinessPartnerGeneral.BusinessPartner
+		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?);`, deliverToParty,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToDeliverToItems(input, rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil

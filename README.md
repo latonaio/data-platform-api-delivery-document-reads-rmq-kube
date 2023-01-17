@@ -19,13 +19,9 @@ APIサービス URL: https://xxx.xxx.io/api/API_DELIVERY_DOCUMENT_SRV/reads/
 data-platform-api-delivery-document-reads-rmq-kube には、次の API をコールするためのリソースが含まれています。  
 
 * A_Header（データ連携基盤 入出荷 - ヘッダデータ）
-* A_HeaderPDF（データ連携基盤 入出荷 - ヘッダODFデータ）
-* A_HeaderPartner（データ連携基盤 入出荷 - ヘッダ取引先データ）
-* A_HeaderPartnerPlant（データ連携基盤 入出荷 - ヘッダ取引先プラントデータ）
-* A_Address（データ連携基盤 入出荷 - 住所データ）
 * A_Item（データ連携基盤 入出荷 - 明細データ）
-* A_ItemPartner（データ連携基盤 入出荷 - 明細取引先データ）
-* A_ItemPartnerPlant（データ連携基盤 入出荷 - 明細取引先プラントデータ）
+* A_Partner（データ連携基盤 入出荷 - 取引先データ）
+* A_Address（データ連携基盤 入出荷 - 住所データ）
  
 
 ## API への 値入力条件 の 初期値
