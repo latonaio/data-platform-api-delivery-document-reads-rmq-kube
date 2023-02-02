@@ -13,7 +13,7 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 	for i := 0; true; i++ {
 		if !rows.Next() {
 			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+				return nil, fmt.Errorf("DBテーブルに対象のレコードが存在しません。")
 			} else {
 				break
 			}
@@ -62,7 +62,6 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 			&pm.GoodsIssueOrReceiptSlipNumber,
 			&pm.HeaderBillingStatus,
 			&pm.HeaderBillingConfStatus,
-			&pm.HeaderBillingBlockStatus,
 			&pm.HeaderGrossWeight,
 			&pm.HeaderNetWeight,
 			&pm.HeaderWeightUnit,
@@ -71,14 +70,17 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 			&pm.HeaderDeliveryBlockStatus,
 			&pm.HeaderIssuingBlockStatus,
 			&pm.HeaderReceivingBlockStatus,
+			&pm.HeaderBillingBlockStatus,
+			&pm.HeaderIsCancelled,
+			&pm.HeaderIsDeleted,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
 			return nil, err
 		}
 	}
-	data := pm
 
+	data := pm
 	header := &Header{
 		DeliveryDocument:                       data.DeliveryDocument,
 		SupplyChainRelationshipID:              data.SupplyChainRelationshipID,
@@ -123,7 +125,6 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 		GoodsIssueOrReceiptSlipNumber:          data.GoodsIssueOrReceiptSlipNumber,
 		HeaderBillingStatus:                    data.HeaderBillingStatus,
 		HeaderBillingConfStatus:                data.HeaderBillingConfStatus,
-		HeaderBillingBlockStatus:               data.HeaderBillingBlockStatus,
 		HeaderGrossWeight:                      data.HeaderGrossWeight,
 		HeaderNetWeight:                        data.HeaderNetWeight,
 		HeaderWeightUnit:                       data.HeaderWeightUnit,
@@ -132,34 +133,153 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 		HeaderDeliveryBlockStatus:              data.HeaderDeliveryBlockStatus,
 		HeaderIssuingBlockStatus:               data.HeaderIssuingBlockStatus,
 		HeaderReceivingBlockStatus:             data.HeaderReceivingBlockStatus,
+		HeaderBillingBlockStatus:               data.HeaderBillingBlockStatus,
+		HeaderIsCancelled:                      data.HeaderIsCancelled,
+		HeaderIsDeleted:                        data.HeaderIsDeleted,
 	}
+
 	return header, nil
 }
 
-func ConvertToPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Partner, error) {
-	var partner []Partner
+func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
+	var item []Item
 
 	for i := 0; true; i++ {
-		pm := &requests.Partner{}
+		pm := &requests.Item{}
 		if !rows.Next() {
 			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+				return nil, fmt.Errorf("'data_platform_new_delivery_document_item_data'テーブルに対象のレコードが存在しません。")
 			} else {
 				break
 			}
 		}
 		err := rows.Scan(
 			&pm.DeliveryDocument,
-			&pm.PartnerFunction,
-			&pm.BusinessPartner,
-			&pm.BusinessPartnerFullName,
-			&pm.BusinessPartnerName,
-			&pm.Organization,
-			&pm.Country,
-			&pm.Language,
-			&pm.Currency,
-			&pm.ExternalDocumentID,
-			&pm.AddressID,
+			&pm.DeliveryDocumentItem,
+			&pm.DeliveryDocumentItemCategory,
+			&pm.SupplyChainRelationshipID,
+			&pm.SupplyChainRelationshipDeliveryID,
+			&pm.SupplyChainRelationshipDeliveryPlantID,
+			&pm.SupplyChainRelationshipStockConfPlantID,
+			&pm.SupplyChainRelationshipProductionPlantID,
+			&pm.SupplyChainRelationshipBillingID,
+			&pm.SupplyChainRelationshipPaymentID,
+			&pm.Buyer,
+			&pm.Seller,
+			&pm.DeliverToParty,
+			&pm.DeliverFromParty,
+			&pm.DeliverToPlant,
+			&pm.DeliverFromPlant,
+			&pm.BillToParty,
+			&pm.BillFromParty,
+			&pm.BillToCountry,
+			&pm.BillFromCountry,
+			&pm.Payer,
+			&pm.Payee,
+			&pm.DeliverToPlantStorageLocation,
+			&pm.ProductIsBatchManagedInDeliverToPlant,
+			&pm.BatchMgmtPolicyInDeliverToPlant,
+			&pm.DeliverToPlantBatch,
+			&pm.DeliverToPlantBatchValidityStartDate,
+			&pm.DeliverToPlantBatchValidityStartTime,
+			&pm.DeliverToPlantBatchValidityEndDate,
+			&pm.DeliverToPlantBatchValidityEndTime,
+			&pm.DeliverFromPlantStorageLocation,
+			&pm.ProductIsBatchManagedInDeliverFromPlant,
+			&pm.BatchMgmtPolicyInDeliverFromPlant,
+			&pm.DeliverFromPlantBatch,
+			&pm.DeliverFromPlantBatchValidityStartDate,
+			&pm.DeliverFromPlantBatchValidityStartTime,
+			&pm.DeliverFromPlantBatchValidityEndDate,
+			&pm.DeliverFromPlantBatchValidityEndTime,
+			&pm.StockConfirmationBusinessPartner,
+			&pm.StockConfirmationPlant,
+			&pm.ProductIsBatchManagedInStockConfirmationPlant,
+			&pm.BatchMgmtPolicyInStockConfirmationPlant,
+			&pm.StockConfirmationPlantBatch,
+			&pm.StockConfirmationPlantBatchValidityStartDate,
+			&pm.StockConfirmationPlantBatchValidityStartTime,
+			&pm.StockConfirmationPlantBatchValidityEndDate,
+			&pm.StockConfirmationPlantBatchValidityEndTime,
+			&pm.StockConfirmationPolicy,
+			&pm.StockConfirmationStatus,
+			&pm.ProductionPlantBusinessPartner,
+			&pm.ProductionPlant,
+			&pm.ProductionPlantStorageLocation,
+			&pm.ProductIsBatchManagedInProductionPlant,
+			&pm.BatchMgmtPolicyInProductionPlant,
+			&pm.ProductionPlantBatch,
+			&pm.ProductionPlantBatchValidityStartDate,
+			&pm.ProductionPlantBatchValidityStartTime,
+			&pm.ProductionPlantBatchValidityEndDate,
+			&pm.ProductionPlantBatchValidityEndTime,
+			&pm.DeliveryDocumentItemText,
+			&pm.DeliveryDocumentItemTextByBuyer,
+			&pm.DeliveryDocumentItemTextBySeller,
+			&pm.Product,
+			&pm.ProductStandardID,
+			&pm.ProductGroup,
+			&pm.BaseUnit,
+			&pm.OriginalQuantityInBaseUnit,
+			&pm.DeliveryUnit,
+			&pm.ActualGoodsIssueDate,
+			&pm.ActualGoodsIssueTime,
+			&pm.ActualGoodsReceiptDate,
+			&pm.ActualGoodsReceiptTime,
+			&pm.ActualGoodsIssueQuantity,
+			&pm.ActualGoodsIssueQtyInBaseUnit,
+			&pm.ActualGoodsReceiptQuantity,
+			&pm.ActualGoodsReceiptQtyInBaseUnit,
+			&pm.CreationDate,
+			&pm.CreationTime,
+			&pm.LastChangeDate,
+			&pm.LastChangeTime,
+			&pm.ItemBillingStatus,
+			&pm.SalesCostGLAccount,
+			&pm.ReceivingGLAccount,
+			&pm.ItemCompleteDeliveryIsDefined,
+			&pm.ItemGrossWeight,
+			&pm.ItemNetWeight,
+			&pm.ItemWeightUnit,
+			&pm.InternalCapacityQuantity,
+			&pm.InternalCapacityQuantityUnit,
+			&pm.ItemIsBillingRelevant,
+			&pm.NetAmount,
+			&pm.TaxAmount,
+			&pm.GrossAmount,
+			&pm.OrderID,
+			&pm.OrderItem,
+			&pm.OrderType,
+			&pm.ContractType,
+			&pm.OrderValidityStartDate,
+			&pm.OrderValidityEndDate,
+			&pm.PaymentTerms,
+			&pm.DueCalculationBaseDate,
+			&pm.PaymentDueDate,
+			&pm.NetPaymentDays,
+			&pm.PaymentMethod,
+			&pm.InvoicePeriodStartDate,
+			&pm.InvoicePeriodEndDate,
+			&pm.ConfirmedDeliveryDate,
+			&pm.Project,
+			&pm.ReferenceDocument,
+			&pm.ReferenceDocumentItem,
+			&pm.TransactionTaxClassification,
+			&pm.ProductTaxClassificationBillToCountry,
+			&pm.ProductTaxClassificationBillFromCountry,
+			&pm.DefinedTaxClassification,
+			&pm.AccountAssignmentGroup,
+			&pm.ProductAccountAssignmentGroup,
+			&pm.TaxCode,
+			&pm.TaxRate,
+			&pm.CountryOfOrigin,
+			&pm.CountryOfOriginLanguage,
+			&pm.ItemDeliveryBlockStatus,
+			&pm.ItemIssuingBlockStatus,
+			&pm.ItemReceivingBlockStatus,
+			&pm.ItemBillingBlockStatus,
+			&pm.ItemIsCancelled,
+			&pm.ItemIsDeleted,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
@@ -167,21 +287,137 @@ func ConvertToPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Partner, er
 		}
 
 		data := pm
-		partner = append(partner, Partner{
-			DeliveryDocument:        data.DeliveryDocument,
-			PartnerFunction:         data.PartnerFunction,
-			BusinessPartner:         data.BusinessPartner,
-			BusinessPartnerFullName: data.BusinessPartnerFullName,
-			BusinessPartnerName:     data.BusinessPartnerName,
-			Organization:            data.Organization,
-			Country:                 data.Country,
-			Language:                data.Language,
-			Currency:                data.Currency,
-			ExternalDocumentID:      data.ExternalDocumentID,
-			AddressID:               data.AddressID,
+		item = append(item, Item{
+			DeliveryDocument:                              data.DeliveryDocument,
+			DeliveryDocumentItem:                          data.DeliveryDocumentItem,
+			DeliveryDocumentItemCategory:                  data.DeliveryDocumentItemCategory,
+			SupplyChainRelationshipID:                     data.SupplyChainRelationshipID,
+			SupplyChainRelationshipDeliveryID:             data.SupplyChainRelationshipDeliveryID,
+			SupplyChainRelationshipDeliveryPlantID:        data.SupplyChainRelationshipDeliveryPlantID,
+			SupplyChainRelationshipStockConfPlantID:       data.SupplyChainRelationshipStockConfPlantID,
+			SupplyChainRelationshipProductionPlantID:      data.SupplyChainRelationshipProductionPlantID,
+			SupplyChainRelationshipBillingID:              data.SupplyChainRelationshipBillingID,
+			SupplyChainRelationshipPaymentID:              data.SupplyChainRelationshipPaymentID,
+			Buyer:                                         data.Buyer,
+			Seller:                                        data.Seller,
+			DeliverToParty:                                data.DeliverToParty,
+			DeliverFromParty:                              data.DeliverFromParty,
+			DeliverToPlant:                                data.DeliverToPlant,
+			DeliverFromPlant:                              data.DeliverFromPlant,
+			BillToParty:                                   data.BillToParty,
+			BillFromParty:                                 data.BillFromParty,
+			BillToCountry:                                 data.BillToCountry,
+			BillFromCountry:                               data.BillFromCountry,
+			Payer:                                         data.Payer,
+			Payee:                                         data.Payee,
+			DeliverToPlantStorageLocation:                 data.DeliverToPlantStorageLocation,
+			ProductIsBatchManagedInDeliverToPlant:         data.ProductIsBatchManagedInDeliverToPlant,
+			BatchMgmtPolicyInDeliverToPlant:               data.BatchMgmtPolicyInDeliverToPlant,
+			DeliverToPlantBatch:                           data.DeliverToPlantBatch,
+			DeliverToPlantBatchValidityStartDate:          data.DeliverToPlantBatchValidityStartDate,
+			DeliverToPlantBatchValidityStartTime:          data.DeliverToPlantBatchValidityStartTime,
+			DeliverToPlantBatchValidityEndDate:            data.DeliverToPlantBatchValidityEndDate,
+			DeliverToPlantBatchValidityEndTime:            data.DeliverToPlantBatchValidityEndTime,
+			DeliverFromPlantStorageLocation:               data.DeliverFromPlantStorageLocation,
+			ProductIsBatchManagedInDeliverFromPlant:       data.ProductIsBatchManagedInDeliverFromPlant,
+			BatchMgmtPolicyInDeliverFromPlant:             data.BatchMgmtPolicyInDeliverFromPlant,
+			DeliverFromPlantBatch:                         data.DeliverFromPlantBatch,
+			DeliverFromPlantBatchValidityStartDate:        data.DeliverFromPlantBatchValidityStartDate,
+			DeliverFromPlantBatchValidityStartTime:        data.DeliverFromPlantBatchValidityStartTime,
+			DeliverFromPlantBatchValidityEndDate:          data.DeliverFromPlantBatchValidityEndDate,
+			DeliverFromPlantBatchValidityEndTime:          data.DeliverFromPlantBatchValidityEndTime,
+			StockConfirmationBusinessPartner:              data.StockConfirmationBusinessPartner,
+			StockConfirmationPlant:                        data.StockConfirmationPlant,
+			ProductIsBatchManagedInStockConfirmationPlant: data.ProductIsBatchManagedInStockConfirmationPlant,
+			BatchMgmtPolicyInStockConfirmationPlant:       data.BatchMgmtPolicyInStockConfirmationPlant,
+			StockConfirmationPlantBatch:                   data.StockConfirmationPlantBatch,
+			StockConfirmationPlantBatchValidityStartDate:  data.StockConfirmationPlantBatchValidityStartDate,
+			StockConfirmationPlantBatchValidityStartTime:  data.StockConfirmationPlantBatchValidityStartTime,
+			StockConfirmationPlantBatchValidityEndDate:    data.StockConfirmationPlantBatchValidityEndDate,
+			StockConfirmationPlantBatchValidityEndTime:    data.StockConfirmationPlantBatchValidityEndTime,
+			StockConfirmationPolicy:                       data.StockConfirmationPolicy,
+			StockConfirmationStatus:                       data.StockConfirmationStatus,
+			ProductionPlantBusinessPartner:                data.ProductionPlantBusinessPartner,
+			ProductionPlant:                               data.ProductionPlant,
+			ProductionPlantStorageLocation:                data.ProductionPlantStorageLocation,
+			ProductIsBatchManagedInProductionPlant:        data.ProductIsBatchManagedInProductionPlant,
+			BatchMgmtPolicyInProductionPlant:              data.BatchMgmtPolicyInProductionPlant,
+			ProductionPlantBatch:                          data.ProductionPlantBatch,
+			ProductionPlantBatchValidityStartDate:         data.ProductionPlantBatchValidityStartDate,
+			ProductionPlantBatchValidityStartTime:         data.ProductionPlantBatchValidityStartTime,
+			ProductionPlantBatchValidityEndDate:           data.ProductionPlantBatchValidityEndDate,
+			ProductionPlantBatchValidityEndTime:           data.ProductionPlantBatchValidityEndTime,
+			DeliveryDocumentItemText:                      data.DeliveryDocumentItemText,
+			DeliveryDocumentItemTextByBuyer:               data.DeliveryDocumentItemTextByBuyer,
+			DeliveryDocumentItemTextBySeller:              data.DeliveryDocumentItemTextBySeller,
+			Product:                                       data.Product,
+			ProductStandardID:                             data.ProductStandardID,
+			ProductGroup:                                  data.ProductGroup,
+			BaseUnit:                                      data.BaseUnit,
+			OriginalQuantityInBaseUnit:                    data.OriginalQuantityInBaseUnit,
+			DeliveryUnit:                                  data.DeliveryUnit,
+			ActualGoodsIssueDate:                          data.ActualGoodsIssueDate,
+			ActualGoodsIssueTime:                          data.ActualGoodsIssueTime,
+			ActualGoodsReceiptDate:                        data.ActualGoodsReceiptDate,
+			ActualGoodsReceiptTime:                        data.ActualGoodsReceiptTime,
+			ActualGoodsIssueQuantity:                      data.ActualGoodsIssueQuantity,
+			ActualGoodsIssueQtyInBaseUnit:                 data.ActualGoodsIssueQtyInBaseUnit,
+			ActualGoodsReceiptQuantity:                    data.ActualGoodsReceiptQuantity,
+			ActualGoodsReceiptQtyInBaseUnit:               data.ActualGoodsReceiptQtyInBaseUnit,
+			CreationDate:                                  data.CreationDate,
+			CreationTime:                                  data.CreationTime,
+			LastChangeDate:                                data.LastChangeDate,
+			LastChangeTime:                                data.LastChangeTime,
+			ItemBillingStatus:                             data.ItemBillingStatus,
+			SalesCostGLAccount:                            data.SalesCostGLAccount,
+			ReceivingGLAccount:                            data.ReceivingGLAccount,
+			ItemCompleteDeliveryIsDefined:                 data.ItemCompleteDeliveryIsDefined,
+			ItemGrossWeight:                               data.ItemGrossWeight,
+			ItemNetWeight:                                 data.ItemNetWeight,
+			ItemWeightUnit:                                data.ItemWeightUnit,
+			InternalCapacityQuantity:                      data.InternalCapacityQuantity,
+			InternalCapacityQuantityUnit:                  data.InternalCapacityQuantityUnit,
+			ItemIsBillingRelevant:                         data.ItemIsBillingRelevant,
+			NetAmount:                                     data.NetAmount,
+			TaxAmount:                                     data.TaxAmount,
+			GrossAmount:                                   data.GrossAmount,
+			OrderID:                                       data.OrderID,
+			OrderItem:                                     data.OrderItem,
+			OrderType:                                     data.OrderType,
+			ContractType:                                  data.ContractType,
+			OrderValidityStartDate:                        data.OrderValidityStartDate,
+			OrderValidityEndDate:                          data.OrderValidityEndDate,
+			PaymentTerms:                                  data.PaymentTerms,
+			DueCalculationBaseDate:                        data.DueCalculationBaseDate,
+			PaymentDueDate:                                data.PaymentDueDate,
+			NetPaymentDays:                                data.NetPaymentDays,
+			PaymentMethod:                                 data.PaymentMethod,
+			InvoicePeriodStartDate:                        data.InvoicePeriodStartDate,
+			InvoicePeriodEndDate:                          data.InvoicePeriodEndDate,
+			ConfirmedDeliveryDate:                         data.ConfirmedDeliveryDate,
+			Project:                                       data.Project,
+			ReferenceDocument:                             data.ReferenceDocument,
+			ReferenceDocumentItem:                         data.ReferenceDocumentItem,
+			TransactionTaxClassification:                  data.TransactionTaxClassification,
+			ProductTaxClassificationBillToCountry:         data.ProductTaxClassificationBillToCountry,
+			ProductTaxClassificationBillFromCountry:       data.ProductTaxClassificationBillFromCountry,
+			DefinedTaxClassification:                      data.DefinedTaxClassification,
+			AccountAssignmentGroup:                        data.AccountAssignmentGroup,
+			ProductAccountAssignmentGroup:                 data.ProductAccountAssignmentGroup,
+			TaxCode:                                       data.TaxCode,
+			TaxRate:                                       data.TaxRate,
+			CountryOfOrigin:                               data.CountryOfOrigin,
+			CountryOfOriginLanguage:                       data.CountryOfOriginLanguage,
+			ItemDeliveryBlockStatus:                       data.ItemDeliveryBlockStatus,
+			ItemIssuingBlockStatus:                        data.ItemIssuingBlockStatus,
+			ItemReceivingBlockStatus:                      data.ItemReceivingBlockStatus,
+			ItemBillingBlockStatus:                        data.ItemBillingBlockStatus,
+			ItemIsCancelled:                               data.ItemIsCancelled,
+			ItemIsDeleted:                                 data.ItemIsDeleted,
 		})
 	}
-	return &partner, nil
+
+	return &item, nil
 }
 
 func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, error) {
@@ -191,7 +427,7 @@ func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, er
 		pm := &requests.Address{}
 		if !rows.Next() {
 			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+				return nil, fmt.Errorf("'data_platform_new_delivery_document_address_data'テーブルに対象のレコードが存在しません。")
 			} else {
 				break
 			}
@@ -229,136 +465,34 @@ func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, er
 			Room:             data.Room,
 		})
 	}
+
 	return &address, nil
 }
 
-func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
-	var item []Item
+func ConvertToPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Partner, error) {
+	var partner []Partner
 
 	for i := 0; true; i++ {
-		pm := &requests.Item{}
+		pm := &requests.Partner{}
 		if !rows.Next() {
 			if i == 0 {
-				return nil, fmt.Errorf("DBに対象のレコードが存在しません。")
+				return nil, fmt.Errorf("'data_platform_new_delivery_document_partner_data'テーブルに対象のレコードが存在しません。")
 			} else {
 				break
 			}
 		}
 		err := rows.Scan(
 			&pm.DeliveryDocument,
-			&pm.DeliveryDocumentItem,
-			&pm.DeliveryDocumentItemCategory,
-			&pm.SupplyChainRelationshipID,
-			&pm.SupplyChainRelationshipDeliveryID,
-			&pm.SupplyChainRelationshipDeliveryPlantID,
-			&pm.SupplyChainRelationshipStockConfPlantID,
-			&pm.SupplyChainRelationshipProductionPlantID,
-			&pm.SupplyChainRelationshipBillingID,
-			&pm.SupplyChainRelationshipPaymentID,
-			&pm.Buyer,
-			&pm.Seller,
-			&pm.DeliverToParty,
-			&pm.DeliverFromParty,
-			&pm.DeliverToPlant,
-			&pm.DeliverFromPlant,
-			&pm.BillToParty,
-			&pm.BillFromParty,
-			&pm.BillToCountry,
-			&pm.BillFromCountry,
-			&pm.Payer,
-			&pm.Payee,
-			&pm.DeliverToPlantStorageLocation,
-			&pm.ProductIsBatchManagedInDeliverToPlant,
-			&pm.BatchMgmtPolicyInDeliverToPlant,
-			&pm.DeliverToPlantBatch,
-			&pm.DeliverToPlantBatchValidityStartDate,
-			&pm.DliverToPlantBatchValidityEndDate,
-			&pm.DeliverFromPlantStorageLocation,
-			&pm.ProductIsBatchManagedInDeliverFromPlant,
-			&pm.BatchMgmtPolicyInDeliverFromPlant,
-			&pm.DeliverFromPlantBatch,
-			&pm.DeliverFromPlantBatchValidityStartDate,
-			&pm.DliverFromPlantBatchValidityEndDate,
-			&pm.StockConfirmationBusinessPartner,
-			&pm.StockConfirmationPlant,
-			&pm.ProductIsBatchManagedInStockConfirmationPlant,
-			&pm.BatchMgmtPolicyInStockConfirmationPlant,
-			&pm.StockConfirmationPlantBatch,
-			&pm.StockConfirmationPlantBatchValidityStartDate,
-			&pm.StockConfirmationPlantBatchValidityEndDate,
-			&pm.StockConfirmationPolicy,
-			&pm.StockConfirmationStatus,
-			&pm.ProductionPlantBusinessPartner,
-			&pm.ProductionPlant,
-			&pm.ProductionPlantStorageLocation,
-			&pm.ProductIsBatchManagedInProductionPlant,
-			&pm.BatchMgmtPolicyInProductionPlant,
-			&pm.ProductionPlantBatch,
-			&pm.ProductionPlantBatchValidityStartDate,
-			&pm.ProductionPlantBatchValidityEndDate,
-			&pm.DeliveryDocumentItemText,
-			&pm.DeliveryDocumentItemTextByBuyer,
-			&pm.DeliveryDocumentItemTextBySeller,
-			&pm.Product,
-			&pm.ProductStandardID,
-			&pm.ProductGroup,
-			&pm.BaseUnit,
-			&pm.OriginalQuantityInBaseUnit,
-			&pm.DeliveryUnit,
-			&pm.ActualGoodsIssueDate,
-			&pm.ActualGoodsIssueTime,
-			&pm.ActualGoodsReceiptDate,
-			&pm.ActualGoodsReceiptTime,
-			&pm.ActualGoodsIssueQtyInBaseUnit,
-			&pm.ActualGoodsIssueQuantity,
-			&pm.ActualGoodsReceiptQtyInBaseUnit,
-			&pm.ActualGoodsReceiptQuantity,
-			&pm.CreationDate,
-			&pm.CreationTime,
-			&pm.LastChangeDate,
-			&pm.LastChangeTime,
-			&pm.ItemBillingStatus,
-			&pm.SalesCostGLAccount,
-			&pm.ReceivingGLAccount,
-			&pm.ItemCompleteDeliveryIsDefined,
-			&pm.ItemGrossWeight,
-			&pm.ItemNetWeight,
-			&pm.ItemWeightUnit,
-			&pm.ItemIsBillingRelevant,
-			&pm.NetAmount,
-			&pm.TaxAmount,
-			&pm.GrossAmount,
-			&pm.OrderID,
-			&pm.OrderItem,
-			&pm.OrderType,
-			&pm.ContractType,
-			&pm.OrderValidityStartDate,
-			&pm.OrderValidityEndDate,
-			&pm.PaymentTerms,
-			&pm.DueCalculationBaseDate,
-			&pm.PaymentDueDate,
-			&pm.NetPaymentDays,
-			&pm.PaymentMethod,
-			&pm.InvoicePeriodStartDate,
-			&pm.InvoicePeriodEndDate,
-			&pm.ConfirmedDeliveryDate,
-			&pm.Project,
-			&pm.ReferenceDocument,
-			&pm.ReferenceDocumentItem,
-			&pm.TransactionTaxClassification,
-			&pm.ProductTaxClassificationBillToCountry,
-			&pm.ProductTaxClassificationBillFromCountry,
-			&pm.DefinedTaxClassification,
-			&pm.AccountAssignmentGroup,
-			&pm.ProductAccountAssignmentGroup,
-			&pm.TaxCode,
-			&pm.TaxRate,
-			&pm.CountryOfOrigin,
-			&pm.CountryOfOriginLanguage,
-			&pm.ItemDeliveryBlockStatus,
-			&pm.ItemIssuingBlockStatus,
-			&pm.ItemReceivingBlockStatus,
-			&pm.ItemBillingBlockStatus,
+			&pm.PartnerFunction,
+			&pm.BusinessPartner,
+			&pm.BusinessPartnerFullName,
+			&pm.BusinessPartnerName,
+			&pm.Organization,
+			&pm.Country,
+			&pm.Language,
+			&pm.Currency,
+			&pm.ExternalDocumentID,
+			&pm.AddressID,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
@@ -366,130 +500,26 @@ func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
 		}
 
 		data := pm
-		item = append(item, Item{
-			DeliveryDocument:                              data.DeliveryDocument,
-			DeliveryDocumentItem:                          data.DeliveryDocumentItem,
-			DeliveryDocumentItemCategory:                  data.DeliveryDocumentItemCategory,
-			SupplyChainRelationshipID:                     data.SupplyChainRelationshipID,
-			SupplyChainRelationshipDeliveryID:             data.SupplyChainRelationshipDeliveryID,
-			SupplyChainRelationshipDeliveryPlantID:        data.SupplyChainRelationshipDeliveryPlantID,
-			SupplyChainRelationshipStockConfPlantID:       data.SupplyChainRelationshipStockConfPlantID,
-			SupplyChainRelationshipProductionPlantID:      data.SupplyChainRelationshipProductionPlantID,
-			SupplyChainRelationshipBillingID:              data.SupplyChainRelationshipBillingID,
-			SupplyChainRelationshipPaymentID:              data.SupplyChainRelationshipPaymentID,
-			Buyer:                                         data.Buyer,
-			Seller:                                        data.Seller,
-			DeliverToParty:                                data.DeliverToParty,
-			DeliverFromParty:                              data.DeliverFromParty,
-			DeliverToPlant:                                data.DeliverToPlant,
-			DeliverFromPlant:                              data.DeliverFromPlant,
-			BillToParty:                                   data.BillToParty,
-			BillFromParty:                                 data.BillFromParty,
-			BillToCountry:                                 data.BillToCountry,
-			BillFromCountry:                               data.BillFromCountry,
-			Payer:                                         data.Payer,
-			Payee:                                         data.Payee,
-			DeliverToPlantStorageLocation:                 data.DeliverToPlantStorageLocation,
-			ProductIsBatchManagedInDeliverToPlant:         data.ProductIsBatchManagedInDeliverToPlant,
-			BatchMgmtPolicyInDeliverToPlant:               data.BatchMgmtPolicyInDeliverToPlant,
-			DeliverToPlantBatch:                           data.DeliverToPlantBatch,
-			DeliverToPlantBatchValidityStartDate:          data.DeliverToPlantBatchValidityStartDate,
-			DliverToPlantBatchValidityEndDate:             data.DliverToPlantBatchValidityEndDate,
-			DeliverFromPlantStorageLocation:               data.DeliverFromPlantStorageLocation,
-			ProductIsBatchManagedInDeliverFromPlant:       data.ProductIsBatchManagedInDeliverFromPlant,
-			BatchMgmtPolicyInDeliverFromPlant:             data.BatchMgmtPolicyInDeliverFromPlant,
-			DeliverFromPlantBatch:                         data.DeliverFromPlantBatch,
-			DeliverFromPlantBatchValidityStartDate:        data.DeliverFromPlantBatchValidityStartDate,
-			DliverFromPlantBatchValidityEndDate:           data.DliverFromPlantBatchValidityEndDate,
-			StockConfirmationBusinessPartner:              data.StockConfirmationBusinessPartner,
-			StockConfirmationPlant:                        data.StockConfirmationPlant,
-			ProductIsBatchManagedInStockConfirmationPlant: data.ProductIsBatchManagedInStockConfirmationPlant,
-			BatchMgmtPolicyInStockConfirmationPlant:       data.BatchMgmtPolicyInStockConfirmationPlant,
-			StockConfirmationPlantBatch:                   data.StockConfirmationPlantBatch,
-			StockConfirmationPlantBatchValidityStartDate:  data.StockConfirmationPlantBatchValidityStartDate,
-			StockConfirmationPlantBatchValidityEndDate:    data.StockConfirmationPlantBatchValidityEndDate,
-			StockConfirmationPolicy:                       data.StockConfirmationPolicy,
-			StockConfirmationStatus:                       data.StockConfirmationStatus,
-			ProductionPlantBusinessPartner:                data.ProductionPlantBusinessPartner,
-			ProductionPlant:                               data.ProductionPlant,
-			ProductionPlantStorageLocation:                data.ProductionPlantStorageLocation,
-			ProductIsBatchManagedInProductionPlant:        data.ProductIsBatchManagedInProductionPlant,
-			BatchMgmtPolicyInProductionPlant:              data.BatchMgmtPolicyInProductionPlant,
-			ProductionPlantBatch:                          data.ProductionPlantBatch,
-			ProductionPlantBatchValidityStartDate:         data.ProductionPlantBatchValidityStartDate,
-			ProductionPlantBatchValidityEndDate:           data.ProductionPlantBatchValidityEndDate,
-			DeliveryDocumentItemText:                      data.DeliveryDocumentItemText,
-			DeliveryDocumentItemTextByBuyer:               data.DeliveryDocumentItemTextByBuyer,
-			DeliveryDocumentItemTextBySeller:              data.DeliveryDocumentItemTextBySeller,
-			Product:                                       data.Product,
-			ProductStandardID:                             data.ProductStandardID,
-			ProductGroup:                                  data.ProductGroup,
-			BaseUnit:                                      data.BaseUnit,
-			OriginalQuantityInBaseUnit:                    data.OriginalQuantityInBaseUnit,
-			DeliveryUnit:                                  data.DeliveryUnit,
-			ActualGoodsIssueDate:                          data.ActualGoodsIssueDate,
-			ActualGoodsIssueTime:                          data.ActualGoodsIssueTime,
-			ActualGoodsReceiptDate:                        data.ActualGoodsReceiptDate,
-			ActualGoodsReceiptTime:                        data.ActualGoodsReceiptTime,
-			ActualGoodsIssueQtyInBaseUnit:                 data.ActualGoodsIssueQtyInBaseUnit,
-			ActualGoodsIssueQuantity:                      data.ActualGoodsIssueQuantity,
-			ActualGoodsReceiptQtyInBaseUnit:               data.ActualGoodsReceiptQtyInBaseUnit,
-			ActualGoodsReceiptQuantity:                    data.ActualGoodsReceiptQuantity,
-			CreationDate:                                  data.CreationDate,
-			CreationTime:                                  data.CreationTime,
-			LastChangeDate:                                data.LastChangeDate,
-			LastChangeTime:                                data.LastChangeTime,
-			ItemBillingStatus:                             data.ItemBillingStatus,
-			SalesCostGLAccount:                            data.SalesCostGLAccount,
-			ReceivingGLAccount:                            data.ReceivingGLAccount,
-			ItemCompleteDeliveryIsDefined:                 data.ItemCompleteDeliveryIsDefined,
-			ItemGrossWeight:                               data.ItemGrossWeight,
-			ItemNetWeight:                                 data.ItemNetWeight,
-			ItemWeightUnit:                                data.ItemWeightUnit,
-			ItemIsBillingRelevant:                         data.ItemIsBillingRelevant,
-			NetAmount:                                     data.NetAmount,
-			TaxAmount:                                     data.TaxAmount,
-			GrossAmount:                                   data.GrossAmount,
-			OrderID:                                       data.OrderID,
-			OrderItem:                                     data.OrderItem,
-			OrderType:                                     data.OrderType,
-			ContractType:                                  data.ContractType,
-			OrderValidityStartDate:                        data.OrderValidityStartDate,
-			OrderValidityEndDate:                          data.OrderValidityEndDate,
-			PaymentTerms:                                  data.PaymentTerms,
-			DueCalculationBaseDate:                        data.DueCalculationBaseDate,
-			PaymentDueDate:                                data.PaymentDueDate,
-			NetPaymentDays:                                data.NetPaymentDays,
-			PaymentMethod:                                 data.PaymentMethod,
-			InvoicePeriodStartDate:                        data.InvoicePeriodStartDate,
-			InvoicePeriodEndDate:                          data.InvoicePeriodEndDate,
-			ConfirmedDeliveryDate:                         data.ConfirmedDeliveryDate,
-			Project:                                       data.Project,
-			ReferenceDocument:                             data.ReferenceDocument,
-			ReferenceDocumentItem:                         data.ReferenceDocumentItem,
-			TransactionTaxClassification:                  data.TransactionTaxClassification,
-			ProductTaxClassificationBillToCountry:         data.ProductTaxClassificationBillToCountry,
-			ProductTaxClassificationBillFromCountry:       data.ProductTaxClassificationBillFromCountry,
-			DefinedTaxClassification:                      data.DefinedTaxClassification,
-			AccountAssignmentGroup:                        data.AccountAssignmentGroup,
-			ProductAccountAssignmentGroup:                 data.ProductAccountAssignmentGroup,
-			TaxCode:                                       data.TaxCode,
-			TaxRate:                                       data.TaxRate,
-			CountryOfOrigin:                               data.CountryOfOrigin,
-			CountryOfOriginLanguage:                       data.CountryOfOriginLanguage,
-			ItemDeliveryBlockStatus:                       data.ItemDeliveryBlockStatus,
-			ItemIssuingBlockStatus:                        data.ItemIssuingBlockStatus,
-			ItemReceivingBlockStatus:                      data.ItemReceivingBlockStatus,
-			ItemBillingBlockStatus:                        data.ItemBillingBlockStatus,
+		partner = append(partner, Partner{
+			DeliveryDocument:        data.DeliveryDocument,
+			PartnerFunction:         data.PartnerFunction,
+			BusinessPartner:         data.BusinessPartner,
+			BusinessPartnerFullName: data.BusinessPartnerFullName,
+			BusinessPartnerName:     data.BusinessPartnerName,
+			Organization:            data.Organization,
+			Country:                 data.Country,
+			Language:                data.Language,
+			Currency:                data.Currency,
+			ExternalDocumentID:      data.ExternalDocumentID,
+			AddressID:               data.AddressID,
 		})
 	}
 
-	return &item, nil
+	return &partner, nil
 }
 
 func ConvertToDeliverFromItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]DeliverFromItems, error) {
 	var deliverFromItems []DeliverFromItems
-
 	for i := 0; true; i++ {
 		pm := &requests.DeliverFromItems{}
 		if !rows.Next() {
@@ -511,7 +541,6 @@ func ConvertToDeliverFromItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]De
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return nil, err
 		}
 
 		data := pm
@@ -532,7 +561,6 @@ func ConvertToDeliverFromItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]De
 
 func ConvertToDeliverToItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]DeliverToItems, error) {
 	var deliverToItems []DeliverToItems
-
 	for i := 0; true; i++ {
 		pm := &requests.DeliverToItems{}
 		if !rows.Next() {
@@ -547,14 +575,13 @@ func ConvertToDeliverToItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Deli
 			&pm.HeaderDeliveryStatus,
 			&pm.DeliverToBusinessPartnerFullName,
 			&pm.DeliverToBusinessPartnerName,
-			&pm.DeliverFromBusinessPartnerFullName,
-			&pm.DeliverFromBusinessPartnerName,
+			&pm.DeliverToBusinessPartnerName,
+			&pm.DeliverToBusinessPartnerFullName,
 			&pm.ItemBillingStatus,
 			&pm.ConfirmedDeliveryDate,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return nil, err
 		}
 
 		data := pm
