@@ -2,22 +2,19 @@ package dpfm_api_output_formatter
 
 import (
 	"data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Caller/requests"
-	api_input_reader "data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Input_Reader"
 	"database/sql"
 	"fmt"
 )
 
-func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error) {
-	pm := &requests.Header{}
+func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
+	defer rows.Close()
+	header := make([]Header, 0)
 
-	for i := 0; true; i++ {
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("DBテーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+	i := 0
+	for rows.Next() {
+		i++
+		pm := &requests.Header{}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.SupplyChainRelationshipID,
@@ -62,6 +59,7 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 			&pm.GoodsIssueOrReceiptSlipNumber,
 			&pm.HeaderBillingStatus,
 			&pm.HeaderBillingConfStatus,
+			&pm.HeaderBillingBlockStatus,
 			&pm.HeaderGrossWeight,
 			&pm.HeaderNetWeight,
 			&pm.HeaderWeightUnit,
@@ -70,89 +68,90 @@ func ConvertToHeader(sdc *api_input_reader.SDC, rows *sql.Rows) (*Header, error)
 			&pm.HeaderDeliveryBlockStatus,
 			&pm.HeaderIssuingBlockStatus,
 			&pm.HeaderReceivingBlockStatus,
-			&pm.HeaderBillingBlockStatus,
-			&pm.HeaderIsCancelled,
-			&pm.HeaderIsDeleted,
+			&pm.IsCancelled,
+			&pm.IsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return nil, err
+			return &header, err
 		}
+
+		data := pm
+		header = append(header, Header{
+			DeliveryDocument:                       data.DeliveryDocument,
+			SupplyChainRelationshipID:              data.SupplyChainRelationshipID,
+			SupplyChainRelationshipDeliveryID:      data.SupplyChainRelationshipDeliveryID,
+			SupplyChainRelationshipDeliveryPlantID: data.SupplyChainRelationshipDeliveryPlantID,
+			SupplyChainRelationshipBillingID:       data.SupplyChainRelationshipBillingID,
+			SupplyChainRelationshipPaymentID:       data.SupplyChainRelationshipPaymentID,
+			Buyer:                                  data.Buyer,
+			Seller:                                 data.Seller,
+			DeliverToParty:                         data.DeliverToParty,
+			DeliverFromParty:                       data.DeliverFromParty,
+			DeliverToPlant:                         data.DeliverToPlant,
+			DeliverFromPlant:                       data.DeliverFromPlant,
+			BillToParty:                            data.BillToParty,
+			BillFromParty:                          data.BillFromParty,
+			BillToCountry:                          data.BillToCountry,
+			BillFromCountry:                        data.BillFromCountry,
+			Payer:                                  data.Payer,
+			Payee:                                  data.Payee,
+			IsExportImport:                         data.IsExportImport,
+			DeliverToPlantTimeZone:                 data.DeliverToPlantTimeZone,
+			DeliverFromPlantTimeZone:               data.DeliverFromPlantTimeZone,
+			ReferenceDocument:                      data.ReferenceDocument,
+			ReferenceDocumentItem:                  data.ReferenceDocumentItem,
+			OrderID:                                data.OrderID,
+			OrderItem:                              data.OrderItem,
+			ContractType:                           data.ContractType,
+			OrderValidityStartDate:                 data.OrderValidityStartDate,
+			OrderValidityEndDate:                   data.OrderValidityEndDate,
+			DocumentDate:                           data.DocumentDate,
+			PlannedGoodsIssueDate:                  data.PlannedGoodsIssueDate,
+			PlannedGoodsIssueTime:                  data.PlannedGoodsIssueTime,
+			PlannedGoodsReceiptDate:                data.PlannedGoodsReceiptDate,
+			PlannedGoodsReceiptTime:                data.PlannedGoodsReceiptTime,
+			InvoiceDocumentDate:                    data.InvoiceDocumentDate,
+			HeaderCompleteDeliveryIsDefined:        data.HeaderCompleteDeliveryIsDefined,
+			HeaderDeliveryStatus:                   data.HeaderDeliveryStatus,
+			CreationDate:                           data.CreationDate,
+			CreationTime:                           data.CreationTime,
+			LastChangeDate:                         data.LastChangeDate,
+			LastChangeTime:                         data.LastChangeTime,
+			GoodsIssueOrReceiptSlipNumber:          data.GoodsIssueOrReceiptSlipNumber,
+			HeaderBillingStatus:                    data.HeaderBillingStatus,
+			HeaderBillingConfStatus:                data.HeaderBillingConfStatus,
+			HeaderBillingBlockStatus:               data.HeaderBillingBlockStatus,
+			HeaderGrossWeight:                      data.HeaderGrossWeight,
+			HeaderNetWeight:                        data.HeaderNetWeight,
+			HeaderWeightUnit:                       data.HeaderWeightUnit,
+			Incoterms:                              data.Incoterms,
+			TransactionCurrency:                    data.TransactionCurrency,
+			HeaderDeliveryBlockStatus:              data.HeaderDeliveryBlockStatus,
+			HeaderIssuingBlockStatus:               data.HeaderIssuingBlockStatus,
+			HeaderReceivingBlockStatus:             data.HeaderReceivingBlockStatus,
+			IsCancelled:                            data.IsCancelled,
+			IsMarkedForDeletion:                    data.IsMarkedForDeletion,
+		})
+	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &header, nil
 	}
 
-	data := pm
-	header := &Header{
-		DeliveryDocument:                       data.DeliveryDocument,
-		SupplyChainRelationshipID:              data.SupplyChainRelationshipID,
-		SupplyChainRelationshipDeliveryID:      data.SupplyChainRelationshipDeliveryID,
-		SupplyChainRelationshipDeliveryPlantID: data.SupplyChainRelationshipDeliveryPlantID,
-		SupplyChainRelationshipBillingID:       data.SupplyChainRelationshipBillingID,
-		SupplyChainRelationshipPaymentID:       data.SupplyChainRelationshipPaymentID,
-		Buyer:                                  data.Buyer,
-		Seller:                                 data.Seller,
-		DeliverToParty:                         data.DeliverToParty,
-		DeliverFromParty:                       data.DeliverFromParty,
-		DeliverToPlant:                         data.DeliverToPlant,
-		DeliverFromPlant:                       data.DeliverFromPlant,
-		BillToParty:                            data.BillToParty,
-		BillFromParty:                          data.BillFromParty,
-		BillToCountry:                          data.BillToCountry,
-		BillFromCountry:                        data.BillFromCountry,
-		Payer:                                  data.Payer,
-		Payee:                                  data.Payee,
-		IsExportImport:                         data.IsExportImport,
-		DeliverToPlantTimeZone:                 data.DeliverToPlantTimeZone,
-		DeliverFromPlantTimeZone:               data.DeliverFromPlantTimeZone,
-		ReferenceDocument:                      data.ReferenceDocument,
-		ReferenceDocumentItem:                  data.ReferenceDocumentItem,
-		OrderID:                                data.OrderID,
-		OrderItem:                              data.OrderItem,
-		ContractType:                           data.ContractType,
-		OrderValidityStartDate:                 data.OrderValidityStartDate,
-		OrderValidityEndDate:                   data.OrderValidityEndDate,
-		DocumentDate:                           data.DocumentDate,
-		PlannedGoodsIssueDate:                  data.PlannedGoodsIssueDate,
-		PlannedGoodsIssueTime:                  data.PlannedGoodsIssueTime,
-		PlannedGoodsReceiptDate:                data.PlannedGoodsReceiptDate,
-		PlannedGoodsReceiptTime:                data.PlannedGoodsReceiptTime,
-		InvoiceDocumentDate:                    data.InvoiceDocumentDate,
-		HeaderCompleteDeliveryIsDefined:        data.HeaderCompleteDeliveryIsDefined,
-		HeaderDeliveryStatus:                   data.HeaderDeliveryStatus,
-		CreationDate:                           data.CreationDate,
-		CreationTime:                           data.CreationTime,
-		LastChangeDate:                         data.LastChangeDate,
-		LastChangeTime:                         data.LastChangeTime,
-		GoodsIssueOrReceiptSlipNumber:          data.GoodsIssueOrReceiptSlipNumber,
-		HeaderBillingStatus:                    data.HeaderBillingStatus,
-		HeaderBillingConfStatus:                data.HeaderBillingConfStatus,
-		HeaderGrossWeight:                      data.HeaderGrossWeight,
-		HeaderNetWeight:                        data.HeaderNetWeight,
-		HeaderWeightUnit:                       data.HeaderWeightUnit,
-		Incoterms:                              data.Incoterms,
-		TransactionCurrency:                    data.TransactionCurrency,
-		HeaderDeliveryBlockStatus:              data.HeaderDeliveryBlockStatus,
-		HeaderIssuingBlockStatus:               data.HeaderIssuingBlockStatus,
-		HeaderReceivingBlockStatus:             data.HeaderReceivingBlockStatus,
-		HeaderBillingBlockStatus:               data.HeaderBillingBlockStatus,
-		HeaderIsCancelled:                      data.HeaderIsCancelled,
-		HeaderIsDeleted:                        data.HeaderIsDeleted,
-	}
-
-	return header, nil
+	return &header, nil
 }
 
-func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
-	var item []Item
+// ここまでやりました2023/02/11
+func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
+	defer rows.Close()
+	item := make([]Item, 0)
 
-	for i := 0; true; i++ {
+	i := 0
+	for rows.Next() {
+		i++
 		pm := &requests.Item{}
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("'data_platform_new_delivery_document_item_data'テーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.DeliveryDocumentItem,
@@ -279,11 +278,11 @@ func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
 			&pm.ItemReceivingBlockStatus,
 			&pm.ItemBillingBlockStatus,
 			&pm.ItemIsCancelled,
-			&pm.ItemIsDeleted,
+			&pm.ItemIsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return nil, err
+			return &item, nil
 		}
 
 		data := pm
@@ -413,25 +412,22 @@ func ConvertToItem(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Item, error) {
 			ItemReceivingBlockStatus:                      data.ItemReceivingBlockStatus,
 			ItemBillingBlockStatus:                        data.ItemBillingBlockStatus,
 			ItemIsCancelled:                               data.ItemIsCancelled,
-			ItemIsDeleted:                                 data.ItemIsDeleted,
+			ItemIsMarkedForDeletion:                       data.ItemIsMarkedForDeletion,
 		})
 	}
 
 	return &item, nil
 }
 
-func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, error) {
-	var address []Address
+func ConvertToAddress(rows *sql.Rows) (*[]Address, error) {
+	defer rows.Close()
+	address := make([]Address, 0)
 
-	for i := 0; true; i++ {
+	i := 0
+	for rows.Next() {
+		i++
 		pm := &requests.Address{}
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("'data_platform_new_delivery_document_address_data'テーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.AddressID,
@@ -447,7 +443,7 @@ func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, er
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return nil, err
+			return &address, err
 		}
 
 		data := pm
@@ -465,22 +461,23 @@ func ConvertToAddress(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Address, er
 			Room:             data.Room,
 		})
 	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &address, nil
+	}
 
 	return &address, nil
 }
 
-func ConvertToPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Partner, error) {
-	var partner []Partner
+func ConvertToPartner(rows *sql.Rows) (*[]Partner, error) {
+	defer rows.Close()
+	partner := make([]Partner, 0)
 
-	for i := 0; true; i++ {
+	i := 0
+	for rows.Next() {
+		i++
 		pm := &requests.Partner{}
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("'data_platform_new_delivery_document_partner_data'テーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.PartnerFunction,
@@ -514,21 +511,23 @@ func ConvertToPartner(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Partner, er
 			AddressID:               data.AddressID,
 		})
 	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &partner, nil
+	}
 
 	return &partner, nil
 }
 
-func ConvertToDeliverFromItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]DeliverFromItems, error) {
-	var deliverFromItems []DeliverFromItems
-	for i := 0; true; i++ {
+func ConvertToDeliverFromItems(rows *sql.Rows) (*[]DeliverFromItems, error) {
+	defer rows.Close()
+	deliverFromItems := make([]DeliverFromItems, 0)
+
+	i := 0
+	for rows.Next() {
+		i++
 		pm := &requests.DeliverFromItems{}
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("'data_platform_delivery_document_header_data'テーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.HeaderDeliveryStatus,
@@ -555,21 +554,23 @@ func ConvertToDeliverFromItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]De
 			ConfirmedDeliveryDate:              data.ConfirmedDeliveryDate,
 		})
 	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &deliverFromItems, nil
+	}
 
 	return &deliverFromItems, nil
 }
 
-func ConvertToDeliverToItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]DeliverToItems, error) {
-	var deliverToItems []DeliverToItems
-	for i := 0; true; i++ {
+func ConvertToDeliverToItems(rows *sql.Rows) (*[]DeliverToItems, error) {
+	defer rows.Close()
+	deliverToItems := make([]DeliverToItems, 0)
+
+	i := 0
+	for rows.Next() {
+		i++
 		pm := &requests.DeliverToItems{}
-		if !rows.Next() {
-			if i == 0 {
-				return nil, fmt.Errorf("'data_platform_delivery_document_header_data'テーブルに対象のレコードが存在しません。")
-			} else {
-				break
-			}
-		}
+
 		err := rows.Scan(
 			&pm.DeliveryDocument,
 			&pm.HeaderDeliveryStatus,
@@ -595,6 +596,10 @@ func ConvertToDeliverToItems(sdc *api_input_reader.SDC, rows *sql.Rows) (*[]Deli
 			ItemBillingStatus:                  data.ItemBillingStatus,
 			ConfirmedDeliveryDate:              data.ConfirmedDeliveryDate,
 		})
+	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &deliverToItems, nil
 	}
 
 	return &deliverToItems, nil

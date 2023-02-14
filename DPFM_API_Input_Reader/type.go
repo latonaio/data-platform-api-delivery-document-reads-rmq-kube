@@ -131,8 +131,8 @@ type Header struct {
 	HeaderIssuingBlockStatus               *int      `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *int      `json:"HeaderReceivingBlockStatus"`
 	HeaderBillingBlockStatus               *int      `json:"HeaderBillingBlockStatus"`
-	HeaderIsCancelled                      *int      `json:"HeaderIsCancelled"`
-	HeaderIsDeleted                        *int      `json:"HeaderIsDeleted"`
+	IsCancelled                            *bool     `json:"IsCancelled"`
+	IsMarkedForDeletion                    *bool     `json:"IsMarkedForDeletion"`
 	Item                                   []Item    `json:"Item"`
 	Partner                                []Partner `json:"Partner"`
 	Address                                []Address `json:"Address"`
@@ -275,7 +275,7 @@ type Item struct {
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
 	ItemIsCancelled                               *bool    `json:"ItemIsCancelled"`
-	ItemIsDeleted                                 *bool    `json:"ItemIsDeleted"`
+	ItemIsMarkedForDeletion                       *bool    `json:"ItemIsMarkedForDeletion"`
 }
 
 type Address struct {

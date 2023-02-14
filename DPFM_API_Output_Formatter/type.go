@@ -25,23 +25,12 @@ type SDC struct {
 }
 
 type Message struct {
-	Header           *Header             `json:"Header"`
+	Header           *[]Header           `json:"Header"`
 	Item             *[]Item             `json:"Item"`
 	Partner          *[]Partner          `json:"Partner"`
 	Address          *[]Address          `json:"Address"`
 	DeliverFromItems *[]DeliverFromItems `json:"DeliverFromItems"`
 	DeliverToItems   *[]DeliverToItems   `json:"DeliverToItems"`
-}
-
-type DeliveryDocument struct {
-	ConnectionKey string `json:"connection_key"`
-	Result        bool   `json:"result"`
-	RedisKey      string `json:"redis_key"`
-	Filepath      string `json:"filepath"`
-	Product       string `json:"Product"`
-	APISchema     string `json:"api_schema"`
-	MaterialCode  string `json:"material_code"`
-	Deleted       string `json:"deleted"`
 }
 
 type Header struct {
@@ -94,11 +83,11 @@ type Header struct {
 	Incoterms                              *string  `json:"Incoterms"`
 	TransactionCurrency                    *string  `json:"TransactionCurrency"`
 	HeaderDeliveryBlockStatus              *int     `json:"HeaderDeliveryBlockStatus"`
-	HeaderIssuingBlockStatus               *int     `json:"HeaderIssuingBlockStatus"`
-	HeaderReceivingBlockStatus             *int     `json:"HeaderReceivingBlockStatus"`
-	HeaderBillingBlockStatus               *int     `json:"HeaderBillingBlockStatus"`
-	HeaderIsCancelled                      *int     `json:"HeaderIsCancelled"`
-	HeaderIsDeleted                        *int     `json:"HeaderIsDeleted"`
+	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
+	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
+	HeaderBillingBlockStatus               *bool    `json:"HeaderBillingBlockStatus"`
+	IsCancelled                            *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                    *bool    `json:"IsMarkedForDeletion"`
 }
 
 type HeaderDoc struct {
@@ -238,7 +227,7 @@ type Item struct {
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
 	ItemIsCancelled                               *bool    `json:"ItemIsCancelled"`
-	ItemIsDeleted                                 *bool    `json:"ItemIsDeleted"`
+	ItemIsMarkedForDeletion                       *bool    `json:"ItemIsMarkedForDeletion"`
 }
 
 type Address struct {
@@ -289,4 +278,27 @@ type DeliverToItems struct {
 	DeliverFromBusinessPartnerName     *string `json:"DeliverFromBusinessPartnerName"`
 	ItemBillingStatus                  *string `json:"ItemBillingStatus"`
 	ConfirmedDeliveryDate              *string `json:"ConfirmedDeliveryDate"`
+}
+
+type HeadersByDeliverFromParty struct {
+	DeliveryDocument                        int     `json:"DeliveryDocument"`
+	HeaderDeliveryStatus                    *string `json:"HeaderDeliveryStatus"`
+	DeliverFromPartyBusinessPartnerFullName *string `json:"DeliverFromPartyBusinessPartnerFullName"`
+}
+
+type HeadersByDeliverToParty struct {
+	DeliveryDocument                      int     `json:"DeliveryDocument"`
+	HeaderDeliveryStatus                  *string `json:"HeaderDeliveryStatus"`
+	DeliverToPartyBusinessPartnerFullName *string `json:"DeliverToPartyBusinessPartnerFullName"`
+}
+
+type Items struct {
+	DeliveryDocument         int      `json:"DeliveryDocument"`
+	DeliveryDocumentItem     int      `json:"DeliveryDocumentItem"`
+	DeliveryDocumentItemText *string  `json:"DeliveryDocumentItemText"`
+	NetAmount                *float32 `json:"NetAmount"`
+	Product                  *string  `json:"Product"`
+	ProductDescription       *string  `json:"ProductDescription"`
+	ConditionRateValue       *float32 `json:"ConditionRateValue"`
+	ConfirmedDeliveryDate    *string  `json:"ConfirmedDeliveryDate"`
 }

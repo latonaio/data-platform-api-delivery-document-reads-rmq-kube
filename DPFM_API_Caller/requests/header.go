@@ -1,7 +1,7 @@
 package requests
 
 type Header struct {
-	DeliveryDocument                       int     `json:"DeliveryDocument"`
+	DeliveryDocument                       int      `json:"DeliveryDocument"`
 	SupplyChainRelationshipID              *int     `json:"SupplyChainRelationshipID"`
 	SupplyChainRelationshipDeliveryID      *int     `json:"SupplyChainRelationshipDeliveryID"`
 	SupplyChainRelationshipDeliveryPlantID *int     `json:"SupplyChainRelationshipDeliveryPlantID"`
@@ -50,9 +50,9 @@ type Header struct {
 	Incoterms                              *string  `json:"Incoterms"`
 	TransactionCurrency                    *string  `json:"TransactionCurrency"`
 	HeaderDeliveryBlockStatus              *int     `json:"HeaderDeliveryBlockStatus"`
-	HeaderIssuingBlockStatus               *int     `json:"HeaderIssuingBlockStatus"`
-	HeaderReceivingBlockStatus             *int     `json:"HeaderReceivingBlockStatus"`
-	HeaderBillingBlockStatus               *int     `json:"HeaderBillingBlockStatus"`
-	HeaderIsCancelled                      *int     `json:"HeaderIsCancelled"`
-	HeaderIsDeleted                        *int     `json:"HeaderIsDeleted"`
+	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
+	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
+	HeaderBillingBlockStatus               *bool    `json:"HeaderBillingBlockStatus"`
+	IsCancelled                            *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                    *bool    `json:"IsMarkedForDeletion"`
 }

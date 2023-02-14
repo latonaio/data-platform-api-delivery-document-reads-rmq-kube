@@ -5,7 +5,7 @@
 	"filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
 	"api_status_code": 200,
 	"runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
-	"business_partner": 201,
+	"business_partner": 101,
 	"service_label": "DELIVERY_DOCUMENT",
 	"DeliveryDocumentInputParameters": {
 		"InvoiceDocumentDate": [
@@ -46,7 +46,7 @@
 		"SupplyChainRelationshipBillingID": 120000000,
 		"SupplyChainRelationshipPaymentID": 130000000,
 		"Buyer": 101,
-		"Seller": 201,
+		"Seller": null,
 		"DeliverToParty": 101,
 		"DeliverFromParty": 201,
 		"DeliverToPlant": "",
@@ -74,7 +74,7 @@
 		"PlannedGoodsReceiptTime": "",
 		"InvoiceDocumentDate": "",
 		"HeaderCompleteDeliveryIsDefined": null,
-		"HeaderDeliveryStatus": "",
+		"HeaderDeliveryStatus": "NP",
 		"CreationDate": null,
 		"CreationTime": null,
 		"LastChangeDate": null,
@@ -372,7 +372,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"All"
+		"Headers"
 	],
 	"delivery_document": 1,
 	"deleted": false

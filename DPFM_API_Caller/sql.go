@@ -4,6 +4,7 @@ import (
 	"context"
 	dpfm_api_input_reader "data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Input_Reader"
 	dpfm_api_output_formatter "data-platform-api-delivery-document-reads-rmq-kube/DPFM_API_Output_Formatter"
+	"fmt"
 	"strings"
 	"sync"
 
@@ -19,7 +20,7 @@ func (c *DPFMAPICaller) readSqlProcess(
 	errs *[]error,
 	log *logger.Logger,
 ) interface{} {
-	var header *dpfm_api_output_formatter.Header
+	var header *[]dpfm_api_output_formatter.Header
 	var item *[]dpfm_api_output_formatter.Item
 	var partner *[]dpfm_api_output_formatter.Partner
 	var address *[]dpfm_api_output_formatter.Address
@@ -30,6 +31,10 @@ func (c *DPFMAPICaller) readSqlProcess(
 		case "Header":
 			func() {
 				header = c.Header(mtx, input, output, errs, log)
+			}()
+		case "Headers":
+			func() {
+				header = c.Headers(mtx, input, output, errs, log)
 			}()
 		case "Item":
 			func() {
@@ -73,7 +78,7 @@ func (c *DPFMAPICaller) Header(
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) *dpfm_api_output_formatter.Header {
+) *[]dpfm_api_output_formatter.Header {
 	deliveryDocument := input.Header.DeliveryDocument
 
 	rows, err := c.db.Query(
@@ -86,7 +91,59 @@ func (c *DPFMAPICaller) Header(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToHeader(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) Headers(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.Header {
+	where := "WHERE 1 = 1"
+	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
+		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %v", where, *input.Header.HeaderCompleteDeliveryIsDefined)
+	}
+	if input.Header.HeaderDeliveryBlockStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryBlockStatus = %v", where, *input.Header.HeaderDeliveryBlockStatus)
+	}
+	if input.Header.HeaderDeliveryStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryStatus = '%s'", where, *input.Header.HeaderDeliveryStatus)
+	}
+	if input.Header.IsCancelled != nil {
+		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
+	}
+	if input.Header.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
+	}
+
+	idWhere := ""
+	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {
+		idWhere = fmt.Sprintf("\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
+	} else if input.Header.DeliverFromParty != nil {
+		idWhere = fmt.Sprintf("\nAND DeliverFromParty = %d ", *input.Header.DeliverFromParty)
+	} else if input.Header.DeliverToParty != nil {
+		idWhere = fmt.Sprintf("\nAND DeliverToParty = %d ", *input.Header.DeliverToParty)
+	}
+
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
+		` + where + idWhere + `;`,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -122,7 +179,7 @@ func (c *DPFMAPICaller) Item(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToItem(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToItem(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -159,7 +216,7 @@ func (c *DPFMAPICaller) Partner(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToPartner(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToPartner(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -196,7 +253,7 @@ func (c *DPFMAPICaller) Address(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToAddress(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToAddress(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -237,7 +294,7 @@ func (c *DPFMAPICaller) DeliverFromItems(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToDeliverFromItems(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToDeliverFromItems(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -278,7 +335,7 @@ func (c *DPFMAPICaller) DeliverToItems(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToDeliverToItems(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToDeliverToItems(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil

@@ -1,8 +1,8 @@
 package requests
 
 type Item struct {
-	DeliveryDocument                              int     `json:"DeliveryDocument"`
-	DeliveryDocumentItem                          int     `json:"DeliveryDocumentItem"`
+	DeliveryDocument                              int      `json:"DeliveryDocument"`
+	DeliveryDocumentItem                          int      `json:"DeliveryDocumentItem"`
 	DeliveryDocumentItemCategory                  *int     `json:"DeliveryDocumentItemCategory"`
 	SupplyChainRelationshipID                     *int     `json:"SupplyChainRelationshipID"`
 	SupplyChainRelationshipDeliveryID             *int     `json:"SupplyChainRelationshipDeliveryID"`
@@ -126,5 +126,5 @@ type Item struct {
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
 	ItemIsCancelled                               *bool    `json:"ItemIsCancelled"`
-	ItemIsDeleted                                 *bool    `json:"ItemIsDeleted"`
+	ItemIsMarkedForDeletion                       *bool    `json:"ItemIsMarkedForDeletion"`
 }
