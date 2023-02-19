@@ -40,6 +40,10 @@ func (c *DPFMAPICaller) readSqlProcess(
 			func() {
 				item = c.Item(mtx, input, output, errs, log)
 			}()
+		case "Items":
+			func() {
+				item = c.Items(mtx, input, output, errs, log)
+			}()
 		case "Partner":
 			func() {
 				partner = c.Partner(mtx, input, output, errs, log)
@@ -173,6 +177,43 @@ func (c *DPFMAPICaller) Item(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
 		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` );`, args...,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToItem(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) Items(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.Item {
+	header := input.Header
+	idWhere := fmt.Sprintf("where DeliveryDocument = %d", header.DeliveryDocument)
+
+	if header.DeliverFromParty != nil && header.DeliverToParty != nil {
+		idWhere = fmt.Sprintf("%s\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", idWhere, *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
+	} else if header.DeliverFromParty != nil {
+		idWhere = fmt.Sprintf("%s\nAND DeliverFromParty = %d ", idWhere, *header.DeliverFromParty)
+	} else if header.DeliverToParty != nil {
+		idWhere = fmt.Sprintf("%s\nAND DeliverToParty = %d ", idWhere, *header.DeliverToParty)
+	}
+
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
+		` + idWhere + ` ;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)

@@ -221,6 +221,14 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.BaseUnit,
 			&pm.OriginalQuantityInBaseUnit,
 			&pm.DeliveryUnit,
+			&pm.PlannedGoodsIssueDate,
+			&pm.PlannedGoodsIssueTime,
+			&pm.PlannedGoodsReceiptDate,
+			&pm.PlannedGoodsReceiptTime,
+			&pm.PlannedGoodsIssueQuantity,
+			&pm.PlannedGoodsIssueQtyInBaseUnit,
+			&pm.PlannedGoodsReceiptQuantity,
+			&pm.PlannedGoodsReceiptQtyInBaseUnit,
 			&pm.ActualGoodsIssueDate,
 			&pm.ActualGoodsIssueTime,
 			&pm.ActualGoodsReceiptDate,
@@ -277,12 +285,12 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.ItemIssuingBlockStatus,
 			&pm.ItemReceivingBlockStatus,
 			&pm.ItemBillingBlockStatus,
-			&pm.ItemIsCancelled,
-			&pm.ItemIsMarkedForDeletion,
+			&pm.IsCancelled,
+			&pm.IsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return &item, nil
+			return &item, err
 		}
 
 		data := pm
@@ -355,6 +363,14 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			BaseUnit:                                      data.BaseUnit,
 			OriginalQuantityInBaseUnit:                    data.OriginalQuantityInBaseUnit,
 			DeliveryUnit:                                  data.DeliveryUnit,
+			PlannedGoodsIssueDate:                         data.PlannedGoodsIssueDate,
+			PlannedGoodsIssueTime:                         data.PlannedGoodsIssueTime,
+			PlannedGoodsReceiptDate:                       data.PlannedGoodsReceiptDate,
+			PlannedGoodsReceiptTime:                       data.PlannedGoodsReceiptTime,
+			PlannedGoodsIssueQuantity:                     data.PlannedGoodsIssueQuantity,
+			PlannedGoodsIssueQtyInBaseUnit:                data.PlannedGoodsIssueQtyInBaseUnit,
+			PlannedGoodsReceiptQuantity:                   data.PlannedGoodsReceiptQuantity,
+			PlannedGoodsReceiptQtyInBaseUnit:              data.PlannedGoodsReceiptQtyInBaseUnit,
 			ActualGoodsIssueDate:                          data.ActualGoodsIssueDate,
 			ActualGoodsIssueTime:                          data.ActualGoodsIssueTime,
 			ActualGoodsReceiptDate:                        data.ActualGoodsReceiptDate,
@@ -411,9 +427,13 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			ItemIssuingBlockStatus:                        data.ItemIssuingBlockStatus,
 			ItemReceivingBlockStatus:                      data.ItemReceivingBlockStatus,
 			ItemBillingBlockStatus:                        data.ItemBillingBlockStatus,
-			ItemIsCancelled:                               data.ItemIsCancelled,
-			ItemIsMarkedForDeletion:                       data.ItemIsMarkedForDeletion,
+			IsCancelled:                                   data.IsCancelled,
+			IsMarkedForDeletion:                           data.IsMarkedForDeletion,
 		})
+	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &item, nil
 	}
 
 	return &item, nil
