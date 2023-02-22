@@ -182,10 +182,10 @@ type Item struct {
 	ActualGoodsIssueTime                          *string  `json:"ActualGoodsIssueTime"`
 	ActualGoodsReceiptDate                        *string  `json:"ActualGoodsReceiptDate"`
 	ActualGoodsReceiptTime                        *string  `json:"ActualGoodsReceiptTime"`
-	ActualGoodsIssueQuantity                      *string  `json:"ActualGoodsIssueQuantity"`
-	ActualGoodsIssueQtyInBaseUnit                 *string  `json:"ActualGoodsIssueQtyInBaseUnit"`
-	ActualGoodsReceiptQuantity                    *string  `json:"ActualGoodsReceiptQuantity"`
-	ActualGoodsReceiptQtyInBaseUnit               *string  `json:"ActualGoodsReceiptQtyInBaseUnit"`
+	ActualGoodsIssueQuantity                      *float32 `json:"ActualGoodsIssueQuantity"`
+	ActualGoodsIssueQtyInBaseUnit                 *float32 `json:"ActualGoodsIssueQtyInBaseUnit"`
+	ActualGoodsReceiptQuantity                    *float32 `json:"ActualGoodsReceiptQuantity"`
+	ActualGoodsReceiptQtyInBaseUnit               *float32 `json:"ActualGoodsReceiptQtyInBaseUnit"`
 	CreationDate                                  *string  `json:"CreationDate"`
 	CreationTime                                  *string  `json:"CreationTime"`
 	LastChangeDate                                *string  `json:"LastChangeDate"`
