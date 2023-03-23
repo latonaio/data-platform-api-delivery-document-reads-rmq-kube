@@ -1,0 +1,59 @@
+{
+    "connection_key": "request",
+    "result": true,
+    "redis_key": "abcdefg",
+    "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+    "api_status_code": 200,
+    "runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+    "business_partner": 101,
+    "service_label": "DELIVERY_DOCUMENT",
+    "api_type": "",
+    "message": {
+        "Header": null,
+        "Item": null,
+        "Partner": [
+            {
+                "DeliveryDocument": 80000001,
+                "PartnerFunction": "BUYER",
+                "BusinessPartner": 101,
+                "BusinessPartnerFullName": "株式会社ローソン本社",
+                "BusinessPartnerName": "ローソン本社",
+                "Organization": null,
+                "Country": "JP",
+                "Language": "JA",
+                "Currency": "JPY",
+                "ExternalDocumentID": null,
+                "AddressID": 700010001
+            },
+            {
+                "DeliveryDocument": 80000001,
+                "PartnerFunction": "SELLER",
+                "BusinessPartner": 201,
+                "BusinessPartnerFullName": "山崎製パン株式会社",
+                "BusinessPartnerName": "山崎パン",
+                "Organization": null,
+                "Country": "JP",
+                "Language": "JA",
+                "Currency": "JPY",
+                "ExternalDocumentID": null,
+                "AddressID": 700020001
+            }
+        ],
+        "Address": null,
+        "DeliverFromItems": null,
+        "DeliverToItems": null
+    },
+    "api_schema": "DPFMDeliveryDocumentReads",
+    "accepter": [
+        "Partner"
+    ],
+    "deleted": false,
+    "sql_update_result": null,
+    "sql_update_error": "",
+    "subfunc_result": null,
+    "subfunc_error": "",
+    "exconf_result": null,
+    "exconf_error": "",
+    "api_processing_result": true,
+    "api_processing_error": ""
+}

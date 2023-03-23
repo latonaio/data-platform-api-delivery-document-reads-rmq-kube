@@ -1,0 +1,72 @@
+{
+    "connection_key": "request",
+    "result": true,
+    "redis_key": "abcdefg",
+    "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+    "api_status_code": 200,
+    "runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+    "business_partner": 101,
+    "service_label": "DELIVERY_DOCUMENT",
+    "api_type": "",
+    "message": {
+        "Header": null,
+        "Item": null,
+        "Partner": null,
+        "Address": [
+            {
+                "DeliveryDocument": 80000011,
+                "AddressID": 700010001,
+                "PostalCode": "141-8643",
+                "LocalRegion": "13",
+                "Country": "JA",
+                "District": null,
+                "StreetName": "Osaki",
+                "CityName": "Shinagawa",
+                "Building": null,
+                "Floor": null,
+                "Room": null
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "AddressID": 700010002,
+                "PostalCode": "105-0001",
+                "LocalRegion": "13",
+                "Country": "JA",
+                "District": null,
+                "StreetName": "Shintora",
+                "CityName": "Minato",
+                "Building": null,
+                "Floor": null,
+                "Room": null
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "AddressID": 700020001,
+                "PostalCode": "101-8585",
+                "LocalRegion": "13",
+                "Country": "JA",
+                "District": null,
+                "StreetName": "Heisei",
+                "CityName": "Chiyoda",
+                "Building": null,
+                "Floor": null,
+                "Room": null
+            }
+        ],
+        "DeliverFromItems": null,
+        "DeliverToItems": null
+    },
+    "api_schema": "DPFMDeliveryDocumentReads",
+    "accepter": [
+        "Address"
+    ],
+    "deleted": false,
+    "sql_update_result": null,
+    "sql_update_error": "",
+    "subfunc_result": null,
+    "subfunc_error": "",
+    "exconf_result": null,
+    "exconf_error": "",
+    "api_processing_result": true,
+    "api_processing_error": ""
+}

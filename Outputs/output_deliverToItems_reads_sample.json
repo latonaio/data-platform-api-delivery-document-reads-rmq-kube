@@ -1,0 +1,1723 @@
+{
+    "connection_key": "request",
+    "result": true,
+    "redis_key": "abcdefg",
+    "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+    "api_status_code": 200,
+    "runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+    "business_partner": 101,
+    "service_label": "DELIVERY_DOCUMENT",
+    "api_type": "",
+    "message": {
+        "Header": null,
+        "Item": null,
+        "Partner": null,
+        "Address": null,
+        "DeliverFromItems": null,
+        "DeliverToItems": [
+            {
+                "DeliveryDocument": 80000001,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000001,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000001,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000001,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000001,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニ チレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000003,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000003,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000003,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000003,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000003,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000005,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000005,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000005,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000005,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000005,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフ ーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000007,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000007,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000007,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000007,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000007,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000009,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000009,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000009,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000009,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000009,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチ レイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "HeaderDeliveryStatus": "CL",
+                "DeliverToBusinessPartnerFullName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎���パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-14"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-14"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-14"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-14"
+            },
+            {
+                "DeliveryDocument": 80000011,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000013,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000014,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000015,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000017,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000017,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-12"
+            },
+            {
+                "DeliveryDocument": 80000018,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000018,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000019,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000019,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000019,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000020,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000020,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000021,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000021,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000021,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000022,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000022,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000023,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000023,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000023,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000024,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000024,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000025,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000025,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000025,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000026,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000026,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000027,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000027,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000027,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000028,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000028,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000029,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000029,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000029,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000030,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000030,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000031,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000031,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000031,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000032,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000032,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000033,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000033,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000033,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000034,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000035,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000036,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000037,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000038,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会 社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000038,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000039,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000039,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000039,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000040,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000040,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000041,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000041,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000041,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000042,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000042,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000043,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000043,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000043,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000044,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000044,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000045,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000045,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000045,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000046,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000046,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000046,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000047,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000047,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000048,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000048,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000049,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000049,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000049,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000050,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000051,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000052,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000053,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000054,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000055,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000056,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000057,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式 会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000058,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000059,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000060,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000061,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000062,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000063,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000064,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000065,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000066,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000067,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000068,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000069,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000070,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000071,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000072,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000073,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000074,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000075,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000076,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000078,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000082,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000083,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            },
+            {
+                "DeliveryDocument": 80000084,
+                "HeaderDeliveryStatus": "NP",
+                "DeliverToBusinessPartnerFullName": "山崎パン",
+                "DeliverToBusinessPartnerName": "山崎製パン株式会社",
+                "DeliverFromBusinessPartnerFullName": null,
+                "DeliverFromBusinessPartnerName": null,
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-15"
+            }
+        ]
+    },
+    "api_schema": "DPFMDeliveryDocumentReads",
+    "accepter": [
+        "DeliverToItems"
+    ],
+    "deleted": false,
+    "sql_update_result": null,
+    "sql_update_error": "",
+    "subfunc_result": null,
+    "subfunc_error": "",
+    "exconf_result": null,
+    "exconf_error": "",
+    "api_processing_result": true,
+    "api_processing_error": ""
+}

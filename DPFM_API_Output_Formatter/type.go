@@ -52,7 +52,7 @@ type Header struct {
 	BillFromCountry                        *string  `json:"BillFromCountry"`
 	Payer                                  *int     `json:"Payer"`
 	Payee                                  *int     `json:"Payee"`
-	IsExportImport                         *int     `json:"IsExportImport"`
+	IsExportImport                         *bool    `json:"IsExportImport"`
 	DeliverToPlantTimeZone                 *string  `json:"DeliverToPlantTimeZone"`
 	DeliverFromPlantTimeZone               *string  `json:"DeliverFromPlantTimeZone"`
 	ReferenceDocument                      *int     `json:"ReferenceDocument"`
@@ -68,7 +68,7 @@ type Header struct {
 	PlannedGoodsReceiptDate                *string  `json:"PlannedGoodsReceiptDate"`
 	PlannedGoodsReceiptTime                *string  `json:"PlannedGoodsReceiptTime"`
 	InvoiceDocumentDate                    *string  `json:"InvoiceDocumentDate"`
-	HeaderCompleteDeliveryIsDefined        *int     `json:"HeaderCompleteDeliveryIsDefined"`
+	HeaderCompleteDeliveryIsDefined        *bool    `json:"HeaderCompleteDeliveryIsDefined"`
 	HeaderDeliveryStatus                   *string  `json:"HeaderDeliveryStatus"`
 	CreationDate                           *string  `json:"CreationDate"`
 	CreationTime                           *string  `json:"CreationTime"`
@@ -77,15 +77,15 @@ type Header struct {
 	GoodsIssueOrReceiptSlipNumber          *string  `json:"GoodsIssueOrReceiptSlipNumber"`
 	HeaderBillingStatus                    *string  `json:"HeaderBillingStatus"`
 	HeaderBillingConfStatus                *string  `json:"HeaderBillingConfStatus"`
+	HeaderBillingBlockStatus               *bool    `json:"HeaderBillingBlockStatus"`
 	HeaderGrossWeight                      *float32 `json:"HeaderGrossWeight"`
 	HeaderNetWeight                        *float32 `json:"HeaderNetWeight"`
 	HeaderWeightUnit                       *string  `json:"HeaderWeightUnit"`
 	Incoterms                              *string  `json:"Incoterms"`
 	TransactionCurrency                    *string  `json:"TransactionCurrency"`
-	HeaderDeliveryBlockStatus              *int     `json:"HeaderDeliveryBlockStatus"`
+	HeaderDeliveryBlockStatus              *bool    `json:"HeaderDeliveryBlockStatus"`
 	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
-	HeaderBillingBlockStatus               *bool    `json:"HeaderBillingBlockStatus"`
 	IsCancelled                            *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                    *bool    `json:"IsMarkedForDeletion"`
 }
@@ -168,7 +168,7 @@ type Item struct {
 	ProductStandardID                             *string  `json:"ProductStandardID"`
 	ProductGroup                                  *string  `json:"ProductGroup"`
 	BaseUnit                                      *string  `json:"BaseUnit"`
-	OriginalQuantityInBaseUnit                    *string  `json:"OriginalQuantityInBaseUnit"`
+	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
 	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
 	PlannedGoodsIssueDate                         *string  `json:"PlannedGoodsIssueDate"`
 	PlannedGoodsIssueTime                         *string  `json:"PlannedGoodsIssueTime"`
@@ -191,13 +191,11 @@ type Item struct {
 	LastChangeDate                                *string  `json:"LastChangeDate"`
 	LastChangeTime                                *string  `json:"LastChangeTime"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
-	SalesCostGLAccount                            *string  `json:"SalesCostGLAccount"`
-	ReceivingGLAccount                            *string  `json:"ReceivingGLAccount"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
 	ItemNetWeight                                 *float32 `json:"ItemNetWeight"`
 	ItemWeightUnit                                *string  `json:"ItemWeightUnit"`
-	InternalCapacityQuantity                      *string  `json:"InternalCapacityQuantity"`
+	InternalCapacityQuantity                      *float32 `json:"InternalCapacityQuantity"`
 	InternalCapacityQuantityUnit                  *string  `json:"InternalCapacityQuantityUnit"`
 	ItemIsBillingRelevant                         *bool    `json:"ItemIsBillingRelevant"`
 	NetAmount                                     *float32 `json:"NetAmount"`

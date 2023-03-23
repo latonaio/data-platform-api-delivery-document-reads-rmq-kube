@@ -121,7 +121,7 @@
 		],
 		"Address": [
 			{
-				"AddressID": null,
+				"AddressID": 700010001,
 				"PostalCode": "",
 				"LocalRegion": "",
 				"Country": "",
@@ -133,7 +133,7 @@
 				"Room": null
 			},
 			{
-				"AddressID": null,
+				"AddressID": 700010002,
 				"PostalCode": "",
 				"LocalRegion": "",
 				"Country": "",
@@ -145,7 +145,7 @@
 				"Room": null
 			},
 			{
-				"AddressID": null,
+				"AddressID": 700020001,
 				"PostalCode": "",
 				"LocalRegion": "",
 				"Country": "",
@@ -396,7 +396,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"Header"
+		"Address"
 	],
 	"delivery_document": 1,
 	"deleted": false

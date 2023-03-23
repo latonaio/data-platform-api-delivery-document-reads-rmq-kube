@@ -40,15 +40,15 @@
 		"ActualGoodsIssueDateFrom": ""
 	},
 	"DeliveryDocument": {
-		"DeliveryDocument": 80000011,
+		"DeliveryDocument": null,
 		"SupplyChainRelationshipID": null,
 		"SupplyChainRelationshipDeliveryID": null,
 		"SupplyChainRelationshipBillingID": null,
 		"SupplyChainRelationshipPaymentID": null,
 		"Buyer": null,
 		"Seller": null,
-		"DeliverToParty": null,
-		"DeliverFromParty": null,
+		"DeliverToParty": 102,
+		"DeliverFromParty": 701,
 		"DeliverToPlant": "",
 		"DeliverFromPlant": "",
 		"BillToParty": null,
@@ -73,8 +73,8 @@
 		"PlannedGoodsReceiptDate": "",
 		"PlannedGoodsReceiptTime": "",
 		"InvoiceDocumentDate": "",
-		"HeaderCompleteDeliveryIsDefined": null,
-		"HeaderDeliveryStatus": "",
+		"HeaderCompleteDeliveryIsDefined": false,
+		"HeaderDeliveryStatus": "NP",
 		"CreationDate": null,
 		"CreationTime": null,
 		"LastChangeDate": null,
@@ -87,12 +87,12 @@
 		"HeaderWeightUnit": "",
 		"Incoterms": "",
 		"TransactionCurrency": "",
-		"HeaderDeliveryBlockStatus": null,
+		"HeaderDeliveryBlockStatus": false,
 		"HeaderIssuingBlockStatus": null,
 		"HeaderReceivingBlockStatus": null,
 		"HeaderBillingBlockStatus": null,
-		"IsCancelled": null,
-		"IsMarkedForDeletion": null,
+		"IsCancelled": false,
+		"IsMarkedForDeletion": false,
 		"Partner": [
 			{
 				"PartnerFunction": "",
@@ -396,7 +396,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"Header"
+		"Headers"
 	],
 	"delivery_document": 1,
 	"deleted": false

@@ -142,7 +142,6 @@ func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
 	return &header, nil
 }
 
-// ここまでやりました2023/02/11
 func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 	defer rows.Close()
 	item := make([]Item, 0)
@@ -242,8 +241,6 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.LastChangeDate,
 			&pm.LastChangeTime,
 			&pm.ItemBillingStatus,
-			&pm.SalesCostGLAccount,
-			&pm.ReceivingGLAccount,
 			&pm.ItemCompleteDeliveryIsDefined,
 			&pm.ItemGrossWeight,
 			&pm.ItemNetWeight,
@@ -384,8 +381,6 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			LastChangeDate:                                data.LastChangeDate,
 			LastChangeTime:                                data.LastChangeTime,
 			ItemBillingStatus:                             data.ItemBillingStatus,
-			SalesCostGLAccount:                            data.SalesCostGLAccount,
-			ReceivingGLAccount:                            data.ReceivingGLAccount,
 			ItemCompleteDeliveryIsDefined:                 data.ItemCompleteDeliveryIsDefined,
 			ItemGrossWeight:                               data.ItemGrossWeight,
 			ItemNetWeight:                                 data.ItemNetWeight,

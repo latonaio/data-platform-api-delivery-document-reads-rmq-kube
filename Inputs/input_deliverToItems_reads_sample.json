@@ -40,14 +40,14 @@
 		"ActualGoodsIssueDateFrom": ""
 	},
 	"DeliveryDocument": {
-		"DeliveryDocument": 80000011,
+		"DeliveryDocument": null,
 		"SupplyChainRelationshipID": null,
 		"SupplyChainRelationshipDeliveryID": null,
 		"SupplyChainRelationshipBillingID": null,
 		"SupplyChainRelationshipPaymentID": null,
 		"Buyer": null,
 		"Seller": null,
-		"DeliverToParty": null,
+		"DeliverToParty": 102,
 		"DeliverFromParty": null,
 		"DeliverToPlant": "",
 		"DeliverFromPlant": "",
@@ -396,7 +396,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"Header"
+		"DeliverToItems"
 	],
 	"delivery_document": 1,
 	"deleted": false

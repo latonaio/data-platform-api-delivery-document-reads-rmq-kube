@@ -1,0 +1,233 @@
+{
+    "connection_key": "request",
+    "result": true,
+    "redis_key": "abcdefg",
+    "filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+    "api_status_code": 200,
+    "runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+    "business_partner": 101,
+    "service_label": "DELIVERY_DOCUMENT",
+    "api_type": "",
+    "message": {
+        "Header": null,
+        "Item": null,
+        "Partner": null,
+        "Address": null,
+        "DeliverFromItems": [
+            {
+                "DeliveryDocument": 80000002,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000002,
+                "DeliverFromBusinessPartnerFullName": "株式 会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "DeliverFromBusinessPartnerFullName": " 株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000004,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000006,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000008,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "NP",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "CL",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "CL",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "CL",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            },
+            {
+                "DeliveryDocument": 80000010,
+                "DeliverFromBusinessPartnerFullName": "株式会社ニチレイフーズ",
+                "DeliverFromBusinessPartnerName": "ニチレイフーズ",
+                "DeliverToBusinessPartnerName": "株式会社ローソン虎ノ門店",
+                "DeliverToBusinessPartnerFullName": "ローソン虎ノ門店",
+                "HeaderDeliveryStatus": "CL",
+                "ItemBillingStatus": "NP",
+                "ConfirmedDeliveryDate": "2023-02-11"
+            }
+        ],
+        "DeliverToItems": null
+    },
+    "api_schema": "DPFMDeliveryDocumentReads",
+    "accepter": [
+        "DeliverFromItems"
+    ],
+    "deleted": false,
+    "sql_update_result": null,
+    "sql_update_error": "",
+    "subfunc_result": null,
+    "subfunc_error": "",
+    "exconf_result": null,
+    "exconf_error": "",
+    "api_processing_result": true,
+    "api_processing_error": ""
+}

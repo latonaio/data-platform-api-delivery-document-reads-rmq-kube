@@ -1,9 +1,10 @@
 # syntax = docker/dockerfile:experimental
 # Build Container
-FROM golang:1.19 as builder
+FROM golang:1.20 as builder
 
 ENV GO111MODULE on
 ENV GOPRIVATE=github.com/latonaio
+ENV CGO_ENABLED=0
 WORKDIR /go/src/github.com/latonaio
 
 COPY . .

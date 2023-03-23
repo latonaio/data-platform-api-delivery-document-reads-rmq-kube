@@ -159,7 +159,7 @@
 		],
 		"Item": [
 			{
-				"DeliveryDocumentItem": null,
+				"DeliveryDocumentItem": 1,
 				"DeliveryDocumentItemCategory": "",
 				"SupplyChainRelationshipID": null,
 				"SupplyChainRelationshipDeliveryID": null,
@@ -276,7 +276,7 @@
 				"ItemBillingBlockStatus": null
 			},
 			{
-				"DeliveryDocumentItem": null,
+				"DeliveryDocumentItem": 2,
 				"DeliveryDocumentItemCategory": "",
 				"SupplyChainRelationshipID": null,
 				"SupplyChainRelationshipDeliveryID": null,
@@ -396,7 +396,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"Header"
+		"Item"
 	],
 	"delivery_document": 1,
 	"deleted": false

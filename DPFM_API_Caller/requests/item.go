@@ -67,7 +67,7 @@ type Item struct {
 	ProductStandardID                             *string  `json:"ProductStandardID"`
 	ProductGroup                                  *string  `json:"ProductGroup"`
 	BaseUnit                                      *string  `json:"BaseUnit"`
-	OriginalQuantityInBaseUnit                    *string  `json:"OriginalQuantityInBaseUnit"`
+	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
 	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
 	PlannedGoodsIssueDate                         *string  `json:"PlannedGoodsIssueDate"`
 	PlannedGoodsIssueTime                         *string  `json:"PlannedGoodsIssueTime"`
@@ -90,13 +90,11 @@ type Item struct {
 	LastChangeDate                                *string  `json:"LastChangeDate"`
 	LastChangeTime                                *string  `json:"LastChangeTime"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
-	SalesCostGLAccount                            *string  `json:"SalesCostGLAccount"`
-	ReceivingGLAccount                            *string  `json:"ReceivingGLAccount"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
 	ItemNetWeight                                 *float32 `json:"ItemNetWeight"`
 	ItemWeightUnit                                *string  `json:"ItemWeightUnit"`
-	InternalCapacityQuantity                      *string  `json:"InternalCapacityQuantity"`
+	InternalCapacityQuantity                      *float32 `json:"InternalCapacityQuantity"`
 	InternalCapacityQuantityUnit                  *string  `json:"InternalCapacityQuantityUnit"`
 	ItemIsBillingRelevant                         *bool    `json:"ItemIsBillingRelevant"`
 	NetAmount                                     *float32 `json:"NetAmount"`
@@ -133,6 +131,6 @@ type Item struct {
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
-	IsCancelled                                   *bool    `json:"ItemIsCancelled"`
-	IsMarkedForDeletion                           *bool    `json:"ItemIsMarkedForDeletion"`
+	IsCancelled                                   *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
 }

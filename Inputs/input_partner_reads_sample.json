@@ -40,7 +40,7 @@
 		"ActualGoodsIssueDateFrom": ""
 	},
 	"DeliveryDocument": {
-		"DeliveryDocument": 80000011,
+		"DeliveryDocument": 80000001,
 		"SupplyChainRelationshipID": null,
 		"SupplyChainRelationshipDeliveryID": null,
 		"SupplyChainRelationshipBillingID": null,
@@ -95,8 +95,8 @@
 		"IsMarkedForDeletion": null,
 		"Partner": [
 			{
-				"PartnerFunction": "",
-				"BusinessPartner": null,
+				"PartnerFunction": "BUYER",
+				"BusinessPartner": 101,
 				"BusinessPartnerFullName": "",
 				"BusinessPartnerName": "",
 				"Organization": "",
@@ -107,8 +107,8 @@
 				"AddressID": null
 			},
 			{
-				"PartnerFunction": "",
-				"BusinessPartner": null,
+				"PartnerFunction": "SELLER",
+				"BusinessPartner": 201,
 				"BusinessPartnerFullName": "",
 				"BusinessPartnerName": "",
 				"Organization": "",
@@ -396,7 +396,7 @@
 	},
 	"api_schema": "DPFMDeliveryDocumentReads",
 	"accepter": [
-		"Header"
+		"Partner"
 	],
 	"delivery_document": 1,
 	"deleted": false

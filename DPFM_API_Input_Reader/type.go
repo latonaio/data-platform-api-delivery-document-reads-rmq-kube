@@ -97,7 +97,7 @@ type Header struct {
 	BillFromCountry                        *string   `json:"BillFromCountry"`
 	Payer                                  *int      `json:"Payer"`
 	Payee                                  *int      `json:"Payee"`
-	IsExportImport                         *int      `json:"IsExportImport"`
+	IsExportImport                         *bool     `json:"IsExportImport"`
 	DeliverToPlantTimeZone                 *string   `json:"DeliverToPlantTimeZone"`
 	DeliverFromPlantTimeZone               *string   `json:"DeliverFromPlantTimeZone"`
 	ReferenceDocument                      *int      `json:"ReferenceDocument"`
@@ -113,7 +113,7 @@ type Header struct {
 	PlannedGoodsReceiptDate                *string   `json:"PlannedGoodsReceiptDate"`
 	PlannedGoodsReceiptTime                *string   `json:"PlannedGoodsReceiptTime"`
 	InvoiceDocumentDate                    *string   `json:"InvoiceDocumentDate"`
-	HeaderCompleteDeliveryIsDefined        *int      `json:"HeaderCompleteDeliveryIsDefined"`
+	HeaderCompleteDeliveryIsDefined        *bool     `json:"HeaderCompleteDeliveryIsDefined"`
 	HeaderDeliveryStatus                   *string   `json:"HeaderDeliveryStatus"`
 	CreationDate                           *string   `json:"CreationDate"`
 	CreationTime                           *string   `json:"CreationTime"`
@@ -127,7 +127,7 @@ type Header struct {
 	HeaderWeightUnit                       *string   `json:"HeaderWeightUnit"`
 	Incoterms                              *string   `json:"Incoterms"`
 	TransactionCurrency                    *string   `json:"TransactionCurrency"`
-	HeaderDeliveryBlockStatus              *int      `json:"HeaderDeliveryBlockStatus"`
+	HeaderDeliveryBlockStatus              *bool     `json:"HeaderDeliveryBlockStatus"`
 	HeaderIssuingBlockStatus               *int      `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *int      `json:"HeaderReceivingBlockStatus"`
 	HeaderBillingBlockStatus               *int      `json:"HeaderBillingBlockStatus"`
@@ -152,7 +152,7 @@ type HeaderDoc struct {
 type Item struct {
 	DeliveryDocument                              int      `json:"DeliveryDocument"`
 	DeliveryDocumentItem                          int      `json:"DeliveryDocumentItem"`
-	DeliveryDocumentItemCategory                  *int     `json:"DeliveryDocumentItemCategory"`
+	DeliveryDocumentItemCategory                  *string  `json:"DeliveryDocumentItemCategory"`
 	SupplyChainRelationshipID                     *int     `json:"SupplyChainRelationshipID"`
 	SupplyChainRelationshipDeliveryID             *int     `json:"SupplyChainRelationshipDeliveryID"`
 	SupplyChainRelationshipDeliveryPlantID        *int     `json:"SupplyChainRelationshipDeliveryPlantID"`
@@ -216,28 +216,34 @@ type Item struct {
 	ProductStandardID                             *string  `json:"ProductStandardID"`
 	ProductGroup                                  *string  `json:"ProductGroup"`
 	BaseUnit                                      *string  `json:"BaseUnit"`
-	OriginalQuantityInBaseUnit                    *string  `json:"OriginalQuantityInBaseUnit"`
+	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
 	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
+	PlannedGoodsIssueDate                         *string  `json:"PlannedGoodsIssueDate"`
+	PlannedGoodsIssueTime                         *string  `json:"PlannedGoodsIssueTime"`
+	PlannedGoodsReceiptDate                       *string  `json:"PlannedGoodsReceiptDate"`
+	PlannedGoodsReceiptTime                       *string  `json:"PlannedGoodsReceiptTime"`
+	PlannedGoodsIssueQuantity                     *float32 `json:"PlannedGoodsIssueQuantity"`
+	PlannedGoodsIssueQtyInBaseUnit                *float32 `json:"PlannedGoodsIssueQtyInBaseUnit"`
+	PlannedGoodsReceiptQuantity                   *float32 `json:"PlannedGoodsReceiptQuantity"`
+	PlannedGoodsReceiptQtyInBaseUnit              *float32 `json:"PlannedGoodsReceiptQtyInBaseUnit"`
 	ActualGoodsIssueDate                          *string  `json:"ActualGoodsIssueDate"`
 	ActualGoodsIssueTime                          *string  `json:"ActualGoodsIssueTime"`
 	ActualGoodsReceiptDate                        *string  `json:"ActualGoodsReceiptDate"`
 	ActualGoodsReceiptTime                        *string  `json:"ActualGoodsReceiptTime"`
-	ActualGoodsIssueQuantity                      *string  `json:"ActualGoodsIssueQuantity"`
-	ActualGoodsIssueQtyInBaseUnit                 *string  `json:"ActualGoodsIssueQtyInBaseUnit"`
-	ActualGoodsReceiptQuantity                    *string  `json:"ActualGoodsReceiptQuantity"`
-	ActualGoodsReceiptQtyInBaseUnit               *string  `json:"ActualGoodsReceiptQtyInBaseUnit"`
+	ActualGoodsIssueQuantity                      *float32 `json:"ActualGoodsIssueQuantity"`
+	ActualGoodsIssueQtyInBaseUnit                 *float32 `json:"ActualGoodsIssueQtyInBaseUnit"`
+	ActualGoodsReceiptQuantity                    *float32 `json:"ActualGoodsReceiptQuantity"`
+	ActualGoodsReceiptQtyInBaseUnit               *float32 `json:"ActualGoodsReceiptQtyInBaseUnit"`
 	CreationDate                                  *string  `json:"CreationDate"`
 	CreationTime                                  *string  `json:"CreationTime"`
 	LastChangeDate                                *string  `json:"LastChangeDate"`
 	LastChangeTime                                *string  `json:"LastChangeTime"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
-	SalesCostGLAccount                            *string  `json:"SalesCostGLAccount"`
-	ReceivingGLAccount                            *string  `json:"ReceivingGLAccount"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
 	ItemNetWeight                                 *float32 `json:"ItemNetWeight"`
 	ItemWeightUnit                                *string  `json:"ItemWeightUnit"`
-	InternalCapacityQuantity                      *string  `json:"InternalCapacityQuantity"`
+	InternalCapacityQuantity                      *float32 `json:"InternalCapacityQuantity"`
 	InternalCapacityQuantityUnit                  *string  `json:"InternalCapacityQuantityUnit"`
 	ItemIsBillingRelevant                         *bool    `json:"ItemIsBillingRelevant"`
 	NetAmount                                     *float32 `json:"NetAmount"`
@@ -274,8 +280,8 @@ type Item struct {
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
-	ItemIsCancelled                               *bool    `json:"ItemIsCancelled"`
-	ItemIsMarkedForDeletion                       *bool    `json:"ItemIsMarkedForDeletion"`
+	IsCancelled                                   *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
 }
 
 type Address struct {
