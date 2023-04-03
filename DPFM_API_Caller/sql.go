@@ -83,12 +83,17 @@ func (c *DPFMAPICaller) Header(
 	errs *[]error,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Header {
-	deliveryDocument := input.Header.DeliveryDocument
-
+	where := fmt.Sprintf("WHERE DeliveryDocument = %d ", input.Header.DeliveryDocument)
+	if input.Header.IsCancelled != nil {
+		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
+	}
+	if input.Header.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
+	}
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		WHERE DeliveryDocument = ?;`, deliveryDocument,
+		` + where + `;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -200,20 +205,27 @@ func (c *DPFMAPICaller) Items(
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Item {
 	header := input.Header
-	idWhere := fmt.Sprintf("where DeliveryDocument = %d", header.DeliveryDocument)
+	where := fmt.Sprintf("where DeliveryDocument = %d", header.DeliveryDocument)
 
 	if header.DeliverFromParty != nil && header.DeliverToParty != nil {
-		idWhere = fmt.Sprintf("%s\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", idWhere, *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
+		where = fmt.Sprintf("%s\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", where, *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
 	} else if header.DeliverFromParty != nil {
-		idWhere = fmt.Sprintf("%s\nAND DeliverFromParty = %d ", idWhere, *header.DeliverFromParty)
+		where = fmt.Sprintf("%s\nAND DeliverFromParty = %d ", where, *header.DeliverFromParty)
 	} else if header.DeliverToParty != nil {
-		idWhere = fmt.Sprintf("%s\nAND DeliverToParty = %d ", idWhere, *header.DeliverToParty)
+		where = fmt.Sprintf("%s\nAND DeliverToParty = %d ", where, *header.DeliverToParty)
+	}
+
+	if input.Header.IsCancelled != nil {
+		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
+	}
+	if input.Header.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
 	}
 
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		` + idWhere + ` ;`,
+		` + where + ` ;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
