@@ -93,7 +93,7 @@ func (c *DPFMAPICaller) Header(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		` + where + `;`,
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -145,7 +145,7 @@ func (c *DPFMAPICaller) Headers(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		` + where + idWhere + `;`,
+		` + where + idWhere + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -181,7 +181,8 @@ func (c *DPFMAPICaller) Item(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` );`, args...,
+		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` ) 
+		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -225,7 +226,7 @@ func (c *DPFMAPICaller) Items(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		` + where + ` ;`,
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -262,7 +263,8 @@ func (c *DPFMAPICaller) Partner(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_partner_data
-		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` );`, args...,
+		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` ) 
+		ORDER BY DeliveryDocument DESC, BusinessPartner DESC, AddressID ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -299,7 +301,8 @@ func (c *DPFMAPICaller) Address(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_address_data
-		WHERE (DeliveryDocument, AddressID) IN ( `+repeat+` );`, args...,
+		WHERE (DeliveryDocument, AddressID) IN ( `+repeat+` )
+		ORDER BY DeliveryDocument DESC, AddressID ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -340,7 +343,8 @@ func (c *DPFMAPICaller) DeliverFromItems(
 		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
 		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
 		ON DeliveryDocumentHeader.DeliverToParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?);`, deliverFromParty,
+		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?) 
+		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverFromParty,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -381,7 +385,8 @@ func (c *DPFMAPICaller) DeliverToItems(
 		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
 		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
 		ON DeliveryDocumentHeader.DeliverFromParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?);`, deliverToParty,
+		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?) 
+		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverToParty,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
