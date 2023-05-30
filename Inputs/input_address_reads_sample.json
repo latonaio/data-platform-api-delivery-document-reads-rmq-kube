@@ -9,7 +9,6 @@
 	"service_label": "DELIVERY_DOCUMENT",
 	"DeliveryDocumentInputParameters": {
 		"InvoiceDocumentDate": [
-			"",
 			""
 		],
 		"InvoiceDocumentDateTo": "",

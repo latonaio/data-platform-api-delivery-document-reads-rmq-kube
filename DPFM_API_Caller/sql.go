@@ -132,6 +132,9 @@ func (c *DPFMAPICaller) Headers(
 	if input.Header.IsMarkedForDeletion != nil {
 		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
 	}
+	if input.Header.HeaderBillingStatusException != nil {
+		where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
+	}
 
 	idWhere := ""
 	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {

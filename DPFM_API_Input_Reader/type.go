@@ -121,6 +121,7 @@ type Header struct {
 	LastChangeTime                         *string   `json:"LastChangeTime"`
 	GoodsIssueOrReceiptSlipNumber          *string   `json:"GoodsIssueOrReceiptSlipNumber"`
 	HeaderBillingStatus                    *string   `json:"HeaderBillingStatus"`
+	HeaderBillingStatusException           *string   `json:"HeaderBillingStatusException"`
 	HeaderBillingConfStatus                *string   `json:"HeaderBillingConfStatus"`
 	HeaderGrossWeight                      *float32  `json:"HeaderGrossWeight"`
 	HeaderNetWeight                        *float32  `json:"HeaderNetWeight"`
