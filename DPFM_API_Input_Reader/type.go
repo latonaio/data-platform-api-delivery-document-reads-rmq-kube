@@ -104,6 +104,12 @@ type Header struct {
 	ReferenceDocumentItem                  *int      `json:"ReferenceDocumentItem"`
 	OrderID                                *int      `json:"OrderID"`
 	OrderItem                              *int      `json:"OrderItem"`
+	ProductionOrder                        *int		 `json:"ProductionOrder"`
+    ProductionOrderItem                    *int		 `json:"ProductionOrderItem"`
+    Operations                             *int		 `json:"Operations"`
+    OperationsItem                         *int		 `json:"OperationsItem"`
+    BillOfMaterial                         *int		 `json:"BillOfMaterial"`
+    BillOfMaterialItem                     *int		 `json:"BillOfMaterialItem"`
 	ContractType                           *string   `json:"ContractType"`
 	OrderValidityStartDate                 *string   `json:"OrderValidityStartDate"`
 	OrderValidityEndDate                   *string   `json:"OrderValidityEndDate"`

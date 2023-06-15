@@ -284,6 +284,12 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.ItemBillingBlockStatus,
 			&pm.IsCancelled,
 			&pm.IsMarkedForDeletion,
+			&pm.ProductionOrder,
+			&pm.ProductionOrderItem,
+			&pm.Operations,
+			&pm.OperationsItem,
+			&pm.BillOfMaterial,
+			&pm.BillOfMaterialItem,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
@@ -424,6 +430,12 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			ItemBillingBlockStatus:                        data.ItemBillingBlockStatus,
 			IsCancelled:                                   data.IsCancelled,
 			IsMarkedForDeletion:                           data.IsMarkedForDeletion,
+			ProductionOrder:                               data.ProductionOrder,
+			ProductionOrderItem:                           data.ProductionOrderItem,
+			Operations:                                    data.Operations,
+			OperationsItem:                                data.OperationsItem,
+			BillOfMaterial:                                data.BillOfMaterial,
+			BillOfMaterialItem:                            data.BillOfMaterialItem,
 		})
 	}
 	if i == 0 {

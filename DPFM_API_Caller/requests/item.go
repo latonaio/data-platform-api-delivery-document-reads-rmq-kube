@@ -133,4 +133,10 @@ type Item struct {
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
 	IsCancelled                                   *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
+	ProductionOrder                               *int     `json:"ProductionOrder"`
+	ProductionOrderItem                           *int     `json:"ProductionOrderItem"`
+	Operations                                    *int     `json:"Operations"`
+	OperationsItem                                *int     `json:"OperationsItem"`
+	BillOfMaterial                                *int     `json:"BillOfMaterial"`
+	BillOfMaterialItem                            *int     `json:"BillOfMaterialItem"`
 }
