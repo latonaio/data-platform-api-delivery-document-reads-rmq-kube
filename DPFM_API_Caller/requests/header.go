@@ -37,10 +37,6 @@ type Header struct {
 	InvoiceDocumentDate                    *string  `json:"InvoiceDocumentDate"`
 	HeaderCompleteDeliveryIsDefined        *bool    `json:"HeaderCompleteDeliveryIsDefined"`
 	HeaderDeliveryStatus                   *string  `json:"HeaderDeliveryStatus"`
-	CreationDate                           *string  `json:"CreationDate"`
-	CreationTime                           *string  `json:"CreationTime"`
-	LastChangeDate                         *string  `json:"LastChangeDate"`
-	LastChangeTime                         *string  `json:"LastChangeTime"`
 	GoodsIssueOrReceiptSlipNumber          *string  `json:"GoodsIssueOrReceiptSlipNumber"`
 	HeaderBillingStatus                    *string  `json:"HeaderBillingStatus"`
 	HeaderBillingConfStatus                *string  `json:"HeaderBillingConfStatus"`
@@ -53,6 +49,10 @@ type Header struct {
 	HeaderDeliveryBlockStatus              *bool    `json:"HeaderDeliveryBlockStatus"`
 	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
+	CreationDate                           *string  `json:"CreationDate"`
+	CreationTime                           *string  `json:"CreationTime"`
+	LastChangeDate                         *string  `json:"LastChangeDate"`
+	LastChangeTime                         *string  `json:"LastChangeTime"`
 	IsCancelled                            *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                    *bool    `json:"IsMarkedForDeletion"`
 }

@@ -22,6 +22,7 @@ func (c *DPFMAPICaller) readSqlProcess(
 ) interface{} {
 	var header *[]dpfm_api_output_formatter.Header
 	var item *[]dpfm_api_output_formatter.Item
+	var itemPicking *[]dpfm_api_output_formatter.ItemPicking
 	var partner *[]dpfm_api_output_formatter.Partner
 	var address *[]dpfm_api_output_formatter.Address
 	var deliverFromItems *[]dpfm_api_output_formatter.DeliverFromItems
@@ -43,6 +44,14 @@ func (c *DPFMAPICaller) readSqlProcess(
 		case "Items":
 			func() {
 				item = c.Items(mtx, input, output, errs, log)
+			}()
+		case "ItemPicking":
+			func() {
+				itemPicking = c.ItemPicking(mtx, input, output, errs, log)
+			}()
+		case "ItemPickings":
+			func() {
+				itemPicking = c.ItemPickings(mtx, input, output, errs, log)
 			}()
 		case "Partner":
 			func() {
@@ -67,6 +76,7 @@ func (c *DPFMAPICaller) readSqlProcess(
 	data := &dpfm_api_output_formatter.Message{
 		Header:           header,
 		Item:             item,
+		ItemPicking:      itemPicking,
 		Partner:          partner,
 		Address:          address,
 		DeliverFromItems: deliverFromItems,

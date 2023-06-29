@@ -23,6 +23,13 @@ type Item struct {
 	BillFromCountry                               *string  `json:"BillFromCountry"`
 	Payer                                         *int     `json:"Payer"`
 	Payee                                         *int     `json:"Payee"`
+	Product                                       *string  `json:"Product"`
+	ProductStandardID                             *string  `json:"ProductStandardID"`
+	ProductGroup                                  *string  `json:"ProductGroup"`
+	BaseUnit                                      *string  `json:"BaseUnit"`
+	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
+	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
+	OriginalQuantityInDeliveryUnit                *float32 `json:"OriginalQuantityInDeliveryUnit"`
 	DeliverToPlantStorageLocation                 *string  `json:"DeliverToPlantStorageLocation"`
 	ProductIsBatchManagedInDeliverToPlant         *bool    `json:"ProductIsBatchManagedInDeliverToPlant"`
 	BatchMgmtPolicyInDeliverToPlant               *string  `json:"BatchMgmtPolicyInDeliverToPlant"`
@@ -63,12 +70,6 @@ type Item struct {
 	DeliveryDocumentItemText                      *string  `json:"DeliveryDocumentItemText"`
 	DeliveryDocumentItemTextByBuyer               *string  `json:"DeliveryDocumentItemTextByBuyer"`
 	DeliveryDocumentItemTextBySeller              *string  `json:"DeliveryDocumentItemTextBySeller"`
-	Product                                       *string  `json:"Product"`
-	ProductStandardID                             *string  `json:"ProductStandardID"`
-	ProductGroup                                  *string  `json:"ProductGroup"`
-	BaseUnit                                      *string  `json:"BaseUnit"`
-	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
-	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
 	PlannedGoodsIssueDate                         *string  `json:"PlannedGoodsIssueDate"`
 	PlannedGoodsIssueTime                         *string  `json:"PlannedGoodsIssueTime"`
 	PlannedGoodsReceiptDate                       *string  `json:"PlannedGoodsReceiptDate"`
@@ -85,10 +86,7 @@ type Item struct {
 	ActualGoodsIssueQtyInBaseUnit                 *float32 `json:"ActualGoodsIssueQtyInBaseUnit"`
 	ActualGoodsReceiptQuantity                    *float32 `json:"ActualGoodsReceiptQuantity"`
 	ActualGoodsReceiptQtyInBaseUnit               *float32 `json:"ActualGoodsReceiptQtyInBaseUnit"`
-	CreationDate                                  *string  `json:"CreationDate"`
-	CreationTime                                  *string  `json:"CreationTime"`
-	LastChangeDate                                *string  `json:"LastChangeDate"`
-	LastChangeTime                                *string  `json:"LastChangeTime"`
+	QuantityPerPackage               			  *float32 `json:"QuantityPerPackage"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
@@ -102,6 +100,12 @@ type Item struct {
 	GrossAmount                                   *float32 `json:"GrossAmount"`
 	OrderID                                       *int     `json:"OrderID"`
 	OrderItem                                     *int     `json:"OrderItem"`
+	ProuctionOrder                                *int     `json:"ProuctionOrder"`
+	ProuctionOrderItem                            *int     `json:"ProuctionOrderItem"`
+	BillOfMaterial                                *int	   `json:"BillOfMaterial"`
+	BillOfMaterialItem                            *int     `json:"BillOfMaterialItem"`
+	Operations	                                  *int	   `json:"Operations"`
+	OperationsItem	                              *int     `json:"OperationsItem"`
 	OrderType                                     *string  `json:"OrderType"`
 	ContractType                                  *string  `json:"ContractType"`
 	OrderValidityStartDate                        *string  `json:"OrderValidityStartDate"`
@@ -114,7 +118,8 @@ type Item struct {
 	InvoicePeriodStartDate                        *string  `json:"InvoicePeriodStartDate"`
 	InvoicePeriodEndDate                          *string  `json:"InvoicePeriodEndDate"`
 	ConfirmedDeliveryDate                         *string  `json:"ConfirmedDeliveryDate"`
-	Project                                       *string  `json:"Project"`
+	Project                                       *int 	   `json:"Project"`
+	WBSElement                                    *int 	   `json:"WBSElement"`
 	ReferenceDocument                             *int     `json:"ReferenceDocument"`
 	ReferenceDocumentItem                         *int     `json:"ReferenceDocumentItem"`
 	TransactionTaxClassification                  *string  `json:"TransactionTaxClassification"`
@@ -127,16 +132,15 @@ type Item struct {
 	TaxRate                                       *float32 `json:"TaxRate"`
 	CountryOfOrigin                               *string  `json:"CountryOfOrigin"`
 	CountryOfOriginLanguage                       *string  `json:"CountryOfOriginLanguage"`
+	Equipment									  *int 	   `json:"Equipment"`
 	ItemDeliveryBlockStatus                       *bool    `json:"ItemDeliveryBlockStatus"`
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
-	IsCancelled                                   *bool    `json:"IsCancelled"`
-	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
-	ProductionOrder                               *int     `json:"ProductionOrder"`
-	ProductionOrderItem                           *int     `json:"ProductionOrderItem"`
-	Operations                                    *int     `json:"Operations"`
-	OperationsItem                                *int     `json:"OperationsItem"`
-	BillOfMaterial                                *int     `json:"BillOfMaterial"`
-	BillOfMaterialItem                            *int     `json:"BillOfMaterialItem"`
+	CreationDate                                  *string  `json:"CreationDate"`
+	CreationTime                                  *string  `json:"CreationTime"`
+	LastChangeDate                                *string  `json:"LastChangeDate"`
+	LastChangeTime                                *string  `json:"LastChangeTime"`
+	IsCancelled                          		  *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                    		  *bool    `json:"IsMarkedForDeletion"`
 }
