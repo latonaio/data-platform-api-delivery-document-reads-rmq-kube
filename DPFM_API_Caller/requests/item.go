@@ -86,7 +86,7 @@ type Item struct {
 	ActualGoodsIssueQtyInBaseUnit                 *float32 `json:"ActualGoodsIssueQtyInBaseUnit"`
 	ActualGoodsReceiptQuantity                    *float32 `json:"ActualGoodsReceiptQuantity"`
 	ActualGoodsReceiptQtyInBaseUnit               *float32 `json:"ActualGoodsReceiptQtyInBaseUnit"`
-	QuantityPerPackage               			  *float32 `json:"QuantityPerPackage"`
+	QuantityPerPackage                            *float32 `json:"QuantityPerPackage"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
@@ -100,12 +100,12 @@ type Item struct {
 	GrossAmount                                   *float32 `json:"GrossAmount"`
 	OrderID                                       *int     `json:"OrderID"`
 	OrderItem                                     *int     `json:"OrderItem"`
-	ProuctionOrder                                *int     `json:"ProuctionOrder"`
-	ProuctionOrderItem                            *int     `json:"ProuctionOrderItem"`
-	BillOfMaterial                                *int	   `json:"BillOfMaterial"`
+	ProductionOrder                               *int     `json:"ProductionOrder"`
+	ProductionOrderItem                           *int     `json:"ProductionOrderItem"`
+	BillOfMaterial                                *int     `json:"BillOfMaterial"`
 	BillOfMaterialItem                            *int     `json:"BillOfMaterialItem"`
-	Operations	                                  *int	   `json:"Operations"`
-	OperationsItem	                              *int     `json:"OperationsItem"`
+	Operations                                    *int     `json:"Operations"`
+	OperationsItem                                *int     `json:"OperationsItem"`
 	OrderType                                     *string  `json:"OrderType"`
 	ContractType                                  *string  `json:"ContractType"`
 	OrderValidityStartDate                        *string  `json:"OrderValidityStartDate"`
@@ -118,8 +118,8 @@ type Item struct {
 	InvoicePeriodStartDate                        *string  `json:"InvoicePeriodStartDate"`
 	InvoicePeriodEndDate                          *string  `json:"InvoicePeriodEndDate"`
 	ConfirmedDeliveryDate                         *string  `json:"ConfirmedDeliveryDate"`
-	Project                                       *int 	   `json:"Project"`
-	WBSElement                                    *int 	   `json:"WBSElement"`
+	Project                                       *int     `json:"Project"`
+	WBSElement                                    *int     `json:"WBSElement"`
 	ReferenceDocument                             *int     `json:"ReferenceDocument"`
 	ReferenceDocumentItem                         *int     `json:"ReferenceDocumentItem"`
 	TransactionTaxClassification                  *string  `json:"TransactionTaxClassification"`
@@ -132,7 +132,7 @@ type Item struct {
 	TaxRate                                       *float32 `json:"TaxRate"`
 	CountryOfOrigin                               *string  `json:"CountryOfOrigin"`
 	CountryOfOriginLanguage                       *string  `json:"CountryOfOriginLanguage"`
-	Equipment									  *int 	   `json:"Equipment"`
+	Equipment                                     *int     `json:"Equipment"`
 	ItemDeliveryBlockStatus                       *bool    `json:"ItemDeliveryBlockStatus"`
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
@@ -141,6 +141,6 @@ type Item struct {
 	CreationTime                                  *string  `json:"CreationTime"`
 	LastChangeDate                                *string  `json:"LastChangeDate"`
 	LastChangeTime                                *string  `json:"LastChangeTime"`
-	IsCancelled                          		  *bool    `json:"IsCancelled"`
-	IsMarkedForDeletion                    		  *bool    `json:"IsMarkedForDeletion"`
+	IsCancelled                                   *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
 }

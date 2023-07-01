@@ -142,9 +142,9 @@ func (c *DPFMAPICaller) Headers(
 	if input.Header.IsMarkedForDeletion != nil {
 		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
 	}
-	if input.Header.HeaderBillingStatusException != nil {
-		where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
-	}
+	// if input.Header.HeaderBillingStatusException != nil {
+	// 	where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
+	// }
 
 	idWhere := ""
 	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {
@@ -194,7 +194,7 @@ func (c *DPFMAPICaller) Item(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` ) 
+		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` )
 		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`, args...,
 	)
 	if err != nil {
@@ -255,6 +255,85 @@ func (c *DPFMAPICaller) Items(
 	return data
 }
 
+func (c *DPFMAPICaller) ItemPicking(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemPicking {
+	var args []interface{}
+	deliveryDocument := input.Header.DeliveryDocument
+	item := input.Header.Item
+
+	cnt := 0
+	for _, v := range item {
+		itemPicking := v.ItemPicking
+		for _, w := range itemPicking {
+			args = append(args, deliveryDocument, v.DeliveryDocumentItem, w.DeliveryDocumentItemPickingID)
+		}
+		cnt++
+	}
+	repeat := strings.Repeat("(?,?,?),", cnt-1) + "(?,?,?)"
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
+		WHERE (DeliveryDocument, DeliveryDocumentItem, DeliveryDocumentItemPickingID) IN ( `+repeat+` )
+		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`, args...,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToItemPicking(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) ItemPickings(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemPicking {
+	item := &dpfm_api_input_reader.Item{}
+	if len(input.Header.Item) > 0 {
+		item = &input.Header.Item[0]
+	}
+
+	where := fmt.Sprintf("WHERE deliveryDocument = %v", input.Header.DeliveryDocument)
+	if item != nil {
+		if item.IsMarkedForDeletion != nil {
+			where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *item.IsMarkedForDeletion)
+		}
+	}
+
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_operations_item_data
+		` + where + `;`,
+	)
+
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToItemPicking(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
 func (c *DPFMAPICaller) Partner(
 	mtx *sync.Mutex,
 	input *dpfm_api_input_reader.SDC,
@@ -276,7 +355,7 @@ func (c *DPFMAPICaller) Partner(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_partner_data
-		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` ) 
+		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` )
 		ORDER BY DeliveryDocument DESC, BusinessPartner DESC, AddressID ASC;`, args...,
 	)
 	if err != nil {
@@ -343,7 +422,7 @@ func (c *DPFMAPICaller) DeliverFromItems(
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocumentHeader.DeliveryDocument,
 			DeliveryDocumentHeader.HeaderDeliveryStatus,
-			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName, 
+			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName,
 			BusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
 			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName,
 			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
@@ -356,7 +435,7 @@ func (c *DPFMAPICaller) DeliverFromItems(
 		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
 		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
 		ON DeliveryDocumentHeader.DeliverToParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?) 
+		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?)
 		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverFromParty,
 	)
 	if err != nil {
@@ -385,7 +464,7 @@ func (c *DPFMAPICaller) DeliverToItems(
 	rows, err := c.db.Query(
 		`SELECT DeliveryDocumentHeader.DeliveryDocument,
 			DeliveryDocumentHeader.HeaderDeliveryStatus,
-			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName, 
+			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName,
 			BusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
 			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName,
 			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
@@ -398,7 +477,7 @@ func (c *DPFMAPICaller) DeliverToItems(
 		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
 		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
 		ON DeliveryDocumentHeader.DeliverFromParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?) 
+		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?)
 		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverToParty,
 	)
 	if err != nil {

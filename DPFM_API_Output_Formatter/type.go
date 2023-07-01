@@ -188,7 +188,7 @@ type Item struct {
 	ActualGoodsIssueQtyInBaseUnit                 *float32 `json:"ActualGoodsIssueQtyInBaseUnit"`
 	ActualGoodsReceiptQuantity                    *float32 `json:"ActualGoodsReceiptQuantity"`
 	ActualGoodsReceiptQtyInBaseUnit               *float32 `json:"ActualGoodsReceiptQtyInBaseUnit"`
-	QuantityPerPackage               			  *float32 `json:"QuantityPerPackage"`
+	QuantityPerPackage                            *float32 `json:"QuantityPerPackage"`
 	ItemBillingStatus                             *string  `json:"ItemBillingStatus"`
 	ItemCompleteDeliveryIsDefined                 *bool    `json:"ItemCompleteDeliveryIsDefined"`
 	ItemGrossWeight                               *float32 `json:"ItemGrossWeight"`
@@ -202,12 +202,12 @@ type Item struct {
 	GrossAmount                                   *float32 `json:"GrossAmount"`
 	OrderID                                       *int     `json:"OrderID"`
 	OrderItem                                     *int     `json:"OrderItem"`
-	ProuctionOrder                                *int     `json:"ProuctionOrder"`
-	ProuctionOrderItem                            *int     `json:"ProuctionOrderItem"`
-	BillOfMaterial                                *int	   `json:"BillOfMaterial"`
+	ProductionOrder                               *int     `json:"ProductionOrder"`
+	ProductionOrderItem                           *int     `json:"ProductionOrderItem"`
+	BillOfMaterial                                *int     `json:"BillOfMaterial"`
 	BillOfMaterialItem                            *int     `json:"BillOfMaterialItem"`
-	Operations	                                  *int	   `json:"Operations"`
-	OperationsItem	                              *int     `json:"OperationsItem"`
+	Operations                                    *int     `json:"Operations"`
+	OperationsItem                                *int     `json:"OperationsItem"`
 	OrderType                                     *string  `json:"OrderType"`
 	ContractType                                  *string  `json:"ContractType"`
 	OrderValidityStartDate                        *string  `json:"OrderValidityStartDate"`
@@ -220,8 +220,8 @@ type Item struct {
 	InvoicePeriodStartDate                        *string  `json:"InvoicePeriodStartDate"`
 	InvoicePeriodEndDate                          *string  `json:"InvoicePeriodEndDate"`
 	ConfirmedDeliveryDate                         *string  `json:"ConfirmedDeliveryDate"`
-	Project                                       *int 	   `json:"Project"`
-	WBSElement                                    *int 	   `json:"WBSElement"`
+	Project                                       *int     `json:"Project"`
+	WBSElement                                    *int     `json:"WBSElement"`
 	ReferenceDocument                             *int     `json:"ReferenceDocument"`
 	ReferenceDocumentItem                         *int     `json:"ReferenceDocumentItem"`
 	TransactionTaxClassification                  *string  `json:"TransactionTaxClassification"`
@@ -234,7 +234,7 @@ type Item struct {
 	TaxRate                                       *float32 `json:"TaxRate"`
 	CountryOfOrigin                               *string  `json:"CountryOfOrigin"`
 	CountryOfOriginLanguage                       *string  `json:"CountryOfOriginLanguage"`
-	Equipment									  *int 	   `json:"Equipment"`
+	Equipment                                     *int     `json:"Equipment"`
 	ItemDeliveryBlockStatus                       *bool    `json:"ItemDeliveryBlockStatus"`
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
@@ -243,46 +243,46 @@ type Item struct {
 	CreationTime                                  *string  `json:"CreationTime"`
 	LastChangeDate                                *string  `json:"LastChangeDate"`
 	LastChangeTime                                *string  `json:"LastChangeTime"`
-	IsCancelled                          		  *bool    `json:"IsCancelled"`
-	IsMarkedForDeletion                    		  *bool    `json:"IsMarkedForDeletion"`
+	IsCancelled                                   *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
 }
 
 type ItemPicking struct {
-    DeliveryDocument	                                int	    `json:"DeliveryDocument"`
-    DeliveryDocumentItem	                            int	    `json:"DeliveryDocumentItem"`
-    DeliveryDocumentItemPickingID                       int	    `json:"DeliveryDocumentItemPickingID"`
-    SupplyChainRelationshipID	                        *int	`json:"SupplyChainRelationshipID"`
-    SupplyChainRelationshipDeliveryID	                *int	`json:"SupplyChainRelationshipDeliveryID"`
-    SupplyChainRelationshipDeliveryPlantID	            *int	`json:"SupplyChainRelationshipDeliveryPlantID"`
-    Buyer	                                            *int	`json:"Buyer"`
-    Seller	                                            *int	`json:"Seller"`
-    Product	                                            *string	`json:"Product"`
-    DeliverToParty	                                    *int	`json:"DeliverToParty"`
-    DeliverToPlant	                                    *string	`json:"DeliverToPlant"`
-    DeliverToPlantStorageLocation	                    *string	`json:"DeliverToPlantStorageLocation"`
-    DeliverToPlantStorageBin	                        *string	`json:"DeliverToPlantStorageBin"`
-    DeliverFromParty	                                *int	`json:"DeliverFromParty"`
-    DeliverFromPlant	                                *string	`json:"DeliverFromPlant"`
-    DeliverFromPlantStorageLocation	                    *string	`json:"DeliverFromPlantStorageLocation"`
-    DeliverFromPlantStorageBin	                        *string	`json:"DeliverFromPlantStorageBin"`
-    DeliverToPlantPlannedPickingQuantityInBaseUnit      *float32 `json:"DeliverToPlantPlannedPickingQuantityInBaseUnit"`
-    DeliverFromPlantPlannedPickingQuantityInBaseUnit    *float32 `json:"DeliverFromPlantPlannedPickingQuantityInBaseUnit"`
-    DeliverToPlantPlannedPickingDate	                *string	`json:"DeliverToPlantPlannedPickingDate"`
-    DeliverToPlantPlannedPickingTime	                *string	`json:"DeliverToPlantPlannedPickingTime"`
-    DeliverFromPlantPlannedPickingDate	                *string	`json:"DeliverFromPlantPlannedPickingDate"`
-    DeliverFromPlantPlannedPickingTime	                *string	`json:"DeliverFromPlantPlannedPickingTime"`
-    DeliverToPlantActualPickingQuantityInBaseUnit       *float32 `json:"DeliverToPlantActualPickingQuantityInBaseUnit"`
-    DeliverToPlantActualPickingDate	                    *string	`json:"DeliverToPlantActualPickingDate"`
-    DeliverToPlantActualPickingTime	                    *string	`json:"DeliverToPlantActualPickingTime"`
-    DeliverFromPlantActualPickingQuantityInBaseUnit     *float32 `json:"DeliverFromPlantActualPickingQuantityInBaseUnit"`
-    DeliverFromPlantActualPickingDate	                *string	`json:"DeliverFromPlantActualPickingDate"`
-    DeliverFromPlantActualPickingTime	                *string	`json:"DeliverFromPlantActualPickingTime"`
-    CreationDate	                                    *string	`json:"CreationDate"`
-    CreationTime	                                    *string	`json:"CreationTime"`
-    LastChangeDate	                                    *string	`json:"LastChangeDate"`
-    LastChangeTime	                                    *string	`json:"LastChangeTime"`
-    IsCancelled	                                        *bool	`json:"IsCancelled"`
-    IsMarkedForDeletion	                                *bool	`json:"IsMarkedForDeletion"`
+	DeliveryDocument                                 int      `json:"DeliveryDocument"`
+	DeliveryDocumentItem                             int      `json:"DeliveryDocumentItem"`
+	DeliveryDocumentItemPickingID                    int      `json:"DeliveryDocumentItemPickingID"`
+	SupplyChainRelationshipID                        *int     `json:"SupplyChainRelationshipID"`
+	SupplyChainRelationshipDeliveryID                *int     `json:"SupplyChainRelationshipDeliveryID"`
+	SupplyChainRelationshipDeliveryPlantID           *int     `json:"SupplyChainRelationshipDeliveryPlantID"`
+	Buyer                                            *int     `json:"Buyer"`
+	Seller                                           *int     `json:"Seller"`
+	Product                                          *string  `json:"Product"`
+	DeliverToParty                                   *int     `json:"DeliverToParty"`
+	DeliverToPlant                                   *string  `json:"DeliverToPlant"`
+	DeliverToPlantStorageLocation                    *string  `json:"DeliverToPlantStorageLocation"`
+	DeliverToPlantStorageBin                         *string  `json:"DeliverToPlantStorageBin"`
+	DeliverFromParty                                 *int     `json:"DeliverFromParty"`
+	DeliverFromPlant                                 *string  `json:"DeliverFromPlant"`
+	DeliverFromPlantStorageLocation                  *string  `json:"DeliverFromPlantStorageLocation"`
+	DeliverFromPlantStorageBin                       *string  `json:"DeliverFromPlantStorageBin"`
+	DeliverToPlantPlannedPickingQuantityInBaseUnit   *float32 `json:"DeliverToPlantPlannedPickingQuantityInBaseUnit"`
+	DeliverFromPlantPlannedPickingQuantityInBaseUnit *float32 `json:"DeliverFromPlantPlannedPickingQuantityInBaseUnit"`
+	DeliverToPlantPlannedPickingDate                 *string  `json:"DeliverToPlantPlannedPickingDate"`
+	DeliverToPlantPlannedPickingTime                 *string  `json:"DeliverToPlantPlannedPickingTime"`
+	DeliverFromPlantPlannedPickingDate               *string  `json:"DeliverFromPlantPlannedPickingDate"`
+	DeliverFromPlantPlannedPickingTime               *string  `json:"DeliverFromPlantPlannedPickingTime"`
+	DeliverToPlantActualPickingQuantityInBaseUnit    *float32 `json:"DeliverToPlantActualPickingQuantityInBaseUnit"`
+	DeliverToPlantActualPickingDate                  *string  `json:"DeliverToPlantActualPickingDate"`
+	DeliverToPlantActualPickingTime                  *string  `json:"DeliverToPlantActualPickingTime"`
+	DeliverFromPlantActualPickingQuantityInBaseUnit  *float32 `json:"DeliverFromPlantActualPickingQuantityInBaseUnit"`
+	DeliverFromPlantActualPickingDate                *string  `json:"DeliverFromPlantActualPickingDate"`
+	DeliverFromPlantActualPickingTime                *string  `json:"DeliverFromPlantActualPickingTime"`
+	CreationDate                                     *string  `json:"CreationDate"`
+	CreationTime                                     *string  `json:"CreationTime"`
+	LastChangeDate                                   *string  `json:"LastChangeDate"`
+	LastChangeTime                                   *string  `json:"LastChangeTime"`
+	IsCancelled                                      *bool    `json:"IsCancelled"`
+	IsMarkedForDeletion                              *bool    `json:"IsMarkedForDeletion"`
 }
 
 type Address struct {
