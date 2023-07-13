@@ -2,17 +2,17 @@ package requests
 
 type Header struct {
 	DeliveryDocument                       int      `json:"DeliveryDocument"`
-	SupplyChainRelationshipID              *int     `json:"SupplyChainRelationshipID"`
-	SupplyChainRelationshipDeliveryID      *int     `json:"SupplyChainRelationshipDeliveryID"`
-	SupplyChainRelationshipDeliveryPlantID *int     `json:"SupplyChainRelationshipDeliveryPlantID"`
+	SupplyChainRelationshipID              int      `json:"SupplyChainRelationshipID"`
+	SupplyChainRelationshipDeliveryID      int      `json:"SupplyChainRelationshipDeliveryID"`
+	SupplyChainRelationshipDeliveryPlantID int      `json:"SupplyChainRelationshipDeliveryPlantID"`
 	SupplyChainRelationshipBillingID       *int     `json:"SupplyChainRelationshipBillingID"`
 	SupplyChainRelationshipPaymentID       *int     `json:"SupplyChainRelationshipPaymentID"`
-	Buyer                                  *int     `json:"Buyer"`
-	Seller                                 *int     `json:"Seller"`
-	DeliverToParty                         *int     `json:"DeliverToParty"`
-	DeliverFromParty                       *int     `json:"DeliverFromParty"`
-	DeliverToPlant                         *string  `json:"DeliverToPlant"`
-	DeliverFromPlant                       *string  `json:"DeliverFromPlant"`
+	Buyer                                  int      `json:"Buyer"`
+	Seller                                 int      `json:"Seller"`
+	DeliverToParty                         int      `json:"DeliverToParty"`
+	DeliverFromParty                       int      `json:"DeliverFromParty"`
+	DeliverToPlant                         string   `json:"DeliverToPlant"`
+	DeliverFromPlant                       string   `json:"DeliverFromPlant"`
 	BillToParty                            *int     `json:"BillToParty"`
 	BillFromParty                          *int     `json:"BillFromParty"`
 	BillToCountry                          *string  `json:"BillToCountry"`
@@ -30,10 +30,10 @@ type Header struct {
 	OrderValidityStartDate                 *string  `json:"OrderValidityStartDate"`
 	OrderValidityEndDate                   *string  `json:"OrderValidityEndDate"`
 	DocumentDate                           *string  `json:"DocumentDate"`
-	PlannedGoodsIssueDate                  *string  `json:"PlannedGoodsIssueDate"`
-	PlannedGoodsIssueTime                  *string  `json:"PlannedGoodsIssueTime"`
-	PlannedGoodsReceiptDate                *string  `json:"PlannedGoodsReceiptDate"`
-	PlannedGoodsReceiptTime                *string  `json:"PlannedGoodsReceiptTime"`
+	PlannedGoodsIssueDate                  string   `json:"PlannedGoodsIssueDate"`
+	PlannedGoodsIssueTime                  string   `json:"PlannedGoodsIssueTime"`
+	PlannedGoodsReceiptDate                string   `json:"PlannedGoodsReceiptDate"`
+	PlannedGoodsReceiptTime                string   `json:"PlannedGoodsReceiptTime"`
 	InvoiceDocumentDate                    *string  `json:"InvoiceDocumentDate"`
 	HeaderCompleteDeliveryIsDefined        *bool    `json:"HeaderCompleteDeliveryIsDefined"`
 	HeaderDeliveryStatus                   *string  `json:"HeaderDeliveryStatus"`
@@ -49,10 +49,10 @@ type Header struct {
 	HeaderDeliveryBlockStatus              *bool    `json:"HeaderDeliveryBlockStatus"`
 	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
-	CreationDate                           *string  `json:"CreationDate"`
-	CreationTime                           *string  `json:"CreationTime"`
-	LastChangeDate                         *string  `json:"LastChangeDate"`
-	LastChangeTime                         *string  `json:"LastChangeTime"`
+	CreationDate                           string   `json:"CreationDate"`
+	CreationTime                           string   `json:"CreationTime"`
+	LastChangeDate                         string   `json:"LastChangeDate"`
+	LastChangeTime                         string   `json:"LastChangeTime"`
 	IsCancelled                            *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                    *bool    `json:"IsMarkedForDeletion"`
 }

@@ -3,33 +3,33 @@ package requests
 type Item struct {
 	DeliveryDocument                              int      `json:"DeliveryDocument"`
 	DeliveryDocumentItem                          int      `json:"DeliveryDocumentItem"`
-	DeliveryDocumentItemCategory                  *string  `json:"DeliveryDocumentItemCategory"`
-	SupplyChainRelationshipID                     *int     `json:"SupplyChainRelationshipID"`
-	SupplyChainRelationshipDeliveryID             *int     `json:"SupplyChainRelationshipDeliveryID"`
-	SupplyChainRelationshipDeliveryPlantID        *int     `json:"SupplyChainRelationshipDeliveryPlantID"`
-	SupplyChainRelationshipStockConfPlantID       *int     `json:"SupplyChainRelationshipStockConfPlantID"`
-	SupplyChainRelationshipProductionPlantID      *int     `json:"SupplyChainRelationshipProductionPlantID"`
+	DeliveryDocumentItemCategory                  string   `json:"DeliveryDocumentItemCategory"`
+	SupplyChainRelationshipID                     int      `json:"SupplyChainRelationshipID"`
+	SupplyChainRelationshipDeliveryID             int      `json:"SupplyChainRelationshipDeliveryID"`
+	SupplyChainRelationshipDeliveryPlantID        int      `json:"SupplyChainRelationshipDeliveryPlantID"`
+	SupplyChainRelationshipStockConfPlantID       int      `json:"SupplyChainRelationshipStockConfPlantID"`
+	SupplyChainRelationshipProductionPlantID      int      `json:"SupplyChainRelationshipProductionPlantID"`
 	SupplyChainRelationshipBillingID              *int     `json:"SupplyChainRelationshipBillingID"`
 	SupplyChainRelationshipPaymentID              *int     `json:"SupplyChainRelationshipPaymentID"`
-	Buyer                                         *int     `json:"Buyer"`
-	Seller                                        *int     `json:"Seller"`
-	DeliverToParty                                *int     `json:"DeliverToParty"`
-	DeliverFromParty                              *int     `json:"DeliverFromParty"`
-	DeliverToPlant                                *string  `json:"DeliverToPlant"`
-	DeliverFromPlant                              *string  `json:"DeliverFromPlant"`
+	Buyer                                         int      `json:"Buyer"`
+	Seller                                        int      `json:"Seller"`
+	DeliverToParty                                int      `json:"DeliverToParty"`
+	DeliverFromParty                              int      `json:"DeliverFromParty"`
+	DeliverToPlant                                string   `json:"DeliverToPlant"`
+	DeliverFromPlant                              string   `json:"DeliverFromPlant"`
 	BillToParty                                   *int     `json:"BillToParty"`
 	BillFromParty                                 *int     `json:"BillFromParty"`
 	BillToCountry                                 *string  `json:"BillToCountry"`
 	BillFromCountry                               *string  `json:"BillFromCountry"`
 	Payer                                         *int     `json:"Payer"`
 	Payee                                         *int     `json:"Payee"`
-	Product                                       *string  `json:"Product"`
+	Product                                       string   `json:"Product"`
 	ProductStandardID                             *string  `json:"ProductStandardID"`
 	ProductGroup                                  *string  `json:"ProductGroup"`
-	BaseUnit                                      *string  `json:"BaseUnit"`
-	DeliveryUnit                                  *string  `json:"DeliveryUnit"`
-	OriginalQuantityInBaseUnit                    *float32 `json:"OriginalQuantityInBaseUnit"`
-	OriginalQuantityInDeliveryUnit                *float32 `json:"OriginalQuantityInDeliveryUnit"`
+	BaseUnit                                      string   `json:"BaseUnit"`
+	DeliveryUnit                                  string   `json:"DeliveryUnit"`
+	OriginalQuantityInBaseUnit                    float32  `json:"OriginalQuantityInBaseUnit"`
+	OriginalQuantityInDeliveryUnit                float32  `json:"OriginalQuantityInDeliveryUnit"`
 	DeliverToPlantStorageLocation                 *string  `json:"DeliverToPlantStorageLocation"`
 	ProductIsBatchManagedInDeliverToPlant         *bool    `json:"ProductIsBatchManagedInDeliverToPlant"`
 	BatchMgmtPolicyInDeliverToPlant               *string  `json:"BatchMgmtPolicyInDeliverToPlant"`
@@ -46,8 +46,8 @@ type Item struct {
 	DeliverFromPlantBatchValidityStartTime        *string  `json:"DeliverFromPlantBatchValidityStartTime"`
 	DeliverFromPlantBatchValidityEndDate          *string  `json:"DeliverFromPlantBatchValidityEndDate"`
 	DeliverFromPlantBatchValidityEndTime          *string  `json:"DeliverFromPlantBatchValidityEndTime"`
-	StockConfirmationBusinessPartner              *int     `json:"StockConfirmationBusinessPartner"`
-	StockConfirmationPlant                        *string  `json:"StockConfirmationPlant"`
+	StockConfirmationBusinessPartner              int      `json:"StockConfirmationBusinessPartner"`
+	StockConfirmationPlant                        string   `json:"StockConfirmationPlant"`
 	ProductIsBatchManagedInStockConfirmationPlant *bool    `json:"ProductIsBatchManagedInStockConfirmationPlant"`
 	BatchMgmtPolicyInStockConfirmationPlant       *string  `json:"BatchMgmtPolicyInStockConfirmationPlant"`
 	StockConfirmationPlantBatch                   *string  `json:"StockConfirmationPlantBatch"`
@@ -70,14 +70,14 @@ type Item struct {
 	DeliveryDocumentItemText                      *string  `json:"DeliveryDocumentItemText"`
 	DeliveryDocumentItemTextByBuyer               *string  `json:"DeliveryDocumentItemTextByBuyer"`
 	DeliveryDocumentItemTextBySeller              *string  `json:"DeliveryDocumentItemTextBySeller"`
-	PlannedGoodsIssueDate                         *string  `json:"PlannedGoodsIssueDate"`
-	PlannedGoodsIssueTime                         *string  `json:"PlannedGoodsIssueTime"`
-	PlannedGoodsReceiptDate                       *string  `json:"PlannedGoodsReceiptDate"`
-	PlannedGoodsReceiptTime                       *string  `json:"PlannedGoodsReceiptTime"`
-	PlannedGoodsIssueQuantity                     *float32 `json:"PlannedGoodsIssueQuantity"`
-	PlannedGoodsIssueQtyInBaseUnit                *float32 `json:"PlannedGoodsIssueQtyInBaseUnit"`
-	PlannedGoodsReceiptQuantity                   *float32 `json:"PlannedGoodsReceiptQuantity"`
-	PlannedGoodsReceiptQtyInBaseUnit              *float32 `json:"PlannedGoodsReceiptQtyInBaseUnit"`
+	PlannedGoodsIssueDate                         string   `json:"PlannedGoodsIssueDate"`
+	PlannedGoodsIssueTime                         string   `json:"PlannedGoodsIssueTime"`
+	PlannedGoodsReceiptDate                       string   `json:"PlannedGoodsReceiptDate"`
+	PlannedGoodsReceiptTime                       string   `json:"PlannedGoodsReceiptTime"`
+	PlannedGoodsIssueQuantity                     float32  `json:"PlannedGoodsIssueQuantity"`
+	PlannedGoodsIssueQtyInBaseUnit                float32  `json:"PlannedGoodsIssueQtyInBaseUnit"`
+	PlannedGoodsReceiptQuantity                   float32  `json:"PlannedGoodsReceiptQuantity"`
+	PlannedGoodsReceiptQtyInBaseUnit              float32  `json:"PlannedGoodsReceiptQtyInBaseUnit"`
 	ActualGoodsIssueDate                          *string  `json:"ActualGoodsIssueDate"`
 	ActualGoodsIssueTime                          *string  `json:"ActualGoodsIssueTime"`
 	ActualGoodsReceiptDate                        *string  `json:"ActualGoodsReceiptDate"`
@@ -122,12 +122,12 @@ type Item struct {
 	WBSElement                                    *int     `json:"WBSElement"`
 	ReferenceDocument                             *int     `json:"ReferenceDocument"`
 	ReferenceDocumentItem                         *int     `json:"ReferenceDocumentItem"`
-	TransactionTaxClassification                  *string  `json:"TransactionTaxClassification"`
-	ProductTaxClassificationBillToCountry         *string  `json:"ProductTaxClassificationBillToCountry"`
-	ProductTaxClassificationBillFromCountry       *string  `json:"ProductTaxClassificationBillFromCountry"`
-	DefinedTaxClassification                      *string  `json:"DefinedTaxClassification"`
-	AccountAssignmentGroup                        *string  `json:"AccountAssignmentGroup"`
-	ProductAccountAssignmentGroup                 *string  `json:"ProductAccountAssignmentGroup"`
+	TransactionTaxClassification                  string   `json:"TransactionTaxClassification"`
+	ProductTaxClassificationBillToCountry         string   `json:"ProductTaxClassificationBillToCountry"`
+	ProductTaxClassificationBillFromCountry       string   `json:"ProductTaxClassificationBillFromCountry"`
+	DefinedTaxClassification                      string   `json:"DefinedTaxClassification"`
+	AccountAssignmentGroup                        string   `json:"AccountAssignmentGroup"`
+	ProductAccountAssignmentGroup                 string   `json:"ProductAccountAssignmentGroup"`
 	TaxCode                                       *string  `json:"TaxCode"`
 	TaxRate                                       *float32 `json:"TaxRate"`
 	CountryOfOrigin                               *string  `json:"CountryOfOrigin"`
@@ -137,10 +137,10 @@ type Item struct {
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
-	CreationDate                                  *string  `json:"CreationDate"`
-	CreationTime                                  *string  `json:"CreationTime"`
-	LastChangeDate                                *string  `json:"LastChangeDate"`
-	LastChangeTime                                *string  `json:"LastChangeTime"`
+	CreationDate                                  string   `json:"CreationDate"`
+	CreationTime                                  string   `json:"CreationTime"`
+	LastChangeDate                                string   `json:"LastChangeDate"`
+	LastChangeTime                                string   `json:"LastChangeTime"`
 	IsCancelled                                   *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                           *bool    `json:"IsMarkedForDeletion"`
 }

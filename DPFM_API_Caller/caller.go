@@ -30,7 +30,7 @@ func NewDPFMAPICaller(
 	}
 }
 
-func (c *DPFMAPICaller) AsyncDeliveryDocumentReads(
+func (c *DPFMAPICaller) AsyncReads(
 	accepter []string,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,

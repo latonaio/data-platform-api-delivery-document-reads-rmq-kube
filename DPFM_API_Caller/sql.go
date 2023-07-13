@@ -33,9 +33,17 @@ func (c *DPFMAPICaller) readSqlProcess(
 			func() {
 				header = c.Header(mtx, input, output, errs, log)
 			}()
-		case "Headers":
+//		case "Headers":
+//			func() {
+//				header = c.Headers(mtx, input, output, errs, log)
+//			}()
+		case "HeadersByDeliverToParty":
 			func() {
-				header = c.Headers(mtx, input, output, errs, log)
+				header = c.HeadersByDeliverToParty(mtx, input, output, errs, log)
+			}()
+		case "HeadersByDeliverFromParty":
+			func() {
+				header = c.HeadersByDeliverFromParty(mtx, input, output, errs, log)
 			}()
 		case "Item":
 			func() {
@@ -119,53 +127,44 @@ func (c *DPFMAPICaller) Header(
 	return data
 }
 
-func (c *DPFMAPICaller) Headers(
+func (c *DPFMAPICaller) HeadersByDeliverToParty(
 	mtx *sync.Mutex,
 	input *dpfm_api_input_reader.SDC,
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) *[]dpfm_api_output_formatter.Header {
-	where := "WHERE 1 = 1"
-	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
-		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %v", where, *input.Header.HeaderCompleteDeliveryIsDefined)
-	}
-	if input.Header.HeaderDeliveryBlockStatus != nil {
-		where = fmt.Sprintf("%s\nAND HeaderDeliveryBlockStatus = %v", where, *input.Header.HeaderDeliveryBlockStatus)
-	}
-	if input.Header.HeaderDeliveryStatus != nil {
-		where = fmt.Sprintf("%s\nAND HeaderDeliveryStatus = '%s'", where, *input.Header.HeaderDeliveryStatus)
-	}
-	if input.Header.IsCancelled != nil {
-		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
-	}
-	if input.Header.IsMarkedForDeletion != nil {
-		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
-	}
-	// if input.Header.HeaderBillingStatusException != nil {
-	// 	where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
-	// }
-
-	idWhere := ""
-	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {
-		idWhere = fmt.Sprintf("\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
-	} else if input.Header.DeliverFromParty != nil {
-		idWhere = fmt.Sprintf("\nAND DeliverFromParty = %d ", *input.Header.DeliverFromParty)
-	} else if input.Header.DeliverToParty != nil {
-		idWhere = fmt.Sprintf("\nAND DeliverToParty = %d ", *input.Header.DeliverToParty)
-	}
+) []dpfm_api_output_formatter.Header {
+	deliverToParty 					:= input.Header.DeliverToParty
+	headerCompleteDeliveryIsDefined := input.Header.HeaderCompleteDeliveryIsDefined
+	headerDeliveryBlockStatus		:= input.Header.HeaderDeliveryBlockStatus
+	headerDeliveryStatus			:= input.Header.HeaderDeliveryStatus
+	isCancelled						:= input.Header.IsCancelled
+	isMarkedForDeletion 			:= input.Header.IsMarkedForDeletion
 
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		` + where + idWhere + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
+		WHERE (
+		       DeliverToParty,
+			   HeaderCompleteDeliveryIsDefined,
+			   HeaderDeliveryBlockStatus,
+			   HeaderDeliveryStatus,
+		       IsCancelled,
+		       IsMarkedForDeletion
+		) = (?, ?, ?, ?, ?, ?);`,
+		deliverToParty,
+		headerCompleteDeliveryIsDefined,
+		headerDeliveryBlockStatus,
+		headerDeliveryStatus,
+		isCancelled,
+		isMarkedForDeletion,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
+	data, err := dpfm_api_output_formatter.ConvertToHeader(input, rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -173,6 +172,107 @@ func (c *DPFMAPICaller) Headers(
 
 	return data
 }
+
+func (c *DPFMAPICaller) HeadersByDeliverFromParty(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) []dpfm_api_output_formatter.Header {
+	deliverFromParty				:= input.Header.DeliverFromParty
+	headerCompleteDeliveryIsDefined := input.Header.HeaderCompleteDeliveryIsDefined
+	headerDeliveryBlockStatus		:= input.Header.HeaderDeliveryBlockStatus
+	headerDeliveryStatus			:= input.Header.HeaderDeliveryStatus
+	isCancelled						:= input.Header.IsCancelled
+	isMarkedForDeletion 			:= input.Header.IsMarkedForDeletion
+
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
+		WHERE (
+		       DeliverFromParty,
+			   HeaderCompleteDeliveryIsDefined,
+			   HeaderDeliveryBlockStatus,
+			   HeaderDeliveryStatus,
+		       IsCancelled,
+		       IsMarkedForDeletion
+		) = (?, ?, ?, ?, ?, ?);`,
+		deliverFromParty,
+		headerCompleteDeliveryIsDefined,
+		headerDeliveryBlockStatus,
+		headerDeliveryStatus,
+		isCancelled,
+		isMarkedForDeletion,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	data, err := dpfm_api_output_formatter.ConvertToHeader(input, rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+//func (c *DPFMAPICaller) Headers(
+//	mtx *sync.Mutex,
+//	input *dpfm_api_input_reader.SDC,
+//	output *dpfm_api_output_formatter.SDC,
+//	errs *[]error,
+//	log *logger.Logger,
+//) *[]dpfm_api_output_formatter.Header {
+//	where := "WHERE 1 = 1"
+//	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
+//		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %v", where, *input.Header.HeaderCompleteDeliveryIsDefined)
+//	}
+//	if input.Header.HeaderDeliveryBlockStatus != nil {
+//		where = fmt.Sprintf("%s\nAND HeaderDeliveryBlockStatus = %v", where, *input.Header.HeaderDeliveryBlockStatus)
+//	}
+//	if input.Header.HeaderDeliveryStatus != nil {
+//		where = fmt.Sprintf("%s\nAND HeaderDeliveryStatus = '%s'", where, *input.Header.HeaderDeliveryStatus)
+//	}
+//	if input.Header.IsCancelled != nil {
+//		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
+//	}
+//	if input.Header.IsMarkedForDeletion != nil {
+//		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
+//	}
+	// if input.Header.HeaderBillingStatusException != nil {
+	// 	where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
+	// }
+//
+//	idWhere := ""
+//	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {
+//		idWhere = fmt.Sprintf("\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
+//	} else if input.Header.DeliverFromParty != nil {
+//		idWhere = fmt.Sprintf("\nAND DeliverFromParty = %d ", *input.Header.DeliverFromParty)
+//	} else if input.Header.DeliverToParty != nil {
+//		idWhere = fmt.Sprintf("\nAND DeliverToParty = %d ", *input.Header.DeliverToParty)
+//	}
+//
+//	rows, err := c.db.Query(
+//		`SELECT *
+//		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
+//		` + where + idWhere + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
+//	)
+//	if err != nil {
+//		*errs = append(*errs, err)
+//		return nil
+//	}
+//
+//	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
+//	if err != nil {
+//		*errs = append(*errs, err)
+//		return nil
+//	}
+//
+//	return data
+//}
 
 func (c *DPFMAPICaller) Item(
 	mtx *sync.Mutex,
