@@ -41,6 +41,12 @@ func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
 			&pm.ReferenceDocumentItem,
 			&pm.OrderID,
 			&pm.OrderItem,
+			&pm.ProductionOrder,
+			&pm.ProductionOrderItem,
+			&pm.Operations,
+			&pm.OperationsItem,
+			&pm.BillOfMaterial,
+			&pm.BillOfMaterialItem,
 			&pm.ContractType,
 			&pm.OrderValidityStartDate,
 			&pm.OrderValidityEndDate,
@@ -103,6 +109,12 @@ func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
 			ReferenceDocumentItem:                  data.ReferenceDocumentItem,
 			OrderID:                                data.OrderID,
 			OrderItem:                              data.OrderItem,
+			ProductionOrder:                        data.ProductionOrder,
+			ProductionOrderItem:                    data.ProductionOrderItem,
+			Operations:                             data.Operations,
+			OperationsItem:                         data.OperationsItem,
+			BillOfMaterial:                         data.BillOfMaterial,
+			BillOfMaterialItem:                     data.BillOfMaterialItem,
 			ContractType:                           data.ContractType,
 			OrderValidityStartDate:                 data.OrderValidityStartDate,
 			OrderValidityEndDate:                   data.OrderValidityEndDate,
@@ -218,6 +230,9 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.ProductionPlantBatchValidityStartTime,
 			&pm.ProductionPlantBatchValidityEndDate,
 			&pm.ProductionPlantBatchValidityEndTime,
+			&pm.InspectionPlan,
+			&pm.InspectionPlant,
+			&pm.InspectionOrder,
 			&pm.DeliveryDocumentItemText,
 			&pm.DeliveryDocumentItemTextByBuyer,
 			&pm.DeliveryDocumentItemTextBySeller,
@@ -368,6 +383,9 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			ProductionPlantBatchValidityStartTime:         data.ProductionPlantBatchValidityStartTime,
 			ProductionPlantBatchValidityEndDate:           data.ProductionPlantBatchValidityEndDate,
 			ProductionPlantBatchValidityEndTime:           data.ProductionPlantBatchValidityEndTime,
+			InspectionPlan:           					   data.InspectionPlan,
+			InspectionPlant:           					   data.InspectionPlant,
+			InspectionOrder:           					   data.InspectionOrder,
 			DeliveryDocumentItemText:                      data.DeliveryDocumentItemText,
 			DeliveryDocumentItemTextByBuyer:               data.DeliveryDocumentItemTextByBuyer,
 			DeliveryDocumentItemTextBySeller:              data.DeliveryDocumentItemTextBySeller,
@@ -650,90 +668,4 @@ func ConvertToPartner(rows *sql.Rows) (*[]Partner, error) {
 	}
 
 	return &partner, nil
-}
-
-func ConvertToDeliverFromItems(rows *sql.Rows) (*[]DeliverFromItems, error) {
-	defer rows.Close()
-	deliverFromItems := make([]DeliverFromItems, 0)
-
-	i := 0
-	for rows.Next() {
-		i++
-		pm := &requests.DeliverFromItems{}
-
-		err := rows.Scan(
-			&pm.DeliveryDocument,
-			&pm.HeaderDeliveryStatus,
-			&pm.DeliverFromBusinessPartnerFullName,
-			&pm.DeliverFromBusinessPartnerName,
-			&pm.DeliverToBusinessPartnerName,
-			&pm.DeliverToBusinessPartnerFullName,
-			&pm.ItemBillingStatus,
-			&pm.ConfirmedDeliveryDate,
-		)
-		if err != nil {
-			fmt.Printf("err = %+v \n", err)
-		}
-
-		data := pm
-		deliverFromItems = append(deliverFromItems, DeliverFromItems{
-			DeliveryDocument:                   data.DeliveryDocument,
-			HeaderDeliveryStatus:               data.HeaderDeliveryStatus,
-			DeliverFromBusinessPartnerFullName: data.DeliverFromBusinessPartnerFullName,
-			DeliverFromBusinessPartnerName:     data.DeliverFromBusinessPartnerName,
-			DeliverToBusinessPartnerName:       data.DeliverToBusinessPartnerName,
-			DeliverToBusinessPartnerFullName:   data.DeliverToBusinessPartnerFullName,
-			ItemBillingStatus:                  data.ItemBillingStatus,
-			ConfirmedDeliveryDate:              data.ConfirmedDeliveryDate,
-		})
-	}
-	if i == 0 {
-		fmt.Printf("DBに対象のレコードが存在しません。")
-		return &deliverFromItems, nil
-	}
-
-	return &deliverFromItems, nil
-}
-
-func ConvertToDeliverToItems(rows *sql.Rows) (*[]DeliverToItems, error) {
-	defer rows.Close()
-	deliverToItems := make([]DeliverToItems, 0)
-
-	i := 0
-	for rows.Next() {
-		i++
-		pm := &requests.DeliverToItems{}
-
-		err := rows.Scan(
-			&pm.DeliveryDocument,
-			&pm.HeaderDeliveryStatus,
-			&pm.DeliverToBusinessPartnerFullName,
-			&pm.DeliverToBusinessPartnerName,
-			&pm.DeliverToBusinessPartnerName,
-			&pm.DeliverToBusinessPartnerFullName,
-			&pm.ItemBillingStatus,
-			&pm.ConfirmedDeliveryDate,
-		)
-		if err != nil {
-			fmt.Printf("err = %+v \n", err)
-		}
-
-		data := pm
-		deliverToItems = append(deliverToItems, DeliverToItems{
-			DeliveryDocument:                   data.DeliveryDocument,
-			HeaderDeliveryStatus:               data.HeaderDeliveryStatus,
-			DeliverToBusinessPartnerFullName:   data.DeliverToBusinessPartnerFullName,
-			DeliverToBusinessPartnerName:       data.DeliverToBusinessPartnerName,
-			DeliverFromBusinessPartnerFullName: data.DeliverFromBusinessPartnerFullName,
-			DeliverFromBusinessPartnerName:     data.DeliverFromBusinessPartnerName,
-			ItemBillingStatus:                  data.ItemBillingStatus,
-			ConfirmedDeliveryDate:              data.ConfirmedDeliveryDate,
-		})
-	}
-	if i == 0 {
-		fmt.Printf("DBに対象のレコードが存在しません。")
-		return &deliverToItems, nil
-	}
-
-	return &deliverToItems, nil
 }

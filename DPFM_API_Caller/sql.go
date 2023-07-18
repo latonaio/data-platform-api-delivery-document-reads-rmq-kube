@@ -25,8 +25,6 @@ func (c *DPFMAPICaller) readSqlProcess(
 	var itemPicking *[]dpfm_api_output_formatter.ItemPicking
 	var partner *[]dpfm_api_output_formatter.Partner
 	var address *[]dpfm_api_output_formatter.Address
-	var deliverFromItems *[]dpfm_api_output_formatter.DeliverFromItems
-	var deliverToItems *[]dpfm_api_output_formatter.DeliverToItems
 	for _, fn := range accepter {
 		switch fn {
 		case "Header":
@@ -69,14 +67,6 @@ func (c *DPFMAPICaller) readSqlProcess(
 			func() {
 				address = c.Address(mtx, input, output, errs, log)
 			}()
-		case "DeliverFromItems":
-			func() {
-				deliverFromItems = c.DeliverFromItems(mtx, input, output, errs, log)
-			}()
-		case "DeliverToItems":
-			func() {
-				deliverToItems = c.DeliverToItems(mtx, input, output, errs, log)
-			}()
 		default:
 		}
 	}
@@ -87,8 +77,6 @@ func (c *DPFMAPICaller) readSqlProcess(
 		ItemPicking:      itemPicking,
 		Partner:          partner,
 		Address:          address,
-		DeliverFromItems: deliverFromItems,
-		DeliverToItems:   deliverToItems,
 	}
 
 	return data
@@ -134,30 +122,30 @@ func (c *DPFMAPICaller) HeadersByDeliverToParty(
 	errs *[]error,
 	log *logger.Logger,
 ) []dpfm_api_output_formatter.Header {
-	deliverToParty 					:= input.Header.DeliverToParty
-	headerCompleteDeliveryIsDefined := input.Header.HeaderCompleteDeliveryIsDefined
-	headerDeliveryBlockStatus		:= input.Header.HeaderDeliveryBlockStatus
-	headerDeliveryStatus			:= input.Header.HeaderDeliveryStatus
-	isCancelled						:= input.Header.IsCancelled
-	isMarkedForDeletion 			:= input.Header.IsMarkedForDeletion
+	where := "WHERE 1 = 1"
+	if input.Header.DeliverToParty != nil {
+		where = fmt.Sprintf("%s\nAND DeliverToParty = %v", where, *input.Header.DeliverToParty)
+	}
+	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
+		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %t", where, *input.Header.HeaderCompleteDeliveryIsDefined)
+	}
+	if input.Header.HeaderDeliveryBlockStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryBlockStatus = %t", where, *input.Header.HeaderDeliveryBlockStatus)
+	}
+	if input.Header.HeaderDeliveryStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryStatus != '%s'", where, *input.Header.HeaderDeliveryStatus)
+	}
+	if input.Header.IsCancelled != nil {
+		where = fmt.Sprintf("%s\nAND IsCancelled = %t", where, *input.Header.IsCancelled)
+	}
+	if input.Header.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %t", where, *input.Header.IsMarkedForDeletion)
+	}
 
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		WHERE (
-		       DeliverToParty,
-			   HeaderCompleteDeliveryIsDefined,
-			   HeaderDeliveryBlockStatus,
-			   HeaderDeliveryStatus,
-		       IsCancelled,
-		       IsMarkedForDeletion
-		) = (?, ?, ?, ?, ?, ?);`,
-		deliverToParty,
-		headerCompleteDeliveryIsDefined,
-		headerDeliveryBlockStatus,
-		headerDeliveryStatus,
-		isCancelled,
-		isMarkedForDeletion,
+		` + where + `;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -180,30 +168,30 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 	errs *[]error,
 	log *logger.Logger,
 ) []dpfm_api_output_formatter.Header {
-	deliverFromParty				:= input.Header.DeliverFromParty
-	headerCompleteDeliveryIsDefined := input.Header.HeaderCompleteDeliveryIsDefined
-	headerDeliveryBlockStatus		:= input.Header.HeaderDeliveryBlockStatus
-	headerDeliveryStatus			:= input.Header.HeaderDeliveryStatus
-	isCancelled						:= input.Header.IsCancelled
-	isMarkedForDeletion 			:= input.Header.IsMarkedForDeletion
+	where := "WHERE 1 = 1"
+	if input.Header.DeliverFromParty != nil {
+		where = fmt.Sprintf("%s\nAND DeliverFromParty = %v", where, *input.Header.DeliverToParty)
+	}
+	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
+		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %t", where, *input.Header.HeaderCompleteDeliveryIsDefined)
+	}
+	if input.Header.HeaderDeliveryBlockStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryBlockStatus = %t", where, *input.Header.HeaderDeliveryBlockStatus)
+	}
+	if input.Header.HeaderDeliveryStatus != nil {
+		where = fmt.Sprintf("%s\nAND HeaderDeliveryStatus != '%s'", where, *input.Header.HeaderDeliveryStatus)
+	}
+	if input.Header.IsCancelled != nil {
+		where = fmt.Sprintf("%s\nAND IsCancelled = %t", where, *input.Header.IsCancelled)
+	}
+	if input.Header.IsMarkedForDeletion != nil {
+		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %t", where, *input.Header.IsMarkedForDeletion)
+	}
 
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		WHERE (
-		       DeliverFromParty,
-			   HeaderCompleteDeliveryIsDefined,
-			   HeaderDeliveryBlockStatus,
-			   HeaderDeliveryStatus,
-		       IsCancelled,
-		       IsMarkedForDeletion
-		) = (?, ?, ?, ?, ?, ?);`,
-		deliverFromParty,
-		headerCompleteDeliveryIsDefined,
-		headerDeliveryBlockStatus,
-		headerDeliveryStatus,
-		isCancelled,
-		isMarkedForDeletion,
+		` + where + `;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -218,6 +206,7 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 
 	return data
 }
+
 
 //func (c *DPFMAPICaller) Headers(
 //	mtx *sync.Mutex,
@@ -502,90 +491,6 @@ func (c *DPFMAPICaller) Address(
 	}
 
 	data, err := dpfm_api_output_formatter.ConvertToAddress(rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
-func (c *DPFMAPICaller) DeliverFromItems(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *[]dpfm_api_output_formatter.DeliverFromItems {
-	deliverFromParty := input.Header.DeliverFromParty
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocumentHeader.DeliveryDocument,
-			DeliveryDocumentHeader.HeaderDeliveryStatus,
-			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName,
-			BusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
-			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName,
-			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
-			DeliveryDocumentItem.ItemBillingStatus,
-			DeliveryDocumentItem.ConfirmedDeliveryDate
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data as DeliveryDocumentHeader
-		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as BusinessPartnerGeneral
-		ON DeliveryDocumentHeader.DeliverFromParty = BusinessPartnerGeneral.BusinessPartner
-		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data as DeliveryDocumentItem
-		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
-		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
-		ON DeliveryDocumentHeader.DeliverToParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverFromParty) = (?)
-		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverFromParty,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToDeliverFromItems(rows)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	return data
-}
-
-func (c *DPFMAPICaller) DeliverToItems(
-	mtx *sync.Mutex,
-	input *dpfm_api_input_reader.SDC,
-	output *dpfm_api_output_formatter.SDC,
-	errs *[]error,
-	log *logger.Logger,
-) *[]dpfm_api_output_formatter.DeliverToItems {
-	deliverToParty := input.Header.DeliverToParty
-
-	rows, err := c.db.Query(
-		`SELECT DeliveryDocumentHeader.DeliveryDocument,
-			DeliveryDocumentHeader.HeaderDeliveryStatus,
-			BusinessPartnerGeneral.BusinessPartnerFullName as DeliverToBusinessPartnerFullName,
-			BusinessPartnerGeneral.BusinessPartnerName as DeliverToBusinessPartnerName,
-			DeliverToBusinessPartnerGeneral.BusinessPartnerFullName as DeliverFromBusinessPartnerFullName,
-			DeliverToBusinessPartnerGeneral.BusinessPartnerName as DeliverFromBusinessPartnerName,
-			DeliveryDocumentItem.ItemBillingStatus,
-			DeliveryDocumentItem.ConfirmedDeliveryDate
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data as DeliveryDocumentHeader
-		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as BusinessPartnerGeneral
-		ON DeliveryDocumentHeader.DeliverToParty = BusinessPartnerGeneral.BusinessPartner
-		INNER JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data as DeliveryDocumentItem
-		ON DeliveryDocumentHeader.DeliveryDocument = DeliveryDocumentItem.DeliveryDocument
-		LEFT JOIN DataPlatformMastersAndTransactionsMysqlKube.data_platform_business_partner_general_data as DeliverToBusinessPartnerGeneral
-		ON DeliveryDocumentHeader.DeliverFromParty = DeliverToBusinessPartnerGeneral.BusinessPartner
-		WHERE (DeliveryDocumentHeader.DeliverToParty) = (?)
-		ORDER BY DeliveryDocumentHeader.IsMarkedForDeletion ASC, DeliveryDocumentHeader.IsCancelled ASC, DeliveryDocumentHeader.DeliveryDocument DESC;`, deliverToParty,
-	)
-	if err != nil {
-		*errs = append(*errs, err)
-		return nil
-	}
-
-	data, err := dpfm_api_output_formatter.ConvertToDeliverToItems(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
