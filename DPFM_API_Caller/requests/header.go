@@ -35,7 +35,7 @@ type Header struct {
 	ContractType                           *string   `json:"ContractType"`
 	OrderValidityStartDate                 *string   `json:"OrderValidityStartDate"`
 	OrderValidityEndDate                   *string   `json:"OrderValidityEndDate"`
-	DocumentDate                           *string   `json:"DocumentDate"`
+	DeliveryDocumentDate                   string    `json:"DeliveryDocumentDate"`
 	PlannedGoodsIssueDate                  string    `json:"PlannedGoodsIssueDate"`
 	PlannedGoodsIssueTime                  string    `json:"PlannedGoodsIssueTime"`
 	PlannedGoodsReceiptDate                string    `json:"PlannedGoodsReceiptDate"`

@@ -90,6 +90,7 @@ func (c *DPFMAPICaller) Header(
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Header {
 	where := fmt.Sprintf("WHERE DeliveryDocument = %d ", input.Header.DeliveryDocument)
+
 	if input.Header.IsCancelled != nil {
 		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
 	}
@@ -307,22 +308,29 @@ func (c *DPFMAPICaller) Items(
 	errs *[]error,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Item {
-	header := input.Header
-	where := fmt.Sprintf("where DeliveryDocument = %d", header.DeliveryDocument)
 
-	if header.DeliverFromParty != nil && header.DeliverToParty != nil {
-		where = fmt.Sprintf("%s\nAND ( DeliverFromParty = %d OR DeliverToParty = %d ) ", where, *input.Header.DeliverFromParty, *input.Header.DeliverToParty)
-	} else if header.DeliverFromParty != nil {
-		where = fmt.Sprintf("%s\nAND DeliverFromParty = %d ", where, *header.DeliverFromParty)
-	} else if header.DeliverToParty != nil {
-		where = fmt.Sprintf("%s\nAND DeliverToParty = %d ", where, *header.DeliverToParty)
+	item := &dpfm_api_input_reader.Item{}
+	if len(input.Header.Item) > 0 {
+		item = &input.Header.Item[0]
 	}
+	where := "WHERE 1 = 1"
 
-	if input.Header.IsCancelled != nil {
-		where = fmt.Sprintf("%s\nAND IsCancelled = %v", where, *input.Header.IsCancelled)
-	}
-	if input.Header.IsMarkedForDeletion != nil {
-		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
+	if item != nil {
+		if item.ItemCompleteDeliveryIsDefined != nil {
+			where = fmt.Sprintf("%s\nAND item.ItemCompleteDeliveryIsDefined = %v", where, *item.ItemCompleteDeliveryIsDefined)
+		}
+		if item.ItemDeliveryStatus != nil {
+			where = fmt.Sprintf("%s\nAND item.ItemDeliveryStatus = '%v'", where, *item.ItemDeliveryStatus)
+		}
+		if item.ItemDeliveryBlockStatus != nil {
+			where = fmt.Sprintf("%s\nAND item.ItemDeliveryBlockStatus = %v", where, *item.ItemDeliveryBlockStatus)
+		}
+		if item.IsCancelled != nil {
+			where = fmt.Sprintf("%s\nAND item.IsCancelled = %v", where, *item.IsCancelled)
+		}
+		if item.IsMarkedForDeletion != nil {
+			where = fmt.Sprintf("%s\nAND item.IsMarkedForDeletion = %v", where, *item.IsMarkedForDeletion)
+		}
 	}
 
 	rows, err := c.db.Query(
