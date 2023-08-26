@@ -106,10 +106,10 @@ type Header struct {
 	OrderItem                              *int      `json:"OrderItem"`
 	ProductionOrder                        *int      `json:"ProductionOrder"`
 	ProductionOrderItem                    *int      `json:"ProductionOrderItem"`
-	Operations                        	   *int      `json:"Operations"`
-	OperationsItem                    	   *int      `json:"OperationsItem"`
-	BillOfMaterial                    	   *int      `json:"BillOfMaterial"`
-	BillOfMaterialItem                 	   *int      `json:"BillOfMaterialItem"`
+	Operations                             *int      `json:"Operations"`
+	OperationsItem                         *int      `json:"OperationsItem"`
+	BillOfMaterial                         *int      `json:"BillOfMaterial"`
+	BillOfMaterialItem                     *int      `json:"BillOfMaterialItem"`
 	ContractType                           *string   `json:"ContractType"`
 	OrderValidityStartDate                 *string   `json:"OrderValidityStartDate"`
 	OrderValidityEndDate                   *string   `json:"OrderValidityEndDate"`
@@ -222,9 +222,9 @@ type Item struct {
 	ProductionPlantBatchValidityStartTime         *string       `json:"ProductionPlantBatchValidityStartTime"`
 	ProductionPlantBatchValidityEndDate           *string       `json:"ProductionPlantBatchValidityEndDate"`
 	ProductionPlantBatchValidityEndTime           *string       `json:"ProductionPlantBatchValidityEndTime"`
-	InspectionPlan								  *int	   		`json:"InspectionPlan"`
-	InspectionPlant								  *string  		`json:"InspectionPlant"`
-	InspectionOrder								  *int	   		`json:"InspectionOrder"`
+	InspectionPlan                                *int          `json:"InspectionPlan"`
+	InspectionPlant                               *string       `json:"InspectionPlant"`
+	InspectionOrder                               *int          `json:"InspectionOrder"`
 	DeliveryDocumentItemText                      *string       `json:"DeliveryDocumentItemText"`
 	DeliveryDocumentItemTextByBuyer               *string       `json:"DeliveryDocumentItemTextByBuyer"`
 	DeliveryDocumentItemTextBySeller              *string       `json:"DeliveryDocumentItemTextBySeller"`
@@ -340,6 +340,54 @@ type ItemPicking struct {
 	LastChangeTime                                   *string  `json:"LastChangeTime"`
 	IsCancelled                                      *bool    `json:"IsCancelled"`
 	IsMarkedForDeletion                              *bool    `json:"IsMarkedForDeletion"`
+}
+
+type ItemPickingDoc struct {
+	DeliveryDocument              int     `json:"DeliveryDocument"`
+	DeliveryDocumentItem          int     `json:"DeliveryDocumentItem"`
+	DeliveryDocumentItemPickingID int     `json:"DeliveryDocumentItemPickingID"`
+	DocType                       string  `json:"DocType"`
+	DocVersionID                  int     `json:"DocVersionID"`
+	DocID                         string  `json:"DocID"`
+	FileExtension                 *string `json:"FileExtension"`
+	FileName                      *string `json:"FileName"`
+	FilePath                      *string `json:"FilePath"`
+	DocIssuerBusinessPartner      *int    `json:"DocIssuerBusinessPartner"`
+}
+
+type ItemDoc struct {
+	DeliveryDocument         int     `json:"DeliveryDocument"`
+	DeliveryDocumentItem     int     `json:"DeliveryDocumentItem"`
+	DocType                  string  `json:"DocType"`
+	DocVersionID             int     `json:"DocVersionID"`
+	DocID                    string  `json:"DocID"`
+	FileExtension            *string `json:"FileExtension"`
+	FileName                 *string `json:"FileName"`
+	FilePath                 *string `json:"FilePath"`
+	DocIssuerBusinessPartner *int    `json:"DocIssuerBusinessPartner"`
+}
+
+type ItemFreightAgreement struct {
+	DeliveryDocument                        int     `json:"DeliveryDocument"`
+	DeliveryDocumentItem                    int     `json:"DeliveryDocumentItem"`
+	DeliveryDocumentItemFreightAgreement    int     `json:"DeliveryDocumentItemFreightAgreement"`
+	FreightAgreement                        *int    `json:"FreightAgreement"`
+	FreightAgreementItem                    *int    `json:"FreightAgreementItem"`
+	SupplyChainRelationshipID               *int    `json:"SupplyChainRelationshipID"`
+	SupplyChainRelationshipFreightID        *int    `json:"SupplyChainRelationshipFreightID"`
+	SupplyChainRelationshipFreightBillingID *int    `json:"SupplyChainRelationshipFreightBillingID"`
+	SupplyChainRelationshipFreightPaymentID *int    `json:"SupplyChainRelationshipFreightPaymentID"`
+	FreightPartner                          *int    `json:"FreightPartner"`
+	FreightBillToParty                      *int    `json:"FreightBillToParty"`
+	FreightBillFromParty                    *int    `json:"FreightBillFromParty"`
+	FreightBillToCountry                    *string `json:"FreightBillToCountry"`
+	FreightBillFromCountry                  *string `json:"FreightBillFromCountry"`
+	Product                                 *string `json:"Product"`
+	Incoterms                               *string `json:"Incoterms"`
+	Project                                 *int    `json:"Project"`
+	WBSElement                              *int    `json:"WBSElement"`
+	IsCancelled                             *bool   `json:"IsCancelled"`
+	IsMarkedForDeletion                     *bool   `json:"IsMarkedForDeletion"`
 }
 
 type Address struct {
