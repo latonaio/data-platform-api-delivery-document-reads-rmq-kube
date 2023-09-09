@@ -144,17 +144,6 @@ type Header struct {
 	Address                                []Address `json:"Address"`
 }
 
-type HeaderDoc struct {
-	DeliveryDocument         int     `json:"DeliveryDocument"`
-	DocType                  string  `json:"DocType"`
-	DocVersionID             int     `json:"DocVersionID"`
-	DocID                    string  `json:"DocID"`
-	FileExtension            *string `json:"FileExtension"`
-	FileName                 *string `json:"FileName"`
-	FilePath                 *string `json:"FilePath"`
-	DocIssuerBusinessPartner *int    `json:"DocIssuerBusinessPartner"`
-}
-
 type Item struct {
 	DeliveryDocument                              int           `json:"DeliveryDocument"`
 	DeliveryDocumentItem                          int           `json:"DeliveryDocumentItem"`
@@ -342,31 +331,6 @@ type ItemPicking struct {
 	IsMarkedForDeletion                              *bool    `json:"IsMarkedForDeletion"`
 }
 
-type ItemPickingDoc struct {
-	DeliveryDocument              int     `json:"DeliveryDocument"`
-	DeliveryDocumentItem          int     `json:"DeliveryDocumentItem"`
-	DeliveryDocumentItemPickingID int     `json:"DeliveryDocumentItemPickingID"`
-	DocType                       string  `json:"DocType"`
-	DocVersionID                  int     `json:"DocVersionID"`
-	DocID                         string  `json:"DocID"`
-	FileExtension                 *string `json:"FileExtension"`
-	FileName                      *string `json:"FileName"`
-	FilePath                      *string `json:"FilePath"`
-	DocIssuerBusinessPartner      *int    `json:"DocIssuerBusinessPartner"`
-}
-
-type ItemDoc struct {
-	DeliveryDocument         int     `json:"DeliveryDocument"`
-	DeliveryDocumentItem     int     `json:"DeliveryDocumentItem"`
-	DocType                  string  `json:"DocType"`
-	DocVersionID             int     `json:"DocVersionID"`
-	DocID                    string  `json:"DocID"`
-	FileExtension            *string `json:"FileExtension"`
-	FileName                 *string `json:"FileName"`
-	FilePath                 *string `json:"FilePath"`
-	DocIssuerBusinessPartner *int    `json:"DocIssuerBusinessPartner"`
-}
-
 type ItemFreightAgreement struct {
 	DeliveryDocument                        int     `json:"DeliveryDocument"`
 	DeliveryDocumentItem                    int     `json:"DeliveryDocumentItem"`
@@ -390,20 +354,6 @@ type ItemFreightAgreement struct {
 	IsMarkedForDeletion                     *bool   `json:"IsMarkedForDeletion"`
 }
 
-type Address struct {
-	DeliveryDocument int     `json:"DeliveryDocument"`
-	AddressID        int     `json:"AddressID"`
-	PostalCode       *string `json:"PostalCode"`
-	LocalRegion      *string `json:"LocalRegion"`
-	Country          *string `json:"Country"`
-	District         *string `json:"District"`
-	StreetName       *string `json:"StreetName"`
-	CityName         *string `json:"CityName"`
-	Building         *string `json:"Building"`
-	Floor            *int    `json:"Floor"`
-	Room             *int    `json:"Room"`
-}
-
 type Partner struct {
 	DeliveryDocument        int     `json:"DeliveryDocument"`
 	PartnerFunction         string  `json:"PartnerFunction"`
@@ -416,4 +366,18 @@ type Partner struct {
 	Currency                *string `json:"Currency"`
 	ExternalDocumentID      *string `json:"ExternalDocumentID"`
 	AddressID               *int    `json:"AddressID"`
+}
+
+type Address struct {
+	DeliveryDocument int     `json:"DeliveryDocument"`
+	AddressID        int     `json:"AddressID"`
+	PostalCode       *string `json:"PostalCode"`
+	LocalRegion      *string `json:"LocalRegion"`
+	Country          *string `json:"Country"`
+	District         *string `json:"District"`
+	StreetName       *string `json:"StreetName"`
+	CityName         *string `json:"CityName"`
+	Building         *string `json:"Building"`
+	Floor            *int    `json:"Floor"`
+	Room             *int    `json:"Room"`
 }
