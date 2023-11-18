@@ -87,6 +87,7 @@ type Header struct {
 	HeaderDeliveryBlockStatus              *bool    `json:"HeaderDeliveryBlockStatus"`
 	HeaderIssuingBlockStatus               *bool    `json:"HeaderIssuingBlockStatus"`
 	HeaderReceivingBlockStatus             *bool    `json:"HeaderReceivingBlockStatus"`
+	ExternalReferenceDocument			   *string  `json:"ExternalReferenceDocument"`
 	CreationDate                           string   `json:"CreationDate"`
 	CreationTime                           string   `json:"CreationTime"`
 	LastChangeDate                         string   `json:"LastChangeDate"`
@@ -235,6 +236,8 @@ type Item struct {
 	ItemIssuingBlockStatus                        *bool    `json:"ItemIssuingBlockStatus"`
 	ItemReceivingBlockStatus                      *bool    `json:"ItemReceivingBlockStatus"`
 	ItemBillingBlockStatus                        *bool    `json:"ItemBillingBlockStatus"`
+	ExternalReferenceDocument        			  *string  `json:"ExternalReferenceDocument"`
+	ExternalReferenceDocumentItem      			  *string  `json:"ExternalReferenceDocumentItem"`
 	CreationDate                                  string   `json:"CreationDate"`
 	CreationTime                                  string   `json:"CreationTime"`
 	LastChangeDate                                string   `json:"LastChangeDate"`
