@@ -83,16 +83,16 @@ func callProcess(rmq *rabbitmq.RabbitmqClient, caller *dpfm_api_caller.DPFMAPICa
 		output.APIProcessingResult = getBoolPtr(false)
 		output.APIProcessingError = errs[0].Error()
 		output.Message = res
-		//rmq.Send(conf.RMQ.QueueToResponse(), output)
-		rmq.Send("data-platform-api-request-reads-cache-manager-receive-queue", output)
+		rmq.Send(conf.RMQ.QueueToResponse(), output)
+		//rmq.Send("data-platform-api-request-reads-cache-manager-receive-queue", output)
 		return errs[0]
 	}
 	output.APIProcessingResult = getBoolPtr(true)
 	output.Message = res
 
 	l.JsonParseOut(output)
-	// rmq.Send(conf.RMQ.QueueToResponse(), output)
-	rmq.Send("data-platform-api-request-reads-cache-manager-receive-queue", output)
+	rmq.Send(conf.RMQ.QueueToResponse(), output)
+	//rmq.Send("data-platform-api-request-reads-cache-manager-receive-queue", output)
 
 	return nil
 }

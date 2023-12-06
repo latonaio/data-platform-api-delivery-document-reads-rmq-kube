@@ -31,10 +31,10 @@ func (c *DPFMAPICaller) readSqlProcess(
 			func() {
 				header = c.Header(mtx, input, output, errs, log)
 			}()
-//		case "Headers":
-//			func() {
-//				header = c.Headers(mtx, input, output, errs, log)
-//			}()
+			//		case "Headers":
+			//			func() {
+			//				header = c.Headers(mtx, input, output, errs, log)
+			//			}()
 		case "HeadersByDeliverToParty":
 			func() {
 				header = c.HeadersByDeliverToParty(mtx, input, output, errs, log)
@@ -72,11 +72,11 @@ func (c *DPFMAPICaller) readSqlProcess(
 	}
 
 	data := &dpfm_api_output_formatter.Message{
-		Header:           header,
-		Item:             item,
-		ItemPicking:      itemPicking,
-		Partner:          partner,
-		Address:          address,
+		Header:      header,
+		Item:        item,
+		ItemPicking: itemPicking,
+		Partner:     partner,
+		Address:     address,
 	}
 
 	return data
@@ -122,7 +122,7 @@ func (c *DPFMAPICaller) HeadersByDeliverToParty(
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) []dpfm_api_output_formatter.Header {
+) *[]dpfm_api_output_formatter.Header {
 	where := "WHERE 1 = 1"
 	if input.Header.DeliverToParty != nil {
 		where = fmt.Sprintf("%s\nAND DeliverToParty = %v", where, *input.Header.DeliverToParty)
@@ -153,7 +153,7 @@ func (c *DPFMAPICaller) HeadersByDeliverToParty(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToHeader(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -168,10 +168,10 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 	output *dpfm_api_output_formatter.SDC,
 	errs *[]error,
 	log *logger.Logger,
-) []dpfm_api_output_formatter.Header {
+) *[]dpfm_api_output_formatter.Header {
 	where := "WHERE 1 = 1"
 	if input.Header.DeliverFromParty != nil {
-		where = fmt.Sprintf("%s\nAND DeliverFromParty = %v", where, *input.Header.DeliverToParty)
+		where = fmt.Sprintf("%s\nAND DeliverFromParty = %v", where, *input.Header.DeliverFromParty)
 	}
 	if input.Header.HeaderCompleteDeliveryIsDefined != nil {
 		where = fmt.Sprintf("%s\nAND HeaderCompleteDeliveryIsDefined = %t", where, *input.Header.HeaderCompleteDeliveryIsDefined)
@@ -199,7 +199,7 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 		return nil
 	}
 
-	data, err := dpfm_api_output_formatter.ConvertToHeader(input, rows)
+	data, err := dpfm_api_output_formatter.ConvertToHeader(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil
@@ -207,7 +207,6 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 
 	return data
 }
-
 
 //func (c *DPFMAPICaller) Headers(
 //	mtx *sync.Mutex,
@@ -232,9 +231,9 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 //	if input.Header.IsMarkedForDeletion != nil {
 //		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
 //	}
-	// if input.Header.HeaderBillingStatusException != nil {
-	// 	where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
-	// }
+// if input.Header.HeaderBillingStatusException != nil {
+// 	where = fmt.Sprintf("%s\nAND HeaderBillingStatus != '%v' ", where, *input.Header.HeaderBillingStatusException)
+// }
 //
 //	idWhere := ""
 //	if input.Header.DeliverFromParty != nil && input.Header.DeliverToParty != nil {
@@ -319,8 +318,8 @@ func (c *DPFMAPICaller) Items(
 		if item.ItemCompleteDeliveryIsDefined != nil {
 			where = fmt.Sprintf("%s\nAND item.ItemCompleteDeliveryIsDefined = %v", where, *item.ItemCompleteDeliveryIsDefined)
 		}
-		if item.ItemDeliveryStatus != nil {
-			where = fmt.Sprintf("%s\nAND item.ItemDeliveryStatus = '%v'", where, *item.ItemDeliveryStatus)
+		if item.DeliveryDocumentItem != 0 {
+			where = fmt.Sprintf("%s\nAND item.DeliveryDocumentItem = '%v'", where, item.DeliveryDocumentItem)
 		}
 		if item.ItemDeliveryBlockStatus != nil {
 			where = fmt.Sprintf("%s\nAND item.ItemDeliveryBlockStatus = %v", where, *item.ItemDeliveryBlockStatus)
@@ -335,8 +334,8 @@ func (c *DPFMAPICaller) Items(
 
 	rows, err := c.db.Query(
 		`SELECT *
-		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
-		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`,
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data as item
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocumentItem ASC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
