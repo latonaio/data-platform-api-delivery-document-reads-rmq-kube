@@ -100,7 +100,7 @@ func (c *DPFMAPICaller) Header(
 	rows, err := c.db.Query(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
+		` + where + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument ASC;`,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -247,7 +247,7 @@ func (c *DPFMAPICaller) HeadersByDeliverFromParty(
 //	rows, err := c.db.Query(
 //		`SELECT *
 //		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_header_data
-//		` + where + idWhere + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC;`,
+//		` + where + idWhere + ` ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument ASC;`,
 //	)
 //	if err != nil {
 //		*errs = append(*errs, err)
@@ -284,7 +284,7 @@ func (c *DPFMAPICaller) Item(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
 		WHERE (DeliveryDocument, DeliveryDocumentItem) IN ( `+repeat+` )
-		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`, args...,
+		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument ASC, DeliveryDocumentItem ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -375,7 +375,7 @@ func (c *DPFMAPICaller) ItemPicking(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_item_data
 		WHERE (DeliveryDocument, DeliveryDocumentItem, DeliveryDocumentItemPickingID) IN ( `+repeat+` )
-		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument DESC, DeliveryDocumentItem ASC;`, args...,
+		ORDER BY IsMarkedForDeletion ASC, IsCancelled ASC, DeliveryDocument ASC, DeliveryDocumentItem ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -452,7 +452,7 @@ func (c *DPFMAPICaller) Partner(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_partner_data
 		WHERE (DeliveryDocument, PartnerFunction, BusinessPartner) IN ( `+repeat+` )
-		ORDER BY DeliveryDocument DESC, BusinessPartner DESC, AddressID ASC;`, args...,
+		ORDER BY DeliveryDocument ASC, BusinessPartner ASC, AddressID ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)
@@ -490,7 +490,7 @@ func (c *DPFMAPICaller) Address(
 		`SELECT *
 		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_delivery_document_address_data
 		WHERE (DeliveryDocument, AddressID) IN ( `+repeat+` )
-		ORDER BY DeliveryDocument DESC, AddressID ASC;`, args...,
+		ORDER BY DeliveryDocument ASC, AddressID ASC;`, args...,
 	)
 	if err != nil {
 		*errs = append(*errs, err)

@@ -12,4 +12,5 @@ type Partner struct {
 	Currency                *string `json:"Currency"`
 	ExternalDocumentID      *string `json:"ExternalDocumentID"`
 	AddressID               *int    `json:"AddressID"`
+	EmailAddress			*string	`json:"EmailAddress"`
 }
