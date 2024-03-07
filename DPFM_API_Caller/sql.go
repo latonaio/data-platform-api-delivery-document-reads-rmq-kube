@@ -307,12 +307,19 @@ func (c *DPFMAPICaller) Items(
 	errs *[]error,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Item {
-
 	item := &dpfm_api_input_reader.Item{}
+
 	if len(input.Header.Item) > 0 {
 		item = &input.Header.Item[0]
 	}
+
 	where := "WHERE 1 = 1"
+
+	deliveryDocument := input.Header.DeliveryDocument
+
+	if deliveryDocument != 0 {
+		where = fmt.Sprintf("%s\nAND item.DeliveryDocument = %d", where, deliveryDocument)
+	}
 
 	if item != nil {
 		if item.ItemCompleteDeliveryIsDefined != nil {

@@ -40,7 +40,7 @@
 		"ActualGoodsIssueDateFrom": ""
 	},
 	"DeliveryDocument": {
-		"DeliveryDocument": 80000001,
+		"DeliveryDocument": 10010901,
 		"SupplyChainRelationshipID": null,
 		"SupplyChainRelationshipDeliveryID": null,
 		"SupplyChainRelationshipBillingID": null,
@@ -257,7 +257,7 @@
 				"InvoicePeriodStartDate": "",
 				"InvoicePeriodEndDate": "",
 				"ConfirmedDeliveryDate": "",
-				"Project": "",
+				"Project": null,
 				"ReferenceDocument": null,
 				"ReferenceDocumentItem": null,
 				"TransactionTaxClassification": "",
@@ -374,7 +374,7 @@
 				"InvoicePeriodStartDate": "",
 				"InvoicePeriodEndDate": "",
 				"ConfirmedDeliveryDate": "",
-				"Project": "",
+				"Project": null,
 				"ReferenceDocument": null,
 				"ReferenceDocumentItem": null,
 				"TransactionTaxClassification": "",

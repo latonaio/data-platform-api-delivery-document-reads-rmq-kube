@@ -109,6 +109,8 @@ type Header struct {
 	OrderItem                              *int      `json:"OrderItem"`
 	Contract		                 	   *int      `json:"Contract"`
 	ContractItem	                 	   *int      `json:"ContractItem"`
+	Project                                *int      `json:"Project"`
+	WBSElement                             *int      `json:"WBSElement"`
 	ProductionVersion				 	   *int      `json:"ProductionVersion"`
 	ProductionVersionItem			 	   *int      `json:"ProductionVersionItem"`
 	ProductionOrder                        *int      `json:"ProductionOrder"`
@@ -227,13 +229,13 @@ type Item struct {
 	ProductionPlantBatchValidityStartTime         *string       `json:"ProductionPlantBatchValidityStartTime"`
 	ProductionPlantBatchValidityEndDate           *string       `json:"ProductionPlantBatchValidityEndDate"`
 	ProductionPlantBatchValidityEndTime           *string       `json:"ProductionPlantBatchValidityEndTime"`
-	InspectionPlantBusinessPartner                *int     `json:"InspectionPlantBusinessPartner"`
-	InspectionPlant                               *string  `json:"InspectionPlant"`
-	InspectionPlan                                *int     `json:"InspectionPlan"`
-	InspectionLot                                 *int     `json:"InspectionLot"`
-	DeliveryDocumentItemText                      *string       `json:"DeliveryDocumentItemText"`
-	DeliveryDocumentItemTextByBuyer               *string       `json:"DeliveryDocumentItemTextByBuyer"`
-	DeliveryDocumentItemTextBySeller              *string       `json:"DeliveryDocumentItemTextBySeller"`
+	InspectionPlantBusinessPartner                *int     		`json:"InspectionPlantBusinessPartner"`
+	InspectionPlant                               *string  		`json:"InspectionPlant"`
+	InspectionPlan                                *int     		`json:"InspectionPlan"`
+	InspectionLot                                 *int     		`json:"InspectionLot"`
+	DeliveryDocumentItemText                      *string  		`json:"DeliveryDocumentItemText"`
+	DeliveryDocumentItemTextByBuyer               *string  		`json:"DeliveryDocumentItemTextByBuyer"`
+	DeliveryDocumentItemTextBySeller              *string  		`json:"DeliveryDocumentItemTextBySeller"`
 	PlannedGoodsIssueDate                         *string       `json:"PlannedGoodsIssueDate"`
 	PlannedGoodsIssueTime                         *string       `json:"PlannedGoodsIssueTime"`
 	PlannedGoodsReceiptDate                       *string       `json:"PlannedGoodsReceiptDate"`
@@ -253,6 +255,8 @@ type Item struct {
 	QuantityPerPackage                            *float32      `json:"QuantityPerPackage"`
 	ItemBillingStatus                             *string       `json:"ItemBillingStatus"`
 	ItemCompleteDeliveryIsDefined                 *bool         `json:"ItemCompleteDeliveryIsDefined"`
+	ProductWeightUnit                             *string  		`json:"ProductWeightUnit"`
+	ProductNetWeight                              *float32 		`json:"ProductNetWeight"`
 	ItemWeightUnit                                *string       `json:"ItemWeightUnit"`
 	ItemNetWeight                                 *float32      `json:"ItemNetWeight"`
 	ItemGrossWeight                               *float32      `json:"ItemGrossWeight"`

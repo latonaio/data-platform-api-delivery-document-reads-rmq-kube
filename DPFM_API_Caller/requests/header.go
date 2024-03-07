@@ -31,6 +31,8 @@ type Header struct {
 	OrderItem                              *int     `json:"OrderItem"`
 	Contract		                 	   *int     `json:"Contract"`
 	ContractItem	                 	   *int     `json:"ContractItem"`
+	Project                                *int     `json:"Project"`
+	WBSElement                             *int     `json:"WBSElement"`
 	ProductionVersion				 	   *int     `json:"ProductionVersion"`
 	ProductionVersionItem			 	   *int     `json:"ProductionVersionItem"`
 	ProductionOrder                        *int     `json:"ProductionOrder"`
